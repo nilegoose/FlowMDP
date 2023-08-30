@@ -1,10 +1,8 @@
+//--------------------------------------------------------------------
+// color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
-var pickerVal = 5;
-
-
-
-
-
+var box_compa = document.getElementById('fun_compa');
+var box_rel = document.getElementById('fun_rel');
 
 for (var i = 0; i < colorBoxes.length; i++) {
     colorBoxes[i].addEventListener('click', toggleOpacity);
@@ -32,6 +30,10 @@ function toggleCompa() {
   // choose function comparasion
   if (fun_compa_count == 0) {
     fun_compa_count = 1; // toggle button
+    if(fun_rel_count == 1){
+      fun_rel_count = 0;
+      toggleOpacity.call(box_rel);
+    }
     FunState.compa();
     console.log(FunState.getValue());
     update_general("", name, FunState.getValue());
@@ -48,6 +50,10 @@ function toggleRel() {
     // choose function comparasion
     if (fun_rel_count == 0) {
       fun_rel_count = 1; // toggle button
+      if(fun_compa_count == 1){
+        fun_compa_count = 0;
+        toggleOpacity.call(box_compa);
+      }
       FunState.rel();
       update_general("", name, FunState.getValue());
     } else {

@@ -136,6 +136,9 @@ function data_process(){
         return graph;
     }
 
+    // help function for the search list
+    // to change the var FunState
+    // remove one element for the array
     function filterFunction(array_in, eleToRemove){
       newArray = array_in.filter((element)=> element != eleToRemove);
       return newArray;
@@ -248,20 +251,23 @@ var abstract_dict = {'one_Numeric': 2,
 
     
 
+  // it allowed multiple choice, later corrected to single choice
 
     var FunState = (function() {
       var current_state = [];
     
       function funComp() {
+        current_state = [];
         current_state.push("comparasion");
       }
 
       function elimComp() {
-        current_state=filterFunction(current_state, "comparasion");
+        current_state = filterFunction(current_state, "comparasion");
       }
 
       
       function funRel() {
+        current_state = [];
         current_state.push("relationship");
       }
 

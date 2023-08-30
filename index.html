@@ -84,9 +84,10 @@
     <div class="dropdown-content">
       <details>
         <summary>Search Charts by Functions</summary>
-        <p>Click on color boxes to search.</p>
-        <!--p></p>
-        <p>Available Functions: </p-->
+        <p>    <span class="tab"></span>
+          Single click on color box to search, double click to cancel.</p>
+        <p></p>
+        <p>    <b>Functions:</b></p>
           <ul>
             <li>comparision</li>
             <li>relationships</li>
@@ -181,11 +182,7 @@ var margin = {top: 10, right: 50, bottom: 100, left: 50},
     height = window.innerHeight - margin.top - margin.bottom -110;
 
 var formatNumber = d3.format(",.0f"),
-    format = function(d) { return formatNumber(d) + "  "; },
-    //color = d3.scale.category20c();
-    // 
-    color = d3.scale.ordinal().range(["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"]);
-
+    format = function(d) { return formatNumber(d) + "  "; };
     
   var svg = d3.select("#chart").append("svg")
     .attr("width", width + margin.left + margin.right)

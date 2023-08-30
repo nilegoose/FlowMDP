@@ -1,5 +1,3 @@
-
-// here we change the fun parameter from string to array
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 
@@ -15,11 +13,6 @@ var padding_space = 10;
 
 d3.select("#fun_compa").on("click", toggleCompa); 
 d3.select("#fun_rel").on("click", toggleRel); 
-
-
-
-
-
 
 
 function drawSankey(data, svg){
@@ -352,32 +345,7 @@ function color_per_func(){
   svg.selectAll("rect").data(data.nodes)
   .transition()
   .duration(1000)
-  .style("fill", function(d) { 
-    console.log("update color " + FunState.getValue());
-    let compBool = FunState.getValue().includes("comparasion");
-    let relBool = FunState.getValue().includes("relationship");
-    let color1Bool = d.color1 == undefined;
-    let color2Bool = d.color2 == undefined;
-    let col3Bool = d.column == 3;
-    let defaultBool = FunState.getValue().length == 0;
-    switch (true) {
-      case (compBool):
-        d.color = ( color1Bool? 
-          col3Bool? "#999999": d.color 
-        : d.color1);
-        break;
-      case (relBool):
-        d.color = ( color2Bool? 
-          col3Bool? "#999999": d.color 
-        : d.color2);
-        break;
-      case (defaultBool):
-        return d.color = d.color;
-      default:
-        return d.color;                   
-    }
-    return d.color = d.color;
-  })
+  .style("fill", color_node_fun)
   .attr("height", function(d) { 
     return d.dy; })
   .attr("width", sankey.nodeWidth()); 

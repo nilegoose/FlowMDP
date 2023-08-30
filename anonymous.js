@@ -18,7 +18,35 @@ function color_fade_link(d){
       else return d.color = d.target.color;
   }
     return d.color = "#D8D8D8"
+}
+
+function color_node_fun(d) { 
+  console.log("update color " + FunState.getValue());
+  let compBool = FunState.getValue().includes("comparasion");
+  let relBool = FunState.getValue().includes("relationship");
+  let color1Bool = d.color1 == undefined;
+  let color2Bool = d.color2 == undefined;
+  let col3Bool = d.column == 3;
+  let defaultBool = FunState.getValue().length == 0;
+  let temp_color;
+  switch (true) {
+    case (compBool):
+      temp_color = ( color1Bool? 
+        col3Bool? "#999999": d.color 
+      : d.color1);
+      break;
+    case (relBool):
+      temp_color = ( color2Bool? 
+        col3Bool? "#999999": d.color 
+      : d.color2);
+      break;
+    case (defaultBool):
+      return d.color;
+    default:
+      return d.color;                   
   }
+  return temp_color;
+}
 
 function title_link(d) { 
   return d.source.name + " → " + d.target.name + "\n" + 
