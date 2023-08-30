@@ -1,4 +1,4 @@
-var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot ', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Doughnut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar Chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
+var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Doughnut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar Chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
 
 dimensions=["oneDim", "twoDim", "threeDim", "nDim"], 
 attributes=['one_Numeric', 'two_Numeric', 'three_Numeric', 'n_Numeric', 'one_Categorical', '2/more_Categorical', 'oneNum_oneCat', 'oneCat_sevNum', 'sevCat_oneNum'],
@@ -112,7 +112,7 @@ function data_process(){
         });
 
 
-        var comparasion = ["Boxplot", "Bubble plot", "Line plot", "Stacked Area plot", "Barplot", "Doughnut chart", "Piechart", "Treemap", "Parallel coordination", "Radar chart", "Venn diagram", "Chord"];
+        var comparasion = ["Boxplot", "Bubble plot", "Line plot", "Stacked Area plot", "Barplot", "Doughnut chart", "Piechart", "Treemap", "Parallel coordinates", "Radar Chart", "Venn diagram", "Chord"];
         
         graph.nodes.forEach((node) => {
           if(node.column == 3){
@@ -124,7 +124,7 @@ function data_process(){
 
         });
 
-        var relationships = ["Scatter plot", "Bubble plot", "Heatmap", "Parallel coordination", "Radar chart", "Venn diagram", "Chord"];
+        var relationships = ["Scatterplot", "Bubble plot", "Heatmap", "Parallel coordinates", "Radar Chart", "Venn diagram", "Chord"];
         graph.nodes.forEach((node) => {
           if(node.column == 3){
             if(relationships.includes(node.name)){

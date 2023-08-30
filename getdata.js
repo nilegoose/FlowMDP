@@ -68,7 +68,7 @@ function getData(){
                 "name": "2D density plot"
             },
             {
-                "name": "Stacked Area plot "
+                "name": "Stacked Area plot"
             },
             {
                 "name": "Streamgraph"

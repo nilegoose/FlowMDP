@@ -29,13 +29,7 @@ function drawSankey(data, svg){
  
 
 svg.selectAll("g").remove().transition().duration(200);
-/*
-svg.append("rect")
-.attr("x", 10)
-.attr("y", 10)
-.attr("width", 180)
-.attr("height", 80)
-.style("fill", "url(#gradient)");*/
+
 
 var sankey = d3.sankey()
   .nodeWidth(15)
@@ -97,11 +91,6 @@ var path = sankey.link();
       .attr("width", sankey.nodeWidth())
       .style("fill", function(d) { return d.color = d.color})
       .on("click", highlight_node_links)
-      //.on("mouseout", clearHighlight)
-      //return d.color = color(d.name.replace(/ .*/, ""));
-      //.on("click", rect_click)
-      // this line removes everything after space for the param name
-      //.style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
       .text(title_node);
  
@@ -256,7 +245,6 @@ var path = sankey.link();
 
 
 function update_general(action, name, sort_param){
-  return;
   graph = dataObj.getData();
   var sankey = d3.sankey()
   .nodeWidth(15)
@@ -329,7 +317,7 @@ function update_general(action, name, sort_param){
   console.log("line 493 sort " + sort_param);
       
 
-  color_per_func(graph, sankey);
+  color_per_func();
 
   svg.selectAll(".node>rect>title")
   .data(graph.nodes)
@@ -357,9 +345,11 @@ function update_general(action, name, sort_param){
 }
 
 
-function color_per_func(graph, sankey){
+function color_per_func(){
+  let data = dataObj.getData();
+  let sankey = dataObj.getSankey();
 
-  svg.selectAll("rect").data(graph.nodes)
+  svg.selectAll("rect").data(data.nodes)
   .transition()
   .duration(1000)
   .style("fill", function(d) { 
@@ -370,24 +360,16 @@ function color_per_func(graph, sankey){
     let color2Bool = d.color2 == undefined;
     let col3Bool = d.column == 3;
     let defaultBool = FunState.getValue().length == 0;
-    let colorDefined = d.color == "#5ab4ac"; // color assigned for the first function
     switch (true) {
-      case(compBool && relBool):
-        d.color =  color1Bool? 
-          (color2Bool?
-          col3Bool? "#999999": d.color 
-          : d.color2)
-          : d.color1;
-        break;
       case (compBool):
         d.color = ( color1Bool? 
           col3Bool? "#999999": d.color 
         : d.color1);
         break;
       case (relBool):
-        d.color = colorDefined? "#5ab4ac" :
-        (d.color2 == undefined? 
-          (d.column == 3)? "#999999": d.color : d.color2);
+        d.color = ( color2Bool? 
+          col3Bool? "#999999": d.color 
+        : d.color2);
         break;
       case (defaultBool):
         return d.color = d.color;

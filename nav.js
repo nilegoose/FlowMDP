@@ -26,56 +26,6 @@ function toggleOpacity() {
   }
 }
 
-/*
-var numberInput = document.getElementById("paddingPicker");
-
-numberInput.addEventListener("input", function() {
-  var value = numberInput.value;
-  pickerVal = value; 
-});
-*/
-
-
-
-var numberInput = document.getElementById("paddingPicker");
-  numberInput.addEventListener("input", function() {
-    var step = 1; // Step value
-    var value = Math.round(numberInput.value / step) * step;
-    numberInput.value = value;
-  });
-
-
-  var opacityInput = document.getElementById("opacityPicker");
-  opacityInput.addEventListener("input", function() {
-    var step = 0.1; // Step value
-    var value = Math.round(opacityInput.value / step) * step;
-    opacityInput.value = value;
-    //console.log("opacity " + value);
-    opacityPick = value;
-
-  });
-
-
-var colorInput = document.getElementsByName("colorPicker");
-
-// Set a default value (e.g., the first option)
-colorInput[0].checked = true;
-
-// Add event listener for value change
-for (var i = 0; i < 3; i++) {
-  colorInput[i].addEventListener("change", function() {
-    var selectedValue = this.value;
-    console.log(selectedValue); // Display the selected value in the console
-  });
-}
-
-
-numberInput.addEventListener("input", function() {
-  var value = numberInput.value;
-  pickerVal = value;
-  update_general("padding2");
-});
-
 
 
 function toggleCompa() {
