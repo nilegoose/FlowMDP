@@ -75,18 +75,14 @@ var path = sankey.link();
 
 
   link.append("title")
-      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+      .text(title_link);
  
   var node = svg.append("g").selectAll(".node")
       .data(data.nodes)
       .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-      .call(d3.behavior.drag()
-      .origin(function(d) { return d; })
-      // interfering with click .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove));
-
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
 
 
 
@@ -107,7 +103,7 @@ var path = sankey.link();
       // this line removes everything after space for the param name
       //.style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value); });
+      .text(title_node);
  
   node.append("text")
       .attr("x", -6)// position left
@@ -120,20 +116,6 @@ var path = sankey.link();
       .attr("x", 6 + sankey.nodeWidth())// position right
       .attr("text-anchor", "start");
 
-
-      function dragmove(d) {
-        //check if horizontal drag is
-          var horizontal = document.getElementById("check1");
-          d3.select(this).attr("transform", 
-              "translate(" + (
-                horizontal.checked?  d.x = Math.max(0, Math.min(width - d.dx, d3.event.x)) : d.x 
-                     //d.x // = Math.max(0, Math.min(width - d.dx, d3.event.x))
-                  ) + "," + (
-                         d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
-                ) + ")");
-      
-           link.attr("d", path);
-      }
             
      
       // usually we dont dont have to write so complex function
