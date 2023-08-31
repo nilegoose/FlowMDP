@@ -1,14 +1,15 @@
+// assign link_toHighlight
+// and nodes
 function traverse_right(node){
     let remainingNodes = [],
-        nextNodes = [];
+        nextNodes = [],
+        temp_link = [];
 
     let sankey = dataObj.getSankey();
                 // traversal right
     node["sourceLinks"].forEach(function(link) {
       remainingNodes.push(link["target"]);
-
-      link_toHighlight.push(link.id);
-      
+      temp_link.push(link.id);      
     });
     while (remainingNodes.length) {
 
@@ -24,7 +25,7 @@ function traverse_right(node){
           //console.log(link);
           
           nextNodes.push(link["target"]);
-          link_toHighlight.push(link.id);
+          temp_link.push(link.id);      
         });
   
 
@@ -32,6 +33,8 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
+    col4 = [...new Set(cols[3])]
+    return temp_link;
   }
 
 
@@ -39,11 +42,12 @@ function traverse_right(node){
 function traverse_left(node){
     let remainingNodes = [],
         nextNodes = [],
-        sankey = dataObj.getSankey();
+        sankey = dataObj.getSankey(),
+        temp_link = [];
 
     node["targetLinks"].forEach(function(link) {
     remainingNodes.push(link["source"]);
-    link_toHighlight.push(link.id);
+    temp_link.push(link.id);      
     });
 
     while (remainingNodes.length) {
@@ -55,22 +59,14 @@ function traverse_left(node){
     remainingNodes.forEach(function(node) {
 // traversal right
     node["targetLinks"].forEach(function(link) {
-//console.log(link);
-
     nextNodes.push(link["source"]);
-
-// highlight expect the leftmost
-
-    if(nextNodes.length > 0){
-        link_toHighlight.push(link.id); 
-    }
-});
-
-
-});
-
-remainingNodes = nextNodes;
-}
+    temp_link.push(link.id);      
+      });
+    });
+    remainingNodes = nextNodes;
+  }
+  col1 = [...new Set(cols[0])];
+  return temp_link;
 }
 
 

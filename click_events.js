@@ -1,5 +1,6 @@
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
+var clicked_node = undefined;
 
 var col1 = [],
 col2 = [],
@@ -11,17 +12,14 @@ var cols = [col1, col2, col3, col4];
 var translated_nodes = [];
 var padding_space = 10;
 
-d3.select("#fun_compa").on("click", toggleCompa); 
-d3.select("#fun_rel").on("click", toggleRel); 
-
-
-function drawSankey(data, svg){
+function drawSankey(data, svg, sortFun){
   console.log("function drawSankey");
+  //console.log(data);
 
 
  
 
-svg.selectAll("g").remove().transition().duration(200);
+svg.selectAll("g").remove().transition().duration(1000);
 
 
 var sankey = d3.sankey()
@@ -36,7 +34,7 @@ var path = sankey.link();
   sankey
       .nodes(data.nodes)
       .links(data.links)
-      .nodeSort(ascendingDepth)
+      .nodeSort(sortFun == undefined? ascendingDepth : sortFun)
       .layout(32);
 
   dataObj.updateSankey(sankey);
@@ -82,7 +80,7 @@ var path = sankey.link();
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { return d.color = d.color})
+      .style("fill", color_per_func)
       .on("click", highlight_node_links)
       .append("title")
       .text(title_node);
@@ -103,9 +101,14 @@ var path = sankey.link();
       // usually we dont dont have to write so complex function
       // but since there are multiple updating operations.. 
       // so the main function is splitted into several 
+
+
+      // - hightlight
+      // - resort then highlight
       
       
       function highlight_node_links(node,i){
+        clicked_node = node;
 
         current_name = node['name'];
 
@@ -118,14 +121,9 @@ var path = sankey.link();
       
       
         var clicked_col = checkCol(i);
-
-
-        traverse_right(node);
-        col4 = [...new Set(cols[3])]
-
-        traverse_left(node);
+        link_toHighlight= link_toHighlight.concat(traverse_right(node));
+        link_toHighlight = link_toHighlight.concat(traverse_left(node));
       
-        col1 = [...new Set(cols[0])]
       
         var encoding_list = [];
       
@@ -133,17 +131,14 @@ var path = sankey.link();
         col4.forEach(function(node){
           encoding_list.push(node['name']);
         });
-        // the encoding column
+        // the encoding columns
         showText2(encoding_list);
         encoding_list = [];
         // gove to global variable
 
-        if(clicked_col == 3){
-          update_general("padding", current_name, FunState.getValue());
 
-        }
 
-        update_link(graph.links, path);
+        update_link();
 
         link_toHighlight.forEach(function(id){
           highlight_link(id, 0.6);
@@ -155,42 +150,10 @@ var path = sankey.link();
 
       }
       
-    
-            
-      d3.select("#update2").on("click",  updateSankey);
-
-      d3.select("#update4").on("click",  function(){
-        update_text();
-      });
-
-      d3.select("#update5").on("click",  function(){
-        fade_link(graph.links, path);
-      });
-
-
-
-      //d3.select("#update6").on("click",  update_node);
-
   }
 
 
-  function ascendingDepth(a, b) {
-    return a.y - b.y;
-  }
 
-  function noSort(a, b) {
-    return a.index - b.index;
-  }
-
-  function ascending_param(a, b) {
-    if (a.comparasion == b.comparasion) {
-      return a.y - b.y; // Sort by ascending y value
-    } else if (a.comparasion == true) {
-      return -1; 
-    } else {
-      return 1; // b comes before a
-    }
-  }
 
   function canvasEvent(){
     if (!d3.event.target.matches("rect") && !d3.event.target.matches("path")) {
@@ -203,6 +166,7 @@ var path = sankey.link();
 
   // array highlighted link stores id.. []
   function clearHighlight(){
+    clicked_node = undefined;
 
     if(highlighted_link.length <= 0) {
       return;
@@ -238,6 +202,7 @@ var path = sankey.link();
 
 
 function update_general(action, name, sort_param){
+  return;
   graph = dataObj.getData();
   var sankey = d3.sankey()
   .nodeWidth(15)
@@ -255,15 +220,6 @@ function update_general(action, name, sort_param){
 
     path = sankey.link();
 
-  }else if(action == "padding2"){
-    sankey
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .nodePadding(pickerVal)
-    .layout(32);
-
-    path = sankey.link();
-
   }else{
     sankey
     .nodes(graph.nodes)
@@ -274,13 +230,8 @@ function update_general(action, name, sort_param){
   }
 
 
+  dataObj.updateSankey(sankey);
 
-
-
-  if(action=="padding"){
-    sankey.relayout3(name);
-    //console.log(name);
-  }
 
 
   var link2 = svg.selectAll(".link")
@@ -352,8 +303,7 @@ function color_per_func(){
 }
 
 // changes link color, including fading
-
-function update_link(data, path){
+function update_link(){
   var link3 = svg.selectAll(".link")
   //.data(data)
   .transition()

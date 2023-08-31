@@ -25,22 +25,26 @@ function toggleOpacity() {
 }
 
 
-
+  
 function toggleCompa() {
-  // choose function comparasion
-  if (fun_compa_count == 0) {
+  // click
+    if (fun_compa_count == 0) {
     fun_compa_count = 1; // toggle button
     if(fun_rel_count == 1){
       fun_rel_count = 0;
       toggleOpacity.call(box_rel);
     }
     FunState.compa();
-    console.log(FunState.getValue());
-    update_general("", name, FunState.getValue());
+    //let svg = d3.select("#chartSVG");
+    //console.log(svg);
+    drawSankey(dataObj.getData(), svg, ascending_param);
+    //update_general("", name, FunState.getValue());
   } else {
       fun_compa_count = 0;
       FunState.cancelCompa();
-      update_general("", name, FunState.getValue());
+      drawSankey(dataObj.getData(), svg);
+
+      //update_general("", name, FunState.getValue());
 
   }
 }
@@ -59,7 +63,7 @@ function toggleRel() {
     } else {
       fun_rel_count = 0;
       FunState.cancelRel();
-        update_general("", name, FunState.getValue());
+      update_general("", name, FunState.getValue());
     }
 }
 

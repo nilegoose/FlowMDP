@@ -310,3 +310,21 @@ var abstract_dict = {'one_Numeric': 2,
     return array.splice(0, 4);
 
   }
+
+  function ascendingDepth(a, b) {
+    return a.y - b.y;
+  }
+
+  function noSort(a, b) {
+    return a.index - b.index;
+  }
+
+  function ascending_param(a, b) {
+    if (a.comparasion == b.comparasion) {
+      return a.y - b.y; // Sort by ascending y value
+    } else if (a.comparasion == true) {
+      return -1; 
+    } else {
+      return 1; // b comes before a
+    }
+  }

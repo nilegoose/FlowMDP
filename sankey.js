@@ -73,21 +73,7 @@ d3.sankey = function() {
     return sankey;
   };
 
-  sankey.relayout3 = function(name) {
-    console.log("relayout3");
-    //sort = ascending_param;
-    padding_preserve = 4;
-    computeNodeLinks();
-    computeNodeValues();
-    computeNodeBreadths();
-    //relax = false;
-    computeNodeDepths(31);
-    padding_preserve = 0;
-    //relax = true;
-    extrapadding(name);
-    computeLinkDepths();
-    return sankey;
-  };
+
 
 
 

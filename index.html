@@ -146,7 +146,7 @@
   
   
   
-  <script src="nav.js"></script>>    
+  <!--script src="nav.js"></script-->
 
 
 
@@ -159,11 +159,13 @@
 <script src="sankey.js"></script>
 <script src="bubble2.js"></script>
 <script src="getdata.js"></script>
+<script src="nav.js"></script>
 <script src="click_events.js"></script>
 <script src="util.js"></script>
 <script src="util_graph.js"></script>
 <script src="anonymous.js"></script>
 <script src="data.js"></script>
+
 
 <script>
 
@@ -190,15 +192,6 @@ var formatNumber = d3.format(",.0f"),
     .attr("id", "chartSVG")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-
-function updateSankey() {
-
-  drawSankey(data_process2(), svg);
-
-}
-
 
 
 drawSankey(dataObj.getData(), svg);
@@ -257,59 +250,14 @@ function changeWidth(width){
 
   // the function creates radio button from a list
 
-  function updateEncoding(e_list, id, btnId, radioName){
-    var container = document.getElementById(id);
-
-// Create the radio group
-  e_list.forEach(function(option) {
-  // Create the radio button element
-  var radioBtn = document.createElement("input");
-  radioBtn.type = "radio";
-  radioBtn.name = radioName; // Give it a unique name
-  radioBtn.value = option; // Set the value of the radio button
-
-  // Create a label for the radio button
-  var label = document.createElement("label");
-  label.innerHTML = option;
-
-  // Append the radio button and label to the container
-  container.appendChild(radioBtn);
-  container.appendChild(label);
-  container.appendChild(document.createElement("br")); // Add a line break
-
-// Append the submit button to the container
-});
-createBtn(container, btnId, radioName)
-}
-  function createBtn(container, btnId ,radioName){
-  var submitBtn = document.createElement("input");
-  submitBtn.type = "submit";
-  submitBtn.value = "Submit";
-  submitBtn.id = btnId;
-  submitBtn.addEventListener("click", function() {
-  // Get the selected radio button
-  var selectedOption = document.querySelector(`input[name="${radioName}"]:checked`);
-
-  // Check if any option is selected
-  if (selectedOption) {
-    //size/area
-    var selectedValue = selectedOption.value;
-    console.log("Selected value: " + selectedValue);
-    if (selectedValue.includes('color')) {
-
-      draw(true, false);
-    } else {
-    draw(false, false);
-    } 
-
-  }});
-  container.appendChild(submitBtn);
 
 
-  }
-  //draw(true);
-  
-  //draw(true);
+
+
+d3.select("#fun_compa").on("click", toggleCompa); 
+d3.select("#fun_rel").on("click", toggleRel); 
+
+
 
   </script>
 
