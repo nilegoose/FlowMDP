@@ -295,7 +295,7 @@ function color_per_func(){
 
   svg.selectAll("rect").data(data.nodes)
   .transition()
-  .duration(1000)
+  .duration(0)
   .style("fill", color_node_fun)
   .attr("height", function(d) { 
     return d.dy; })

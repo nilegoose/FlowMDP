@@ -59,11 +59,11 @@ function toggleRel() {
         toggleOpacity.call(box_compa);
       }
       FunState.rel();
-      update_general("", name, FunState.getValue());
+      drawSankey(dataObj.getData(), svg, ascending_param2);
     } else {
       fun_rel_count = 0;
       FunState.cancelRel();
-      update_general("", name, FunState.getValue());
+      drawSankey(dataObj.getData(), svg);
     }
 }
 

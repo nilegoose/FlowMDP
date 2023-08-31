@@ -328,3 +328,13 @@ var abstract_dict = {'one_Numeric': 2,
       return 1; // b comes before a
     }
   }
+
+  function ascending_param2(a, b) {
+    if (a.relationships == b.relationships) {
+      return a.y - b.y; // Sort by ascending y value
+    } else if (a.relationships == true) {
+      return -1; 
+    } else {
+      return 1; // b comes before a
+    }
+  }
