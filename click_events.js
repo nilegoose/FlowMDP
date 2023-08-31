@@ -52,6 +52,8 @@ var path = sankey.link();
         d.id = i;
         return "link-"+i;
       })
+      .transition()
+      .duration(1000)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
       .style('stroke', color_link);
@@ -77,7 +79,8 @@ var path = sankey.link();
 
 
  
-  node.append("rect")
+  node
+  .append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
       .style("fill", color_per_func)
@@ -304,10 +307,7 @@ function color_per_func(){
 
 // changes link color, including fading
 function update_link(){
-  var link3 = svg.selectAll(".link")
-  //.data(data)
-  .transition()
-  .duration(1000);
+  var link3 = svg.selectAll(".link");
 
   link3.style('stroke', color_fade_link)
   .transition()
