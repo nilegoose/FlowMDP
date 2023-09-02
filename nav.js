@@ -145,6 +145,40 @@ function changeHeight() {
 changeHeight();
 setColText();
 
+const openCheckbox = document.getElementById('open-checkbox');
+const content = document.querySelector('.dropdown-content');
+const hoverWindow = document.getElementById('setting_icon');
+
+let isHovering = false;
+let leaveTimeout;
+
+hoverWindow.addEventListener('mouseenter', () => {
+  clearTimeout(leaveTimeout);
+  content.style.display = 'block';
+});
+
+hoverWindow.addEventListener('mouseleave', () => {
+  leaveTimeout = setTimeout(() => {
+  if (!openCheckbox.checked && !isHovering) {
+    content.style.display = 'none';
+      }
+    }, 100); 
+});
+
+content.addEventListener('mouseenter', () => {
+    isHovering = true;
+    content.style.display = 'block';
+
+});
+
+content.addEventListener('mouseleave', () => {
+    isHovering = false;
+    if (!openCheckbox.checked) {
+        content.style.display = 'none';
+    }
+});
+
+
 
 
 

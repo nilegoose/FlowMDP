@@ -84,15 +84,11 @@
     <div class="dropdown-content">
       <details>
         <summary>Search Charts by Functions</summary>
-        <p>    <span class="tab"></span>
-          Single click on color box to search, double click to cancel.</p>
-        <p></p>
-        <p>    <b>Functions:</b></p>
-          <ul>
-            <li>comparision</li>
-            <li>relationships</li>
-          </ul>
-      </details>
+          <!--p>    <span class="tab"></span>
+          Single click on color box to search, double click to cancel.</p-->
+          <span class="tab"></span><input type="checkbox" id="open-checkbox">
+          <label for="open-checkbox" id="checkbox-label">Keep this window open</label>      
+        </details>
       <div class="container">
       <div class="color-box" id="fun_compa" style="background-color: #5ab4ac;"><p>comparision</p></div>
       <!-- A4 + B1-->
@@ -199,6 +195,8 @@ drawSankey(dataObj.getData(), svg);
 function resetSankey() {
 
   drawSankey(dataObj.getData(), svg);
+  FunState.default();
+
 
 }
 

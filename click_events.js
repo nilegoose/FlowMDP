@@ -14,6 +14,8 @@ var padding_space = 10;
 
 function drawSankey(data, svg, sortFun){
   console.log("function drawSankey");
+  console.log(sortFun);
+
   //console.log(data);
 
 
