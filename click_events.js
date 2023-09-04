@@ -117,6 +117,11 @@ var path = sankey.link();
         clicked_node = node;
 
         current_name = node['name'];
+        if(current_name == "Bubble plot"){
+          draw1();
+        }else{
+          remove1();
+        }
         console.log(current_name + " clicked");
 
         highlighted_link.forEach(function(link){
@@ -163,6 +168,7 @@ var path = sankey.link();
 
 
   function canvasEvent(){
+
     if (!d3.event.target.matches("rect") && !d3.event.target.matches("path")) {
       clearHighlight();
       translate_reset();
