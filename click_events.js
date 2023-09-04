@@ -13,6 +13,7 @@ var translated_nodes = [];
 var padding_space = 10;
 
 function drawSankey(data, svg, sortFun){
+  translated_nodes = [];
   console.log("function drawSankey");
   console.log(sortFun);
 
@@ -116,6 +117,7 @@ var path = sankey.link();
         clicked_node = node;
 
         current_name = node['name'];
+        console.log(current_name + " clicked");
 
         highlighted_link.forEach(function(link){
           dehighlight_link(link);
@@ -386,7 +388,12 @@ function translate_spacing(node){
 }
 
 function translate_reset(){
-  if(translated_nodes.length == 0) return;
+  if(translated_nodes.length == 0){
+    return;
+  }
+  console.log("translated reset");
+  console.log(translated_nodes);
+
   let nodes = dataObj.getSankey().nodes();
 
   if(translated_nodes.length > 1){
