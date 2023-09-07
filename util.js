@@ -1,11 +1,11 @@
 /*----------------------------------------------------------------------------- */
 // labels 
 
-var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Doughnut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar Chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
+var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
 
-dimensions=["oneDim", "twoDim", "threeDim", "nDim"], 
-attributes=['one_Numeric', 'two_Numeric', 'three_Numeric', 'n_Numeric', 'one_Categorical', '2/more_Categorical', 'oneNum_oneCat', 'oneCat_sevNum', 'sevCat_oneNum'],
-encoding=['position', 'points', 'colour', 'lines', 'size(area)', 'angle', 'shape', 'length'];
+dimensions=["1D", "2D", "3D", "HD"], 
+attributes=['One Numeric', 'Two Numeric', 'Three Numeric', 'Several Numeric', 'One Categorical', 'Several Categorical', 'One Num, One Cat', 'One Cat, Several Num', 'Several Cat, One Num'],
+encoding=['Position', 'Point', 'Color', 'Line', 'Size(area)', 'Angle', 'Shape', 'Length'];
 
 // colors for each column
 var colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"];
@@ -72,17 +72,7 @@ function data_process(){
         });
 
 
-        let attributeMap = {
-          "name1": "value1",
-          "name2": "value2"
-        };
         
-        graph.nodes.forEach((node) => {
-          node.attribute = attributeMap[node.name] || "default value";
-        });
-
-
-
 
         graph.nodes.forEach((node) => {
           node.column = checkCol_node(node);
@@ -111,7 +101,7 @@ function data_process(){
         });
 
 
-        var comparasion = ["Boxplot", "Bubble plot", "Line plot", "Stacked Area plot", "Barplot", "Doughnut chart", "Piechart", "Treemap", "Parallel coordinates", "Radar Chart", "Venn diagram", "Chord"];
+        var comparasion = [0, 3, 7, 9, 14, 15, 16, 17, 19, 20, 23, 26];
         
         graph.nodes.forEach((node) => {
           if(node.column == 3){
@@ -123,7 +113,7 @@ function data_process(){
 
         });
 
-        var relationships = ["Scatterplot", "Bubble plot", "Heatmap", "Parallel coordinates", "Radar Chart", "Venn diagram", "Chord"];
+        var relationships = [4, 3, 12, 19, 20, 23, 27];
         graph.nodes.forEach((node) => {
           if(node.column == 3){
             if(relationships.includes(node.name)){
@@ -366,3 +356,5 @@ function ascending_name1(a, b) {
   function resetPage(){
     location.reload();
   }
+
+

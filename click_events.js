@@ -62,6 +62,7 @@ var path = sankey.link();
       .style('stroke', color_link);
 
   link_count = link.length;
+  console.log("links " + link_count);
 
 
   link.append("title")

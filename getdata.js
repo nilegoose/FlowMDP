@@ -1,44 +1,44 @@
 function getData(){
-    return {
+    return{
         "nodes": [
             {
-                "name": "oneDim"
+                "name": "1D"
             },
             {
-                "name": "twoDim"
+                "name": "2D"
             },
             {
-                "name": "threeDim"
+                "name": "3D"
             },
             {
-                "name": "nDim"
+                "name": "HD"
             },
             {
-                "name": "one_Numeric"
+                "name": "One Numeric"
             },
             {
-                "name": "two_Numeric"
+                "name": "Two Numeric"
             },
             {
-                "name": "three_Numeric"
+                "name": "Three Numeric"
             },
             {
-                "name": "n_Numeric"
+                "name": "Several Numeric"
             },
             {
-                "name": "one_Categorical"
+                "name": "One Categorical"
             },
             {
-                "name": "2/more_Categorical"
+                "name": "Several Categorical"
             },
             {
-                "name": "oneNum_oneCat"
+                "name": "One Num, One Cat"
             },
             {
-                "name": "oneCat_sevNum"
+                "name": "One Cat, Several Num"
             },
             {
-                "name": "sevCat_oneNum"
+                "name": "Several Cat, One Num"
             },
             {
                 "name": "Boxplot"
@@ -86,7 +86,7 @@ function getData(){
                 "name": "Barplot"
             },
             {
-                "name": "Doughnut chart"
+                "name": "Donut chart"
             },
             {
                 "name": "Piechart"
@@ -98,7 +98,7 @@ function getData(){
                 "name": "Parallel coordinates"
             },
             {
-                "name": "Radar Chart"
+                "name": "Radar chart"
             },
             {
                 "name": "Sankey diagram"
@@ -122,28 +122,28 @@ function getData(){
                 "name": "Arc diagram"
             },
             {
-                "name": "position"
+                "name": "Position"
             },
             {
-                "name": "points"
+                "name": "Point"
             },
             {
-                "name": "colour"
+                "name": "Color"
             },
             {
-                "name": "lines"
+                "name": "Line"
             },
             {
-                "name": "size(area)"
+                "name": "Size(area)"
             },
             {
-                "name": "angle"
+                "name": "Angle"
             },
             {
-                "name": "shape"
+                "name": "Shape"
             },
             {
-                "name": "length"
+                "name": "Length"
             }
         ],
         "links": [
@@ -1054,5 +1054,4 @@ function getData(){
             }
         ]
     }
-    
 }

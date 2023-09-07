@@ -58,7 +58,7 @@
 
  
 </style>
-<link rel = "stylesheet" href="nav.css">
+<link rel = "stylesheet" href="/static/css2/nav.css">
 </head>
 <body>
 
@@ -139,19 +139,28 @@
   </div>
 </body>
 
+  
+  
+  
+  <!--script src="nav.js"></script-->
 
-<!--script src="http://d3js.org/d3.v3.min.js?2.9.1"></script-->
-<script src="lib/d3v3.js"></script>
 
-<script src="sankey.js"></script>
-<script src="bubble2.js"></script>
-<script src="getdata.js"></script>
-<script src="nav.js"></script>
-<script src="click_events.js"></script>
-<script src="util.js"></script>
-<script src="util_graph.js"></script>
-<script src="anonymous.js"></script>
-<script src="data.js"></script>
+
+
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js?2.9.1"></script-->
+<script src="/static/js2/lib/ajax.js"></script>
+<script src="/static/js2/lib/d3v3.js"></script>
+
+<script src="/static/js2/sankey.js"></script>
+<script src="/static/js2/bubble2.js"></script>
+<script src="/static/js2/getdata.js"></script>
+<script src="/static/js2/nav.js"></script>
+<script src="/static/js2/click_events.js"></script>
+<script src="/static/js2/util.js"></script>
+<script src="/static/js2/util_graph.js"></script>
+<script src="/static/js2/anonymous.js"></script>
+<script src="/static/js2/data.js"></script>
 
 
 <script>
@@ -193,7 +202,7 @@ function resetSankey() {
 
 
 var resetBtn = document.getElementById("reset_icon");
-resetBtn.addEventListener("click", resetPage);
+resetBtn.addEventListener("click", resetSankey);
 
 
 
@@ -245,6 +254,7 @@ function changeWidth(width){
 
 d3.select("#fun_compa").on("click", toggleCompa); 
 d3.select("#fun_rel").on("click", toggleRel); 
+
 
 
   </script>

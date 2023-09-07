@@ -184,7 +184,13 @@ content.addEventListener('mouseleave', () => {
 });
 
 /*----------------------------------------------------------------------*/
-
-
+/*----------------------------------------------------------------------*/
+// refresh on resize
+function refreshOnResize() {
+  window.addEventListener('resize', function() {
+    resetPage();
+  });
+}
+refreshOnResize();
 
 
