@@ -1,10 +1,20 @@
+/*----------------------------------------------------------------------------- */
+// labels 
+
 var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Doughnut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar Chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
 
 dimensions=["oneDim", "twoDim", "threeDim", "nDim"], 
 attributes=['one_Numeric', 'two_Numeric', 'three_Numeric', 'n_Numeric', 'one_Categorical', '2/more_Categorical', 'oneNum_oneCat', 'oneCat_sevNum', 'sevCat_oneNum'],
 encoding=['position', 'points', 'colour', 'lines', 'size(area)', 'angle', 'shape', 'length'];
 
+// colors for each column
+var colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"];
+var colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"];
+var colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'];
+var colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 
+
+// i : index of node
 function checkCol(i){
     switch (true) {
       case (i >= 0 && i < dimensions.length):
@@ -77,17 +87,6 @@ function data_process(){
         graph.nodes.forEach((node) => {
           node.column = checkCol_node(node);
         });
-
-
-        var colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd",
-          "#b8a0c3", "#a6747c",  "#865d9e"];
-
-        var colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"];
-
-        var colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'];
-
-        var colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
-
 
 
         // assign color
@@ -275,17 +274,14 @@ var abstract_dict = {'one_Numeric': 2,
         current_state=filterFunction(current_state, "relationship");
       }
     
-      // Private function
       function funDefault() {
         current_state = [];
       }
     
-      // Public function to access the variable
       function getState() {
         return current_state;
       }
     
-      // Public API (exposed methods)
       return {
         compa: funComp,
         rel : funRel,
@@ -310,6 +306,9 @@ var abstract_dict = {'one_Numeric': 2,
     return array.splice(0, 4);
 
   }
+/*----------------------------------------------------------------------*/
+// sorting functions for ordering nodes
+// used in sankey.js
 
   function ascendingDepth(a, b) {
     return a.y - b.y;
@@ -319,22 +318,51 @@ var abstract_dict = {'one_Numeric': 2,
     return a.index - b.index;
   }
 
+  // sort by 1. nodes with comparison param
+  // then by y value
   function ascending_param(a, b) {
     if (a.comparasion == b.comparasion) {
-      return a.y - b.y; // Sort by ascending y value
+      return a.y - b.y; 
     } else if (a.comparasion == true) {
       return -1; 
     } else {
-      return 1; // b comes before a
+      return 1; 
     }
   }
 
+  // sort by 1. nodes with the param relationship
+  // then by y value
   function ascending_param2(a, b) {
     if (a.relationships == b.relationships) {
-      return a.y - b.y; // Sort by ascending y value
+      return a.y - b.y; 
     } else if (a.relationships == true) {
       return -1; 
     } else {
-      return 1; // b comes before a
+      return 1; 
     }
+  }
+
+
+
+
+
+function ascending_name1(a, b) {
+  // plot first
+  if (a.name.endsWith("plot") && !b.name.endsWith("plot")) {
+    return -1; 
+  } else if (!a.name.endsWith("plot") && b.name.endsWith("plot")) {
+    return 1;  
+  }
+  // then chart
+  if (a.name.endsWith("hart") && !b.name.endsWith("hart")) {
+    return -1; 
+  } else if (!a.name.endsWith("hart") && b.name.endsWith("hart")) {
+    return 1;  
+  }
+  // the y
+  return a.y - b.y;
+}
+/*----------------------------------------------------------------------*/
+  function resetPage(){
+    location.reload();
   }

@@ -37,7 +37,7 @@ var path = sankey.link();
   sankey
       .nodes(data.nodes)
       .links(data.links)
-      .nodeSort(sortFun == undefined? ascendingDepth : sortFun)
+      .nodeSort(sortFun == undefined? ascending_name1 : sortFun)
       .layout(32);
 
   dataObj.updateSankey(sankey);

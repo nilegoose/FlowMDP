@@ -1,3 +1,6 @@
+const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
+
+
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
@@ -72,7 +75,7 @@ function setColText() {
 
 
 
-  // Replace these values with your actual x-coordinates calculated by your function
+  // Replace these values with the actual x-coordinates
  
   let buttons = [document.getElementById('button1'),
   document.getElementById('button2'),
@@ -80,7 +83,6 @@ function setColText() {
   document.getElementById('button4')]
 
   
-  const buttonTexts = ["dimension", "data abstraction", "types", "encoding idoms"];
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].innerText = buttonTexts[i];
@@ -145,6 +147,9 @@ function changeHeight() {
 changeHeight();
 setColText();
 
+/*----------------------------------------------------------------------*/
+// set the "search by functions" window
+// popup per hover or checkbox
 const openCheckbox = document.getElementById('open-checkbox');
 const content = document.querySelector('.dropdown-content');
 const hoverWindow = document.getElementById('setting_icon');
@@ -178,6 +183,7 @@ content.addEventListener('mouseleave', () => {
     }
 });
 
+/*----------------------------------------------------------------------*/
 
 
 

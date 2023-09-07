@@ -5,7 +5,7 @@ d3.sankey = function() {
       size = [1, 1],
       nodes = [],
       links = [],
-      sort = ascendingDepth,
+      sort = ascending_name1,
       padding_preserve = 4
       relax = true; // a boolean for the two functions: relax from left to right
                       // relax from right to left 
