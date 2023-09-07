@@ -1,17 +1,19 @@
 /*----------------------------------------------------------------------------- */
 // labels 
 
-var types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
+const types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
 
 dimensions=["1D", "2D", "3D", "HD"], 
 attributes=['One Numeric', 'Two Numeric', 'Three Numeric', 'Several Numeric', 'One Categorical', 'Several Categorical', 'One Num, One Cat', 'One Cat, Several Num', 'Several Cat, One Num'],
 encoding=['Position', 'Point', 'Color', 'Line', 'Size(area)', 'Angle', 'Shape', 'Length'];
 
 // colors for each column
-var colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"];
-var colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"];
-var colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'];
-var colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
+const colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"],
+colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
+colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
+colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
+
+const colorFunctions = ["#5ab4ac", "#d8b365"];
 
 
 // i : index of node
@@ -101,24 +103,38 @@ function data_process(){
         });
 
 
-        var comparasion = [0, 3, 7, 9, 14, 15, 16, 17, 19, 20, 23, 26];
-        
-        graph.nodes.forEach((node) => {
-          if(node.column == 3){
-            if(comparasion.includes(node.name)){
-              node.comparasion = true;
-              node.color1="#5ab4ac";
-            }
-          }
-
+        const compaIdx = [0, 3, 7, 9, 14, 15, 16, 17, ,18, 19, 22, 25]; //indices in the array chart types
+        var compa_name = []; 
+        compaIdx.forEach(index => {
+          let name = types[index];
+          compa_name.push(name);          
         });
 
-        var relationships = [4, 3, 12, 19, 20, 23, 27];
+        const relIdx = [4, 3, 12, 19, 18, 22, 25]; //indices in the array chart types
+        var rel_name = []; 
+        relIdx.forEach(index => {
+          let name = types[index];
+          rel_name.push(name);          
+        });
+
+
+
         graph.nodes.forEach((node) => {
           if(node.column == 3){
-            if(relationships.includes(node.name)){
+            if(compa_name.includes(node.name)){
+              node.comparasion = true;
+              node.color1=colorFunctions[0];
+            }
+          }
+        });
+
+
+
+        graph.nodes.forEach((node) => {
+          if(node.column == 3){
+            if(rel_name.includes(node.name)){
               node.relationships = true;
-              node.color2="#d8b365";
+              node.color2=colorFunctions[1];
             }
           }
         });
