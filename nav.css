@@ -136,3 +136,88 @@ details[open] summary {
   cursor: pointer;
   border-radius: 10px;
 }
+
+.printbtn:hover {fill: #3e8e41;}
+
+.resetBtn {
+  fill: #3e8e41;
+}
+
+.resetBtn:active {
+  fill: #000;
+
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+
+.rotated {
+  transform: rotate(90deg); 
+}
+
+/*---------------------------------------------------*/
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+}
+   
+#chart {
+  height: 500px;
+}
+ 
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+ 
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+ 
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+ 
+.link:hover {
+  stroke-opacity: .6 !important;
+}
+
+
+.color-box {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      margin: 10px;
+      transition: opacity 0.3s ease-in-out;
+      opacity : 0.5;
+      text-align: center;
+      border-radius: 10px;
+
+
+    }
+
+.nonDisplay{
+  display: none;
+}
+
+.maxWidth{
+  margin-left: 50px;
+  margin-right: 50px;
+  border-top: 1px solid #aaa;
+
+
+  /*background-color: #f1f1f1;
+
+  
+    max-width: 1000px;*/
+  
+}

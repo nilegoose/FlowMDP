@@ -57,6 +57,14 @@ function data_process(){
           "links" :[]
         };
 
+
+        //types.forEach(function(name){
+        //  graph.nodes.push({
+        //    "name" : name
+        //  });
+
+        //});
+
         getData()["nodes"].forEach(function (d){
           graph.nodes.push({
             "name" : d.name
@@ -373,4 +381,8 @@ function ascending_name1(a, b) {
     location.reload();
   }
 
+  function resetBtnEvent(){
+    resetPage();
+    this.classList.toggle('rotated');
+  }
 

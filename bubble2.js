@@ -1,12 +1,12 @@
 function draw(color, area, divName, subplot){
   let windowWidth = window.innerWidth;
-  let chartWidth = windowWidth /3;
+  let chartWidth = windowWidth /4;
   if(subplot == true){
     chartWidth *= 0.75;
   }
 
-  let margin = {top: 10, right: 20, bottom: 30, left: 50},
-  width = chartWidth - margin.left - margin.right,
+  let margin = {top: 10, right: 25, bottom: 30, left: 25},
+  width = chartWidth - margin.left - margin.right - 50,
   height = chartWidth * 0.75 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page

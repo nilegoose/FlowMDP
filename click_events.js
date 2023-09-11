@@ -1,7 +1,7 @@
+const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
-
 var col1 = [],
 col2 = [],
 col3 = [],
@@ -120,7 +120,19 @@ var path = sankey.link();
         current_name = node['name'];
         if(current_name == "Bubble plot"){
           draw1();
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+
+          }
+          exampleArea.setAttribute("class", "maxWidth")
+
+
         }else{
+
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+          }
+
           remove1();
         }
         console.log(current_name + " clicked");
@@ -129,7 +141,6 @@ var path = sankey.link();
           dehighlight_link(link);
         })
 
-        showText(current_name);
         
       
       
@@ -140,14 +151,7 @@ var path = sankey.link();
       
         var encoding_list = [];
       
-      
-        col4.forEach(function(node){
-          encoding_list.push(node['name']);
-        });
-        // the encoding columns
-        showText2(encoding_list);
-        encoding_list = [];
-        // gove to global variable
+ 
 
 
 
@@ -377,18 +381,7 @@ function translate_spacing(node){
    .transition()
    .duration(1000)
    .attr("d", path);
-   link.style('stroke', function(d){   
-
-    if(link_toHighlight.includes(d.id)){
-      let sourceColorBool = d.source.column < 3 ;
-      if(sourceColorBool){
-        return d.color = d.source.color;
-      }else{
-        return d.color = d.target.color;
-      }
-  } 
-    return d.color = "#D8D8D8"
-  });
+   link.style('stroke', color_fade_link);
 
    //dataObj.getSankey().nodes(backupNodes);
    //console.log("restored");
