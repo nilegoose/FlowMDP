@@ -1,6 +1,6 @@
 function draw(color, area, divName, subplot){
   let windowWidth = window.innerWidth;
-  let chartWidth = windowWidth /4;
+  let chartWidth = windowWidth / 3;
   if(subplot == true){
     chartWidth *= 0.75;
   }
@@ -65,6 +65,8 @@ function draw(color, area, divName, subplot){
 
 
 function draw1(){
+  d3.select("#multiple").selectAll("g").remove();
+
   draw(true, true, "#multiple");
   draw(false, true, "#multiple", true);
   draw(false, false, "#multiple", true);
