@@ -328,6 +328,10 @@ var abstract_dict = {'one_Numeric': 2,
     return a.y - b.y;
   }
 
+  function descendingDepth(a, b) {
+    return b.y - a.y;
+  }
+
   function noSort(a, b) {
     return a.index - b.index;
   }

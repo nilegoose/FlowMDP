@@ -40,6 +40,10 @@ var path = sankey.link();
       .nodeSort(sortFun == undefined? ascending_name1 : sortFun)
       .layout(32);
 
+      dataObj.updateSankey(sankey);
+
+  translate_col4();
+
   dataObj.updateSankey(sankey);
 
 
@@ -149,11 +153,7 @@ var path = sankey.link();
         link_toHighlight = link_toHighlight.concat(traverse_left(node));
       
       
-        var encoding_list = [];
-      
- 
-
-
+       
 
         update_link();
 
@@ -432,6 +432,41 @@ function translate_reset(){
 
 
 // the idea is, to update graph first, then re-highlight
+
+
+function translate_col4(){
+  let nodes = dataObj.getSankey().nodes();
+
+  //const backupNodes = nodes.map(item => ({ ...item }));
+
+  
+  let sorted_part = resortPart( nodes.slice(), "column", 4, descendingDepth);
+
+  // if the spacing between two nodes exceeds , correct manuelly
+
+  let y_below;
+  let padding = 8;
+  
+
+  sorted_part.forEach(function(d){
+    if (y_below == undefined){
+      y_below = d.y;
+
+      return;
+    }
+    let y_delta = y_below - d.y - d.dy;
+    if(y_delta > padding * 2){
+      d.y =  y_below - d.dy - padding * 2;
+    }
+
+    y_below = d.y;
+
+    
+  })
+
+
+}
+
 
       
       
