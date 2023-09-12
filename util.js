@@ -220,21 +220,17 @@ function resortPart(arr, field, value, sortFun){
 }
 //calculate the spacing between topmost and the upper edge
 
-var abstract_dict = {'one_Numeric': 2,
- 'two_Numeric': 8,
- 'three_Numeric': 7,
- 'n_Numeric': 9,
- 'one_Categorical': 6,
- '2/more_Categorical': 12,
- 'oneNum_oneCat': 10,
- 'oneCat_sevNum': 13,
- 'sevCat_oneNum': 15};
+var abstract_dict = {'One Numeric': 2,
+'Two Numeric': 8,
+'Three Numeric': 7,
+'Several Numeric': 9,
+'One Categorical': 6,
+'Several Categorical': 12,
+'One Num, One Cat': 10,
+'One Cat, Several Num': 14,
+'Several Cat, One Num': 15}
 
- var dim_dict = {'oneDim': 8,
-  'twoDim': 15,
-  'threeDim': 10,
-  'nDim': 21};
-
+ var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22}
   
 
   var ColorState = (function() {

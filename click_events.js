@@ -151,6 +151,7 @@ var path = sankey.link();
       
       
         var clicked_col = checkCol(i);
+        cols[clicked_col -1] = [node];
         link_toHighlight= link_toHighlight.concat(traverse_right(node));
         link_toHighlight = link_toHighlight.concat(traverse_left(node));
       
@@ -163,6 +164,9 @@ var path = sankey.link();
           highlight_link(id, 0.6);
         })
         highlighted_link = link_toHighlight;
+
+        update_node("highlight");
+        update_text("highlight");
 
         translate_spacing(node);
         link_toHighlight = [];
@@ -187,6 +191,8 @@ var path = sankey.link();
   // array highlighted link stores id.. []
   function clearHighlight(){
     clicked_node = undefined;
+    update_node("dehighlight");
+    update_text("dehighlight");
 
     if(highlighted_link.length <= 0) {
       return;
@@ -371,8 +377,9 @@ function translate_spacing(node){
   .transition()
   .duration(1000)
   .attr("transform", function(d){
-
     return translateString(d.x, d.y)});
+
+    
   let link = svg.selectAll(".link");
   let path = dataObj.getSankey().link();
 
@@ -469,6 +476,47 @@ function translate_col4(){
 
 }
 
+function update_node(action){
+  var graph = dataObj.getData();
+
+
+svg.selectAll("rect").data(graph.nodes)
+  .transition()
+  .duration(1000)
+  .style("fill", function(d){
+    if(action == "dehighlight"){
+      return d.color;
+    }else{
+      if(cols.flat().includes(d)){
+        return d.color;
+      }
+      return "#a9a9a9";}
+    })
+    .attr("height", function(d) { 
+      return d.dy; })
+}
+
+
+function update_text(action){
+  graph = dataObj.getData();
+
+
+  svg.selectAll("text")
+  .data(graph.nodes)
+  .transition()
+  .duration(1000)
+  .style("fill", function(d){
+    if(action == "dehighlight"){
+      return "#000000";
+    }else{
+      if(cols.flat().includes(d)){
+        return "#000000";
+      }
+      return "#8c8c8c";
+    }
+  })
+  
+}
 
       
       
