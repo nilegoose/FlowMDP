@@ -1,6 +1,7 @@
 const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
 
-
+const colorFunctions = ["#5ab4ac", "#d8b365"];
+const nameFunctions = ["Comparision", "Relationship"];
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
@@ -73,10 +74,6 @@ function toggleRel() {
 
 function setColText() {
 
-
-
-  // Replace these values with the actual x-coordinates
- 
   let buttons = [document.getElementById('button1'),
   document.getElementById('button2'),
   document.getElementById('button3'),
@@ -85,12 +82,19 @@ function setColText() {
   
 
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].innerText = buttonTexts[i];
-
-    // Calculate the width of the button text
-    
+    buttons[i].innerText = buttonTexts[i];  
   }
 
+}
+
+function setBoxText(){
+   
+    let boxes = [document.getElementById('fun_compa'),
+    document.getElementById('fun_rel')]
+  
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].style.backgroundColor = colorFunctions[i];
+  }
 }
 
 function downloadSVG() {
@@ -146,6 +150,7 @@ function changeHeight() {
 
 changeHeight();
 setColText();
+setBoxText();
 
 /*----------------------------------------------------------------------*/
 // set the "search by functions" window

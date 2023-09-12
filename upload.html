@@ -3,61 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Sankey Demo</title>
-<style>
- 
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
 
-}
-   
-#chart {
-  height: 500px;
-}
- 
-.node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
-}
- 
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-}
- 
-.link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
-}
- 
-.link:hover {
-  stroke-opacity: .6 !important;
-}
-
-
-.color-box {
-      width: 100px;
-      height: 100px;
-      display: inline-block;
-      margin: 10px;
-      transition: opacity 0.3s ease-in-out;
-      opacity : 0.5;
-      text-align: center;
-      border-radius: 10px;
-
-
-    }
-
-
-
- 
-</style>
 <link rel = "stylesheet" href="/static/css2/nav.css">
 </head>
 <body>
@@ -223,28 +169,7 @@ function changeWidth(width){
 }
  
   
-  function showText(text){
-    //$("#text p").text("what")
-    var para = document.getElementById("text1").innerHTML=text;
-   // d3.select("textarea").node().value = local.get(thisCircle) || "";
-  //d3.select("button").on("click", function() {
-   //   local.set(thisCircle, d3.select("textarea").node().value);
-  }
-
-
-  function showText2(text){
-    //$("#text p").text("what")
-    var para = document.getElementById("text2").innerHTML=text;
-   // d3.select("textarea").node().value = local.get(thisCircle) || "";
-  //d3.select("button").on("click", function() {
-   //   local.set(thisCircle, d3.select("textarea").node().value);
-  }
-
-  // the function creates radio button from a list
-
-
-
-
+ 
 
 d3.select("#fun_compa").on("click", toggleCompa); 
 d3.select("#fun_rel").on("click", toggleRel); 

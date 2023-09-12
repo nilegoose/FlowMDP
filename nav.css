@@ -201,8 +201,6 @@ details[open] summary {
       opacity : 0.5;
       text-align: center;
       border-radius: 10px;
-
-
     }
 
 .nonDisplay{
@@ -213,15 +211,14 @@ details[open] summary {
   margin-left: 50px;
   margin-right: 50px;
   border-top: 1px solid #aaa;
-
-
-  /*background-color: #f1f1f1;
-
-  
-    max-width: 1000px;*/
-  
+  margin-top: 50px;
 }
 
 body{
   overflow-x: hidden;
+}
+
+
+.axis path, .axis line{
+  stroke-width: 1px;
 }

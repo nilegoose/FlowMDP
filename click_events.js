@@ -124,6 +124,8 @@ var path = sankey.link();
         current_name = node['name'];
         if(current_name == "Bubble plot"){
           draw1();
+          scrollToBottom();
+          // add a line between
           if (exampleArea.getAttribute("class") == "maxWidth"){
             exampleArea.classList.remove("maxWidth");
 

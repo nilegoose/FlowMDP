@@ -5,7 +5,7 @@ function draw(color, area, divName, subplot){
     chartWidth *= 0.75;
   }
 
-  let margin = {top: 10, right: 25, bottom: 30, left: 25},
+  let margin = {top: 50, right: 25, bottom: 30, left: 25},
   width = chartWidth - margin.left - margin.right - 50,
   height = chartWidth * 0.75 - margin.top - margin.bottom;
 
@@ -25,16 +25,32 @@ function draw(color, area, divName, subplot){
   let x = d3.scale.linear()
   .domain([0, 10000])
   .range([ 0, width ]);
-  svg2.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.svg.axis().scale(x).orient("bottom"));
+
 
 // Add Y axis
   let y = d3.scale.linear()
   .domain([35, 90])
   .range([ height, 0]);
-  svg2.append("g")
-  .call(d3.svg.axis().scale(y).orient("left"));
+
+  if(subplot == undefined){
+    svg2.append("g")
+    .call(d3.svg.axis().scale(y).orient("left"));
+    svg2.append("g")
+    .attr("transform", "translate(-6," + height + ")")
+    .call(d3.svg.axis().scale(x).orient("bottom"));
+
+  }else{
+    
+    var axisLeft = svg2.append("g")
+    .call(d3.svg.axis().scale(y).orient("left"));
+    axisLeft.selectAll("text").remove();
+    var axisRight =svg2.append("g")
+    .attr("transform", "translate(-6," + height + ")")
+    .call(d3.svg.axis().scale(x).orient("bottom"));
+    axisRight.selectAll("text").remove();
+  
+  }
+
 
 // Add a scale for bubble size
 // scaleOrdinal()
@@ -53,19 +69,19 @@ function draw(color, area, divName, subplot){
     .append("circle")
       .attr("cx", function (d) { return x(d.gdpPercap); } )
       .attr("cy", function (d) { return y(d.lifeExp); } )
-      .attr("r", function (d) { return area? z(d.pop) : 10; } )
+      .attr("r", function (d) { return area? z(d.pop) : 5; } )
       .style("fill", function (d) { 
         return color? myColor(d.continent) : "#69b3a2"; } )
       .style("opacity", "0.7")
       .attr("stroke", "white")
-      .style("stroke-width", "2px")
+      .style("stroke-width", "1px")
   })
   
 }
 
 
 function draw1(){
-  d3.select("#multiple").selectAll("g").remove();
+  d3.select("#multiple").selectAll("*").remove();
 
   draw(true, true, "#multiple");
   draw(false, true, "#multiple", true);
