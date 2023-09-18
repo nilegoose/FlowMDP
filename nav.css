@@ -39,7 +39,7 @@ details[open] summary {
   align-items: center;
   padding-left: 50px;
   padding-right: 50px;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .tab {
@@ -113,7 +113,6 @@ details[open] summary {
   align-items: center; /* Center vertically */
   justify-content: space-between; /* Distribute space between elements */  
   z-index: -1; 
-  margin-left: 10px;
   margin-right: 50px;
   margin-left: 50px;
   font-weight: bold;
@@ -221,4 +220,13 @@ body{
 
 .axis path, .axis line{
   stroke-width: 1px;
+}
+
+.rightElem{
+  font-size: x-large;
+  margin-left: auto;
+  margin-right: 50px;
+}
+.rightElem a:visited{
+  font-size: x-large;
 }

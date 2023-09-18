@@ -39,16 +39,13 @@ function toggleCompa() {
       toggleOpacity.call(box_rel);
     }
     FunState.compa();
-    //let svg = d3.select("#chartSVG");
-    //console.log(svg);
-    drawSankey(dataObj.getData(), svg, ascending_param);
-    //update_general("", name, FunState.getValue());
+   
+    update_general("compa");
   } else {
       fun_compa_count = 0;
       FunState.cancelCompa();
-      drawSankey(dataObj.getData(), svg);
 
-      //update_general("", name, FunState.getValue());
+      update_general("reset");
 
   }
 }
@@ -63,11 +60,11 @@ function toggleRel() {
         toggleOpacity.call(box_compa);
       }
       FunState.rel();
-      drawSankey(dataObj.getData(), svg, ascending_param2);
+      update_general("rel");
     } else {
       fun_rel_count = 0;
       FunState.cancelRel();
-      drawSankey(dataObj.getData(), svg);
+      update_general("reset");
     }
 }
 
@@ -144,8 +141,9 @@ function greyLink(){
 
 function changeHeight() {
   var boxElement = document.getElementById("chart");
-  var newHeight = window.innerHeight - 110 -100; // Generates a random height between 50px and 250px
+  var newHeight = window.innerHeight - 120 -100; 
   boxElement.style.height = newHeight + "px";
+  console.log(newHeight);
 }
 
 changeHeight();

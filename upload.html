@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>Sankey Demo</title>
-
 <link rel = "stylesheet" href="/static/css2/nav.css">
 </head>
 <body>
@@ -36,9 +35,9 @@
           <label for="open-checkbox" id="checkbox-label">Keep this window open</label>      
         </details>
       <div class="container">
-      <div class="color-box" id="fun_compa" style="background-color: #5ab4ac;"><p>comparision</p></div>
+      <div class="color-box" id="fun_compa"><p>Comparision</p></div>
       <!-- A4 + B1-->
-      <div class="color-box" id="fun_rel" style="background-color: #d8b365;"><p>relationships</p></div>
+      <div class="color-box" id="fun_rel"><p>Relationship</p></div>
       </div>
     </div>
 <!-- end drop down-->
@@ -65,23 +64,10 @@
       <p id="button2">1</p>
       <p id="button3">1</p>
       <p id="button4">1</p>
-
-      <!--p id="button2" class="textButton">2</p>
-      <p id="button3" class="textButton">3</p>
-      <p id="button4" class="textButton">4</p-->
     </div> 
 
-
-    <br>
-    <div id = "text-area1">
-      <p>chose node:</p>
-      <p id="text1"></p>
-      <p>encoding:</p>
-      <p id="text2"></p>
-      <div id="radioContainer"></div>
     <div id="multiple"></div>
-
-    </div>  
+ 
   </div>
 </body>
 
@@ -90,7 +76,7 @@
 <script src="/static/js2/lib/d3v3.js"></script>
 
 <script src="/static/js2/sankey.js"></script>
-<script src="/static/js2/bubble2.js"></script>
+<script src="/static/js2/charts/bubble2.js"></script>
 <script src="/static/js2/getdata.js"></script>
 <script src="/static/js2/nav.js"></script>
 <script src="/static/js2/click_events.js"></script>
@@ -168,8 +154,9 @@ function changeWidth(width){
     .style("width", width)
 }
  
-  
- 
+
+
+
 
 d3.select("#fun_compa").on("click", toggleCompa); 
 d3.select("#fun_rel").on("click", toggleRel); 
