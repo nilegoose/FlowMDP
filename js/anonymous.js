@@ -12,7 +12,7 @@ function color_link(link){
 // color highlight link and fade the rest
 function color_fade_link(d){   
 
-    if(link_toHighlight.includes(d.id)){
+    if(link_clicked(d)){
       let sourceColorBool = d.source.column < 3;
       if(sourceColorBool) return d.color = d.source.color;
       else return d.color = d.target.color;
@@ -21,7 +21,6 @@ function color_fade_link(d){
 }
 
 function color_node_fun(d) { 
-  console.log("update color " + FunState.getValue());
   let compBool = FunState.getValue().includes("comparasion");
   let relBool = FunState.getValue().includes("relationship");
   let color1Bool = d.color1 == undefined;
@@ -49,18 +48,19 @@ function color_node_fun(d) {
 }
 
 function title_link(d) { 
-  return d.source.name + " → " + d.target.name + "\n" + 
-  "chart types: " +
-  format(d.value)
-  /*+ "\n" + d.id*/; }
+  return d.source.name + " -- " + d.target.name}
 
   function title_node(d) { 
     if(d.column == 3){
       return d.name; 
     }else if(d.column == 1){
-      return d.name + "\n" +  "chart types: " + dim_dict[d.name];
+      return d.name + "\n" +  "Chart types: " + dim_dict[d.name];
     }else if(d.column == 2){
-      return d.name + "\n" +  "chart types: " + abstract_dict[d.name];
+      return d.name + "\n" +  "Chart types: " + abstract_dict[d.name];
     }
-    return d.name + "\n" +  "chart types: " + format(d.value); 
+    return d.name + "\n" +  "Chart types: " + format(d.value); 
+  }
+
+  function link_clicked(d){ 
+    return cols.flat().includes(d.source) && cols.flat().includes(d.target) 
   }

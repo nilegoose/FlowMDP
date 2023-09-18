@@ -39,7 +39,7 @@ details[open] summary {
   align-items: center;
   padding-left: 50px;
   padding-right: 50px;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .tab {
@@ -113,7 +113,6 @@ details[open] summary {
   align-items: center; /* Center vertically */
   justify-content: space-between; /* Distribute space between elements */  
   z-index: -1; 
-  margin-left: 10px;
   margin-right: 50px;
   margin-left: 50px;
   font-weight: bold;
@@ -201,8 +200,6 @@ details[open] summary {
       opacity : 0.5;
       text-align: center;
       border-radius: 10px;
-
-
     }
 
 .nonDisplay{
@@ -213,11 +210,23 @@ details[open] summary {
   margin-left: 50px;
   margin-right: 50px;
   border-top: 1px solid #aaa;
+  margin-top: 50px;
+}
+
+body{
+  overflow-x: hidden;
+}
 
 
-  /*background-color: #f1f1f1;
+.axis path, .axis line{
+  stroke-width: 1px;
+}
 
-  
-    max-width: 1000px;*/
-  
+.rightElem{
+  font-size: x-large;
+  margin-left: auto;
+  margin-right: 50px;
+}
+.rightElem a:visited{
+  font-size: x-large;
 }

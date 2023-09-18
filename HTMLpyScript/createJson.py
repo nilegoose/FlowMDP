@@ -24,3 +24,9 @@ for x in sum_list:
 dict2 = dict(nodes=list1, links=list3)
 s = json.dumps(dict2, indent="\t")
 print(s)
+
+#chart counts
+dim_count = [8, 15, 10, 22]
+abstract_count = [2, 8, 7, 9, 6, 12, 10, 14, 15]
+dict(zip(attributes, abstract_count))
+dict(zip(dimensions, dim_count))

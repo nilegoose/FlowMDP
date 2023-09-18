@@ -2,14 +2,12 @@
 // and nodes
 function traverse_right(node){
     let remainingNodes = [],
-        nextNodes = [],
-        temp_link = [];
+        nextNodes = [];
 
     let sankey = dataObj.getSankey();
                 // traversal right
     node["sourceLinks"].forEach(function(link) {
       remainingNodes.push(link["target"]);
-      temp_link.push(link.id);      
     });
     while (remainingNodes.length) {
 
@@ -25,7 +23,6 @@ function traverse_right(node){
           //console.log(link);
           
           nextNodes.push(link["target"]);
-          temp_link.push(link.id);      
         });
   
 
@@ -33,8 +30,7 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
-    col4 = [...new Set(cols[3])]
-    return temp_link;
+    col4 = [...new Set(cols[3])];
   }
 
 
@@ -42,12 +38,10 @@ function traverse_right(node){
 function traverse_left(node){
     let remainingNodes = [],
         nextNodes = [],
-        sankey = dataObj.getSankey(),
-        temp_link = [];
+        sankey = dataObj.getSankey();
 
     node["targetLinks"].forEach(function(link) {
-    remainingNodes.push(link["source"]);
-    temp_link.push(link.id);      
+    remainingNodes.push(link["source"]);      
     });
 
     while (remainingNodes.length) {
@@ -59,31 +53,50 @@ function traverse_left(node){
     remainingNodes.forEach(function(node) {
 // traversal right
     node["targetLinks"].forEach(function(link) {
-    nextNodes.push(link["source"]);
-    temp_link.push(link.id);      
+    nextNodes.push(link["source"]);      
       });
     });
     remainingNodes = nextNodes;
   }
   col1 = [...new Set(cols[0])];
-  return temp_link;
 }
 
 
 function update_node(action){
+
   var graph = dataObj.getData();
+
 
 
 svg.selectAll("rect").data(graph.nodes)
   .transition()
   .duration(1000)
   .style("fill", function(d){
+    let compBool = FunState.getValue().includes("comparasion");
+    let relBool = FunState.getValue().includes("relationship");
+  
     if(action == "dehighlight"){
-      return d.color;
+      return color_node_fun(d);
     }else{
       if(cols.flat().includes(d)){
-        return d.color;
+        return color_node_fun(d);}
+      if(compBool  && d.column ==3){
+        if(d.color1 != undefined){
+          return d.color1;
+        }
+       
+
       }
+
+      if(relBool && d.column ==3){
+      
+        if(d.color2 != undefined){
+          return d.color2;
+        }
+
+      }
+
+      
       return "#a9a9a9";}
     })
     .attr("height", function(d) { 
@@ -109,4 +122,20 @@ function update_text(action){
     }
   })
   
+}
+
+/**-------------------------------------------------------------------------- */
+//test functions
+function changeColor(){
+  d3.selectAll("rect")
+    .transition()
+    .duration(500)
+    .style("fill", "red")
+}
+
+function changeWidth(width){
+  d3.selectAll("rect")
+    .transition()
+    .duration(2000)
+    .style("width", width)
 }

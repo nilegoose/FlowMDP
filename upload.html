@@ -2,62 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sankey Demo</title>
-<style>
- 
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-
-}
-   
-#chart {
-  height: 500px;
-}
- 
-.node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
-}
- 
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-}
- 
-.link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
-}
- 
-.link:hover {
-  stroke-opacity: .6 !important;
-}
-
-
-.color-box {
-      width: 100px;
-      height: 100px;
-      display: inline-block;
-      margin: 10px;
-      transition: opacity 0.3s ease-in-out;
-      opacity : 0.5;
-      text-align: center;
-      border-radius: 10px;
-
-
-    }
-
-
-
- 
-</style>
+<title>FlowMDP</title>
 <link rel = "stylesheet" href="/static/css2/nav.css">
 </head>
 <body>
@@ -70,7 +15,7 @@
 
     <!--the first row-->
   <div class = "flex_box">
-    <h2>Sankey Diagram</h2>
+    <h1>FlowMDP</h1>
     <span class="tab"></span>
     <svg id="reset_icon" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30" class="resetBtn">
       <path d="M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z"/>
@@ -90,9 +35,9 @@
           <label for="open-checkbox" id="checkbox-label">Keep this window open</label>      
         </details>
       <div class="container">
-      <div class="color-box" id="fun_compa" style="background-color: #5ab4ac;"><p>comparision</p></div>
+      <div class="color-box" id="fun_compa"><p>Comparision</p></div>
       <!-- A4 + B1-->
-      <div class="color-box" id="fun_rel" style="background-color: #d8b365;"><p>relationships</p></div>
+      <div class="color-box" id="fun_rel"><p>Relationship</p></div>
       </div>
     </div>
 <!-- end drop down-->
@@ -103,6 +48,11 @@
     <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30" class="end-element printbtn" id="print-icon">
       <path d="M658-648v-132H302v132h-60v-192h476v192h-60Zm-518 60h680-680Zm599 95q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm-81 313v-192H302v192h356Zm60 60H242v-176H80v-246q0-45.05 30.5-75.525Q141-648 186-648h588q45.05 0 75.525 30.475Q880-587.05 880-542v246H718v176Zm102-236v-186.215Q820-562 806.775-575 793.55-588 774-588H186q-19.55 0-32.775 13.225Q140-561.55 140-542v186h102v-76h476v76h102Z"/>
     </svg>
+    <span class="tab"></span>
+    <div class="rightElem">
+      <a target="_blank" href="https://google.com">google</a>
+    </div>
+
 
 
   </div>
@@ -119,23 +69,10 @@
       <p id="button2">1</p>
       <p id="button3">1</p>
       <p id="button4">1</p>
-
-      <!--p id="button2" class="textButton">2</p>
-      <p id="button3" class="textButton">3</p>
-      <p id="button4" class="textButton">4</p-->
     </div> 
 
-
-    <br>
-    <div id = "text-area1">
-      <p>chose node:</p>
-      <p id="text1"></p>
-      <p>encoding:</p>
-      <p id="text2"></p>
-      <div id="radioContainer"></div>
     <div id="multiple"></div>
-
-    </div>  
+ 
   </div>
 </body>
 
@@ -144,7 +81,7 @@
 <script src="/static/js2/lib/d3v3.js"></script>
 
 <script src="/static/js2/sankey.js"></script>
-<script src="/static/js2/bubble2.js"></script>
+<script src="/static/js2/charts/bubble2.js"></script>
 <script src="/static/js2/getdata.js"></script>
 <script src="/static/js2/nav.js"></script>
 <script src="/static/js2/click_events.js"></script>
@@ -166,9 +103,9 @@ var dataObj = DataObj.getData();
 
 
   
-var margin = {top: 10, right: 50, bottom: 100, left: 50},
+var margin = {top: 20, right: 50, bottom: 100, left: 50},
     width = window.innerWidth - margin.left - margin.right - 20,
-    height = window.innerHeight - margin.top - margin.bottom -110;
+    height = window.innerHeight - margin.top - margin.bottom -120;
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + "  "; };
@@ -208,43 +145,8 @@ printBtn.addEventListener("click", downloadSVG);
 //draw(getData());
 
 
-function changeColor(){
-  d3.selectAll("rect")
-    .transition()
-    .duration(500)
-    .style("fill", "red")
-}
 
-function changeWidth(width){
-  d3.selectAll("rect")
-    .transition()
-    .duration(2000)
-    .style("width", width)
-}
  
-  
-  function showText(text){
-    //$("#text p").text("what")
-    var para = document.getElementById("text1").innerHTML=text;
-   // d3.select("textarea").node().value = local.get(thisCircle) || "";
-  //d3.select("button").on("click", function() {
-   //   local.set(thisCircle, d3.select("textarea").node().value);
-  }
-
-
-  function showText2(text){
-    //$("#text p").text("what")
-    var para = document.getElementById("text2").innerHTML=text;
-   // d3.select("textarea").node().value = local.get(thisCircle) || "";
-  //d3.select("button").on("click", function() {
-   //   local.set(thisCircle, d3.select("textarea").node().value);
-  }
-
-  // the function creates radio button from a list
-
-
-
-
 
 d3.select("#fun_compa").on("click", toggleCompa); 
 d3.select("#fun_rel").on("click", toggleRel); 

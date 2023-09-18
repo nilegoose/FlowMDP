@@ -1,6 +1,7 @@
 const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
 
-
+const colorFunctions = ["#5ab4ac", "#d8b365"];
+const nameFunctions = ["Comparision", "Relationship"];
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
@@ -38,16 +39,13 @@ function toggleCompa() {
       toggleOpacity.call(box_rel);
     }
     FunState.compa();
-    //let svg = d3.select("#chartSVG");
-    //console.log(svg);
-    drawSankey(dataObj.getData(), svg, ascending_param);
-    //update_general("", name, FunState.getValue());
+   
+    update_general("compa");
   } else {
       fun_compa_count = 0;
       FunState.cancelCompa();
-      drawSankey(dataObj.getData(), svg);
 
-      //update_general("", name, FunState.getValue());
+      update_general("reset");
 
   }
 }
@@ -62,21 +60,17 @@ function toggleRel() {
         toggleOpacity.call(box_compa);
       }
       FunState.rel();
-      drawSankey(dataObj.getData(), svg, ascending_param2);
+      update_general("rel");
     } else {
       fun_rel_count = 0;
       FunState.cancelRel();
-      drawSankey(dataObj.getData(), svg);
+      update_general("reset");
     }
 }
 
 
 function setColText() {
 
-
-
-  // Replace these values with the actual x-coordinates
- 
   let buttons = [document.getElementById('button1'),
   document.getElementById('button2'),
   document.getElementById('button3'),
@@ -85,12 +79,19 @@ function setColText() {
   
 
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].innerText = buttonTexts[i];
-
-    // Calculate the width of the button text
-    
+    buttons[i].innerText = buttonTexts[i];  
   }
 
+}
+
+function setBoxText(){
+   
+    let boxes = [document.getElementById('fun_compa'),
+    document.getElementById('fun_rel')]
+  
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].style.backgroundColor = colorFunctions[i];
+  }
 }
 
 function downloadSVG() {
@@ -140,12 +141,14 @@ function greyLink(){
 
 function changeHeight() {
   var boxElement = document.getElementById("chart");
-  var newHeight = window.innerHeight - 110 -100; // Generates a random height between 50px and 250px
+  var newHeight = window.innerHeight - 120 -100; 
   boxElement.style.height = newHeight + "px";
+  console.log(newHeight);
 }
 
 changeHeight();
 setColText();
+setBoxText();
 
 /*----------------------------------------------------------------------*/
 // set the "search by functions" window

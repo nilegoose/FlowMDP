@@ -22,7 +22,7 @@ function drawSankey(data, svg, sortFun){
 
  
 
-svg.selectAll("g").remove().transition().duration(1000);
+svg.selectAll("g").remove();
 
 
 var sankey = d3.sankey()
@@ -59,15 +59,11 @@ var path = sankey.link();
         d.id = i;
         return "link-"+i;
       })
-      .transition()
-      .duration(1000)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
       .style('stroke', color_link);
 
-  link_count = link.length;
-  console.log("links " + link_count);
-
+ 
 
   link.append("title")
       .text(title_link);
@@ -76,7 +72,7 @@ var path = sankey.link();
       .data(data.nodes)
       .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+      .attr("transform", function(d) { return translateString(d.x, d.y); });
     
 
 
@@ -91,7 +87,7 @@ var path = sankey.link();
   .append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", color_per_func)
+      .style("fill", color_node_fun)
       .on("click", highlight_node_links)
       .append("title")
       .text(title_node);
@@ -119,36 +115,51 @@ var path = sankey.link();
       
       
       function highlight_node_links(node,i){
+        console.log("highlight_node_links");
         clicked_node = node;
 
         current_name = node['name'];
-        
-        console.log(current_name + " clicked");
+        if(current_name == "Bubble plot"){
+          draw1();
+          scrollToBottom();
+          // add a line between
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
 
-        highlighted_link.forEach(function(link){
-          dehighlight_link(link);
-        })
+          }
+          exampleArea.setAttribute("class", "maxWidth")
+
+
+        }else{
+
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+          }
+
+          remove1();
+        }
+        console.log(current_name + " clicked");
+        update_opacity(0.2);
+
+
 
         
       
       
         var clicked_col = checkCol(i);
-        link_toHighlight= link_toHighlight.concat(traverse_right(node));
-        link_toHighlight = link_toHighlight.concat(traverse_left(node));
-      
-      
+        cols[clicked_col -1] = [node];
+
+
+        traverse_left(node);
+        traverse_right(node);
        
-
         update_link();
-
-        link_toHighlight.forEach(function(id){
-          highlight_link(id, 0.6);
-        })
-        highlighted_link = link_toHighlight;
+        update_opacity(0.6);
+        update_node("highlight");
+        update_text("highlight");
 
         translate_spacing(node);
-        link_toHighlight = [];
-
+       
       }
       
   }
@@ -169,42 +180,35 @@ var path = sankey.link();
   // array highlighted link stores id.. []
   function clearHighlight(){
     clicked_node = undefined;
-
-    if(highlighted_link.length <= 0) {
-      return;
-    }
-      highlighted_link.forEach(function(element) {
-        dehighlight_link(element);
-      });
-    
-
-  }
-
-  function dehighlight_link(id){
-    d3.select("#link-"+id)
-    .style("stroke-opacity", 0.2)
-    .style("strock", function(d){return d.color = d.source.color});
-    // the array records highted links
-
-    highlighted_link = highlighted_link.filter(item => item !== id);
-    link_toHighlight = link_toHighlight.filter(item => item !== id);
-
-
+    update_node("dehighlight");
+    update_text("dehighlight");
+    update_opacity(0.2);
   }
 
 
 
-  function highlight_link(id,opacity){
-    d3.select("#link-"+id).style("stroke-opacity", opacity);
-    
+  function update_opacity(opacity){
+    d3.selectAll(".link")
+    .filter(link_clicked)
+    .style("stroke-opacity", opacity);
+
   }
 
 
 // translate _ spacing _
 
 
-function update_general(action, name, sort_param){
-  return;
+function update_general(action){
+  translated_nodes = [];
+  clearHighlight();
+
+
+col1 = [];
+col2 = [];
+col3 = [];
+col4 = [];
+
+cols = [col1, col2, col3, col4];
   graph = dataObj.getData();
   var sankey = d3.sankey()
   .nodeWidth(15)
@@ -213,7 +217,7 @@ function update_general(action, name, sort_param){
   path;
 
 
-  if(sort_param != undefined && sort_param.includes("comparasion")){
+  if(action == "compa"){
     sankey 
     .nodes(graph.nodes)
     .links(graph.links)
@@ -222,12 +226,22 @@ function update_general(action, name, sort_param){
 
     path = sankey.link();
 
-  }else{
+  }else if(action == "rel"){
+    sankey 
+    .nodes(graph.nodes)
+    .links(graph.links)
+    .nodeSort(ascending_param2)
+    .layout(32);
+
+    path = sankey.link();
+
+  }
+  else{
     sankey
     .nodes(graph.nodes)
     .links(graph.links)
+    .nodeSort(ascending_name1)
     .layout(32);
-
     path = sankey.link();
   }
 
@@ -243,12 +257,13 @@ function update_general(action, name, sort_param){
   .attr("class", "link")
   .attr("d", path)
   .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-  .sort(function(a, b) { return b.dy - a.dy; });
+  .style('stroke', color_link);
+
 
   svg.selectAll(".link>title")
   .data(graph.links)
   .transition()
-  .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+  .text(title_link);
 
 
   svg.selectAll(".node")
@@ -256,11 +271,9 @@ function update_general(action, name, sort_param){
   .transition()
   .duration(1000)
   .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+  .attr("transform", function(d) {return translateString(d.x, d.y)})
 
 
-  console.log("line 493 fun " + FunState.getValue());
-  console.log("line 493 sort " + sort_param);
       
 
   color_per_func();
@@ -269,13 +282,14 @@ function update_general(action, name, sort_param){
   .data(graph.nodes)
   .transition()
   .duration(1000)
-  .text(function(d) { return d.name + "\n" + format(d.value); });
+  .text(title_node);
 
 
   svg.selectAll("text")
   .data(graph.nodes)
   .transition()
   .duration(1000)
+  .style("fill", "#000000")
   .attr("x", -6)
   .attr("y", function(d) { 
     //if(d.name == "PCA"){return d.dy + 6}
@@ -296,8 +310,6 @@ function color_per_func(){
   let sankey = dataObj.getSankey();
 
   svg.selectAll("rect").data(data.nodes)
-  .transition()
-  .duration(0)
   .style("fill", color_node_fun)
   .attr("height", function(d) { 
     return d.dy; })
@@ -325,8 +337,10 @@ function fade_link(data, path){
 
 
 function translate_spacing(node){
+
   translate_reset();
-  let nodes = dataObj.getSankey().nodes();
+  console.log(node);
+  let nodes = dataObj.getData().nodes;
   let col_nr = node.column;
 
   //const backupNodes = nodes.map(item => ({ ...item }));
@@ -353,8 +367,10 @@ function translate_spacing(node){
   .transition()
   .duration(1000)
   .attr("transform", function(d){
-
     return translateString(d.x, d.y)});
+
+
+    
   let link = svg.selectAll(".link");
   let path = dataObj.getSankey().link();
 
@@ -375,9 +391,7 @@ function translate_reset(){
   if(translated_nodes.length == 0){
     return;
   }
-  console.log("translated reset");
-  console.log(translated_nodes);
-
+  
   let nodes = dataObj.getSankey().nodes();
 
   if(translated_nodes.length > 1){
@@ -398,7 +412,6 @@ function translate_reset(){
   .transition()
   .duration(1000)
   .attr("transform", function(d){
-
     return translateString(d.x, d.y)});
   let link = svg.selectAll(".link");
   let path = dataObj.getSankey().link();
@@ -426,6 +439,10 @@ function translate_col4(){
   
   let sorted_part = resortPart( nodes.slice(), "column", 4, descendingDepth);
 
+  let col3Nodes = resortPart( nodes.slice(), "column", 3, descendingDepth);
+
+  //let baseline = col3Nodes[0].y + col3Nodes[0].dy;
+
   // if the spacing between two nodes exceeds , correct manuelly
 
   let y_below;
@@ -451,8 +468,6 @@ function translate_col4(){
 
 }
 
-
-      
       
 
 

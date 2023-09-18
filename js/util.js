@@ -13,7 +13,7 @@ colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
 colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
 colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 
-const colorFunctions = ["#5ab4ac", "#d8b365"];
+
 
 
 // i : index of node
@@ -220,21 +220,17 @@ function resortPart(arr, field, value, sortFun){
 }
 //calculate the spacing between topmost and the upper edge
 
-var abstract_dict = {'one_Numeric': 2,
- 'two_Numeric': 8,
- 'three_Numeric': 7,
- 'n_Numeric': 9,
- 'one_Categorical': 6,
- '2/more_Categorical': 12,
- 'oneNum_oneCat': 10,
- 'oneCat_sevNum': 13,
- 'sevCat_oneNum': 15};
+var abstract_dict = {'One Numeric': 2,
+'Two Numeric': 8,
+'Three Numeric': 7,
+'Several Numeric': 9,
+'One Categorical': 6,
+'Several Categorical': 12,
+'One Num, One Cat': 10,
+'One Cat, Several Num': 14,
+'Several Cat, One Num': 15}
 
- var dim_dict = {'oneDim': 8,
-  'twoDim': 15,
-  'threeDim': 10,
-  'nDim': 21};
-
+ var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22}
   
 
   var ColorState = (function() {
@@ -388,5 +384,9 @@ function ascending_name1(a, b) {
   function resetBtnEvent(){
     resetPage();
     this.classList.toggle('rotated');
+  }
+
+  function scrollToBottom(){
+    window.scrollTo({left : 0, top : document.body.scrollHeight, behavior: "smooth"});
   }
 
