@@ -15,7 +15,7 @@
 
     <!--the first row-->
   <div class = "flex_box">
-    <h1>FlowMDP</h1>
+    <h1 class="titleFont">FlowMDP</h1>
     <span class="tab"></span>
     <svg id="reset_icon" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30" class="resetBtn">
       <path d="M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z"/>
@@ -50,7 +50,7 @@
     </svg>
     <span class="tab"></span>
     <div class="rightElem">
-      <a target="_blank" href="https://google.com">google</a>
+      <a target="_blank" href="https://github.com/nilegoose/FlowMDP">GitHub Page</a>
     </div>
 
 
@@ -72,8 +72,31 @@
     </div> 
 
     <div id="multiple" class = "nonDisplay"></div>
+
+
+  <div id="papers" class="maxWidth2 paperText">
+    <div class="paperText">
+    <p class="paperTop">Reference Paper : Chart Name</p>
+    <div class = "flex_box">
+      <p><b>PieParty: Visualizing cells from scRNA-seq data as pie charts</b></p>
+      <span class="tab"></span>
+      <svg id="copy_icon" class="copyBtn" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+      </svg>
+    </div>
+    <div class="flex_box">
+      <p><b>DOI:</b>
+      <span class="tab"></span>
+      <a target="_blank" href="https://doi.org/10.26508%2Flsa.202000986">10.26508/lsa.202000986</a></p>
+      <!--span class="tab"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+      </svg-->
+       </div>
+    </div>
+  </div>
  
   </div>
+  <!--end main-->
+
 </body>
 
 
@@ -89,68 +112,9 @@
 <script src="js/util_graph.js"></script>
 <script src="js/anonymous.js"></script>
 <script src="js/data.js"></script>
-
-
-<script>
-
-  //legnth of four column is currently 4, 9, 30, 8
-  // [0-3, 4-12, 13-42, 43-50]
-var highlighted_link = [];
-var link_toHighlight = [];
-var link_count;
-var opacity_pick;
-var dataObj = DataObj.getData();
-
-
-  
-var margin = {top: 20, right: 50, bottom: 100, left: 50},
-    width = window.innerWidth - margin.left - margin.right - 20,
-    height = window.innerHeight - margin.top - margin.bottom -120;
-
-var formatNumber = d3.format(",.0f"),
-    format = function(d) { return formatNumber(d) + "  "; };
-    
-  var svg = d3.select("#chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .attr("id", "chartSVG")
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-drawSankey(dataObj.getData(), svg);
-
-function resetSankey() {
-
-  drawSankey(dataObj.getData(), svg);
-  FunState.default();
-
-}
-
-
-var resetBtn = document.getElementById("reset_icon");
-resetBtn.addEventListener("click", resetBtnEvent);
-var printBtn = document.getElementById("print-icon");
-printBtn.addEventListener("click", downloadSVG);
+<script src="js/drawSankey.js"></script>
 
 
 
-
- 
- // step : try to modify node with
-
-  //node.exit().remove();
-
-//draw(getData());
-
-
-
- 
-
-d3.select("#fun_compa").on("click", toggleCompa); 
-d3.select("#fun_rel").on("click", toggleRel); 
-
-
-  </script>
 
 

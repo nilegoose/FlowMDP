@@ -434,9 +434,6 @@ function translate_reset(){
 function translate_col4(){
   let nodes = dataObj.getSankey().nodes();
 
-  //const backupNodes = nodes.map(item => ({ ...item }));
-
-  
   let sorted_part = resortPart( nodes.slice(), "column", 4, descendingDepth);
 
   let col3Nodes = resortPart( nodes.slice(), "column", 3, descendingDepth);
@@ -446,7 +443,7 @@ function translate_col4(){
   // if the spacing between two nodes exceeds , correct manuelly
 
   let y_below;
-  let padding = 8;
+  let padding = 10;
   
 
   sorted_part.forEach(function(d){

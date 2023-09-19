@@ -113,7 +113,7 @@ details[open] summary {
   align-items: center; /* Center vertically */
   justify-content: space-between; /* Distribute space between elements */  
   z-index: -1; 
-  margin-right: 50px;
+  margin-right: 20px;
   margin-left: 50px;
   font-weight: bold;
   font-size: large;
@@ -223,10 +223,61 @@ body{
 }
 
 .rightElem{
-  font-size: x-large;
+  font-size: large;
   margin-left: auto;
-  margin-right: 50px;
+  margin-right: -20px;
 }
 .rightElem a:visited{
-  font-size: x-large;
+  font-size: large;
+}
+
+/*-------------------------------------------*/
+/*paper area*/
+
+.maxWidth2{
+  margin-left: 50px;
+  margin-right: 20px;
+  border: 1px solid #aaa;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+
+.paperText{
+  color: #6f6f6f;
+  padding: 16px;
+}
+
+.paperText2{
+  padding-left: 50px;
+}
+
+.paperTop{
+  font-size: xx-large;
+  margin-top: -4px;
+  border-bottom: 1px solid #aaa;
+  text-align: center;
+  line-height: 1.3;
+  color: #6c6c6c;
+
+
+}
+.paperText{
+  color: black;
+  font-size: large;
+  line-height: 1.3;
+
+}
+
+.titleFont{
+  font-family: Sans-serif,Palatino,serif;
+  letter-spacing: 2px;
+}
+
+.copyBtn{
+  fill: #6f6f6f;
+}
+
+.copyBtn:hover{
+  fill: #3e8e41;
 }
