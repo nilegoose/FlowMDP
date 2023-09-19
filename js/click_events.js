@@ -1,3 +1,9 @@
+const chart2D = [['Piechart'],
+['Parallel coordinates', 'Heatmap', 'Radar chart', 'Scatterplot'],
+['Scatterplot', 'Heatmap'],
+['Scatterplot', 'Barplot'],
+['Scatterplot', 'Heatmap']];
+
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
@@ -119,6 +125,8 @@ var path = sankey.link();
         clicked_node = node;
 
         current_name = node['name'];
+
+        /*
         if(current_name == "Bubble plot"){
           draw1();
           scrollToBottom();
@@ -137,6 +145,19 @@ var path = sankey.link();
           }
 
           remove1();
+        }*/
+
+        let display = false;
+        chart2D.forEach(function(arrayOfCharts, index){
+          if(arrayOfCharts.includes(current_name)){
+            displayPaperArea();
+            row(index);
+            display = true;
+          }
+        });
+
+        if(!display){
+          hidePaperArea();
         }
         console.log(current_name + " clicked");
         update_opacity(0.2);

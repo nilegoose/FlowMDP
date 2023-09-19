@@ -2,6 +2,10 @@ const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding I
 
 const colorFunctions = ["#5ab4ac", "#d8b365"];
 const nameFunctions = ["Comparision", "Relationship"];
+
+const paperArea = document.getElementById("papers");
+
+const copySVG = 'M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z';
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
@@ -195,5 +199,129 @@ function refreshOnResize() {
   });
 }
 refreshOnResize();
+/*-------------------------------------- */
+// paper functions
+function displayPaperArea(){
+  if (paperArea.getAttribute("class") == "nonDisplay"){
+    paperArea.classList.remove("nonDisplay");
+    paperArea.setAttribute("class", "paperContainer");
+
+  }
+  scrollToBottom();
+
+
+}
+
+function hidePaperArea(){
+  if (paperArea.getAttribute("class") == "nonDisplay"){
+    paperArea.classList.remove("nonDisplay");
+
+  }
+  paperArea.setAttribute("class", "nonDisplay");
+}
+
+function createPaperElemenet(title, doiText, linkText){
+  let paperList = document.getElementById("paperList");
+  let listItem = document.createElement('li');
+
+// Create the first <div> element with class "paperItem"
+const div1 = document.createElement('div');
+div1.className = 'paperItem';
+
+// Create the <p> element with <b> element inside
+const p1 = document.createElement('p');
+const b1 = document.createElement('b');
+b1.textContent = title;
+p1.appendChild(b1);
+
+// Create the <span> element with class "tab"
+const span1 = document.createElement('span');
+span1.className = 'tab';
+
+// <svg> 
+const svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svg1.setAttribute('id', 'copy_icon');
+svg1.setAttribute('class', 'copyBtn');
+svg1.setAttribute('height', '24');
+svg1.setAttribute('viewBox', '0 -960 960 960');
+svg1.setAttribute('width', '24');
+const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+path1.setAttribute('d', copySVG); 
+svg1.appendChild(path1);
+
+svg1.addEventListener("click", function(){
+  copyToClipboard(title);
+});
+
+div1.appendChild(p1);
+div1.appendChild(span1);
+div1.appendChild(svg1);
+
+// Create the second <div> element with classes "paperItem" and "doiLine"
+const div2 = document.createElement('div');
+div2.className = 'paperItem doiLine';
+
+// Create the inner <p> element with "DOI" text
+const p2 = document.createElement('p');
+p2.textContent = 'DOI:';
+
+// Create the inner <span> element with class "tab"
+const span2 = document.createElement('span');
+span2.className = 'tab';
+
+// Create the <a> element with "text" text and href attribute
+const a2 = document.createElement('a');
+a2.setAttribute('target', '_blank');
+a2.setAttribute('href', linkText);
+a2.textContent = doiText;
+
+// Append the created elements to p2
+p2.appendChild(span2);
+p2.appendChild(a2);
+
+
+div2.appendChild(p2);
+div2.appendChild(span2);
+div2.appendChild(a2);
+
+// Append div1 and div2 to the <li> element
+listItem.appendChild(div1);
+listItem.appendChild(div2);
+
+// Append the <li> element to the desired parent element in your document
+paperList.appendChild(listItem);
+
+
+
+
+}
+
+
+function copyToClipboard(text){
+  navigator.clipboard.writeText(text);
+}
+
+
+const title_list = ['PieParty: visualizing cells from scRNA-seq data as pie charts',
+ 'Improving Visualization Design for Effective Multi-Objective Decision Making',
+ 'Comparing and Exploring High-Dimensional Data with Dimensionality Reduction Algorithms and Matrix Visualizations',
+ 'Cluster-Based Visual Abstraction for Multivariate Scatterplots',
+ 'ClustVis: a web tool for visualizing clustering of multivariate data using Principal Component Analysis and heatmap'],
+  doi_list = ['10.26508/lsa.202000986',
+ '10.1109/TVCG.2021.3065126',
+ '10.1145/3399715.3399875',
+ '10.1109/TVCG.2017.2754480',
+ '10.1093/nar/gkv468'],
+  href_list=['https://doi.org/10.26508/lsa.202000986',
+ 'https://doi.org/10.1109/TVCG.2021.3065126',
+ 'https://doi.org/10.1145/3399715.3399875',
+ 'https://doi.org/10.1109/TVCG.2017.2754480',
+ 'https://doi.org/10.1093/nar/gkv468'];
+
+function row(index){
+  createPaperElemenet(title_list[index], doi_list[index], href_list[index]);
+}
+
+hidePaperArea();
 
 
