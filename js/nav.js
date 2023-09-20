@@ -199,21 +199,15 @@ refreshOnResize();
 /*-------------------------------------- */
 // paper functions
 function displayPaperArea(){
-  if (paperArea.getAttribute("class") == "nonDisplay"){
     paperArea.classList.remove("nonDisplay");
     paperArea.setAttribute("class", "paperContainer");
 
-  }
   let paperList = document.getElementById("paperList");
   // clear previous papers
   paperList.innerHTML = '';
 }
 
 function hidePaperArea(){
-  if (paperArea.getAttribute("class") == "nonDisplay"){
-    paperArea.classList.remove("nonDisplay");
-
-  }
   paperArea.setAttribute("class", "nonDisplay");
 }
 
@@ -391,6 +385,14 @@ function testPaper(){
     drawPaper(i);
     i++;
   }
+}
+
+
+function displaySearch(){
+  let searchIcon = document.getElementById("dropdownDiv");
+
+    searchIcon.classList.remove("nonDisplay");
+    searchIcon.setAttribute("class", "dropdown");
 }
 
 
