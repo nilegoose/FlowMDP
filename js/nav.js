@@ -220,7 +220,7 @@ function hidePaperArea(){
   paperArea.setAttribute("class", "nonDisplay");
 }
 
-function createPaperElemenet(title, doiText, linkText){
+function createPaperElemenet(title, doiText, linkText, tooltipText){
   let paperList = document.getElementById("paperList");
   // clear previous papers
 
@@ -232,6 +232,12 @@ div1.className = 'paperItem';
 
 // Create the <p> element with <b> element inside
 const p1 = document.createElement('p');
+p1.setAttribute('class', 'tooltip');
+var tip1 = document.createElement('span');
+tip1.textContent = tooltipText;
+tip1.setAttribute('class', 'tooltiptext');
+p1.appendChild(tip1);
+
 const b1 = document.createElement('b');
 b1.textContent = title;
 p1.appendChild(b1);
@@ -330,7 +336,17 @@ href_list=['https://doi.org/10.26508/lsa.202000986',
           'https://doi.org/10.1016/j.jvlc.2017.03.001',
 'https://doi.org/10.1038/s41467-023-36492-2',
 'https://doi.org/10.1177/0003702820987847',
-'https://doi.org/10.1007/s00371-020-01817-5'];
+'https://doi.org/10.1007/s00371-020-01817-5'],
+
+chart2D = [['Piechart'],
+['Parallel coordinates', 'Heatmap', 'Radar chart', 'Scatterplot'],
+['Scatterplot', 'Heatmap'],
+['Scatterplot', 'Barplot'],
+['Scatterplot', 'Heatmap'],
+          ['Parallel coordinates'],
+          ['Heatmap', 'Bubble plot'],
+          ['Line plot'],
+          ['Heatmap', 'Area plot']];
 
 
 const paperIndex = {'Piechart': [0], 'Parallel coordinates': [1, 5], 'Heatmap': [1, 2, 4, 6, 8], 'Radar chart': [1], 'Scatterplot': [1, 2, 3, 4], 'Barplot': [3], 'Bubble plot': [6], 'Line plot': [7], 'Area plot': [8]};
@@ -338,7 +354,7 @@ const paperIndex = {'Piechart': [0], 'Parallel coordinates': [1, 5], 'Heatmap': 
 
 // given index, show paper
 function drawPaper(index){
-  createPaperElemenet(title_list[index], doi_list[index], href_list[index]);
+  createPaperElemenet(title_list[index], doi_list[index], href_list[index], tooltipText(index));
 }
 
 hidePaperArea();
@@ -349,4 +365,56 @@ function clearList(){
   paperList.innerHTML = '';
 }
 
+function drawBubble(){
+  return;
+        /*
+        if(current_name == "Bubble plot"){
+          draw1();
+          scrollToBottom();
+          // add a line between
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+
+          }
+          exampleArea.setAttribute("class", "maxWidth")
+
+
+        }else{
+
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+          }
+
+          remove1();
+        }*/
+
+}
+
+
+function updatePaperArea(){
+  let display = false;
+  let indexList = paperIndex[current_name];
+  if (indexList != undefined){
+    displayPaperArea();
+    display = true;
+    indexList.forEach(function(idx){
+      drawPaper(idx);
+    });
+
+    scrollToBottom();
+
+  }
+  if(!display){
+    hidePaperArea();
+  }
+}
+
+function tooltipText(idx){
+  let text = "    Chart type: ";
+  let charts = "";
+  chart2D[idx].forEach(function(x){
+    charts += x + ", ";
+  })
+  return text + charts.slice(0, -2) + "    ";
+}
 

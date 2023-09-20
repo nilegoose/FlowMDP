@@ -13,6 +13,13 @@ colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
 colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
 colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 
+var col1 = [],
+col2 = [],
+col3 = [],
+col4 = [];
+
+var cols = [col1, col2, col3, col4];
+
 
 
 
@@ -389,4 +396,13 @@ function ascending_name1(a, b) {
   function scrollToBottom(){
     window.scrollTo({left : 0, top : document.body.scrollHeight, behavior: "smooth"});
   }
+function resetColList(){
+col1 = [],
+col2 = [],
+col3 = [],
+col4 = [];
+
+cols = [col1, col2, col3, col4];
+
+    }
 

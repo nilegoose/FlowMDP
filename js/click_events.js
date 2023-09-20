@@ -1,19 +1,8 @@
-const chart2D = [['Piechart'],
-['Parallel coordinates', 'Heatmap', 'Radar chart', 'Scatterplot'],
-['Scatterplot', 'Heatmap'],
-['Scatterplot', 'Barplot'],
-['Scatterplot', 'Heatmap']];
-
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
-var col1 = [],
-col2 = [],
-col3 = [],
-col4 = [];
 
-var cols = [col1, col2, col3, col4];
 
 var translated_nodes = [];
 var padding_space = 10;
@@ -121,77 +110,22 @@ var path = sankey.link();
       
       
       function highlight_node_links(node,i){
+        resetColList();
         console.log("highlight_node_links");
         clicked_node = node;
 
         current_name = node['name'];
 
-        /*
-        if(current_name == "Bubble plot"){
-          draw1();
-          scrollToBottom();
-          // add a line between
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-
-          }
-          exampleArea.setAttribute("class", "maxWidth")
-
-
-        }else{
-
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-          }
-
-          remove1();
-        }*/
-
          
         var clicked_col = checkCol(i);
-        cols[clicked_col -1] = [node];
+        cols[clicked_col -1] = [node]; //assign clicked column
 
-        let display = false;
         // if the third column is clicked, draw / re-draw paper
         if(clicked_col == 3){
-          let indexList = paperIndex[current_name];
-          if (indexList != undefined){
-            displayPaperArea();
-            display = true;
-            indexList.forEach(function(idx){
-              drawPaper(idx);
-            });
-
-            scrollToBottom();
-
-          }
-          if(!display){
-            hidePaperArea();
-          }
-          
+          updatePaperArea(current_name);
         }
-/*
-        chart2D.forEach(function(arrayOfCharts, index){
-          if(arrayOfCharts.includes(current_name)){
-            displayPaperArea();
-            row(index);
-            display = true;
-          }
-        });
 
-        if(clicked_col == 3 && !display){
-          hidePaperArea();
-        }*/
-
-
-
-
-
-
-
-
-        console.log(current_name + " clicked");
-        update_opacity(0.2);
+        reset_opacity(0.2);
 
 
         traverse_left(node);
@@ -226,7 +160,7 @@ var path = sankey.link();
     clicked_node = undefined;
     update_node("dehighlight");
     update_text("dehighlight");
-    update_opacity(0.2);
+    reset_opacity(0.2);
   }
 
 
@@ -238,6 +172,13 @@ var path = sankey.link();
 
   }
 
+  function reset_opacity(opacity){
+    d3.selectAll(".link")
+    //.filter(link_clicked)
+    .style("stroke-opacity", opacity);
+
+  }
+
 
 // translate _ spacing _
 
@@ -245,14 +186,7 @@ var path = sankey.link();
 function update_general(action){
   translated_nodes = [];
   clearHighlight();
-
-
-col1 = [];
-col2 = [];
-col3 = [];
-col4 = [];
-
-cols = [col1, col2, col3, col4];
+  resetColList();
   graph = dataObj.getData();
   var sankey = d3.sankey()
   .nodeWidth(15)
