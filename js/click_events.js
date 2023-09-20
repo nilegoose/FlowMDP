@@ -114,7 +114,7 @@ var path = sankey.link();
         console.log("highlight_node_links");
         clicked_node = node;
 
-        current_name = node['name'];
+        let current_name = node['name'];
 
          
         var clicked_col = checkCol(i);

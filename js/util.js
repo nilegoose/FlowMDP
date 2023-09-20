@@ -1,18 +1,3 @@
-/*----------------------------------------------------------------------------- */
-// labels 
-
-const types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Barplot', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
-
-dimensions=["1D", "2D", "3D", "HD"], 
-attributes=['One Numeric', 'Two Numeric', 'Three Numeric', 'Several Numeric', 'One Categorical', 'Several Categorical', 'One Num, One Cat', 'One Cat, Several Num', 'Several Cat, One Num'],
-encoding=['Position', 'Point', 'Color', 'Line', 'Size(area)', 'Angle', 'Shape', 'Length'];
-
-// colors for each column
-const colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"],
-colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
-colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
-colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
-
 var col1 = [],
 col2 = [],
 col3 = [],
@@ -118,20 +103,7 @@ function data_process(){
         });
 
 
-        const compaIdx = [0, 3, 7, 9, 14, 15, 16, 17, ,18, 19, 22, 25]; //indices in the array chart types
-        var compa_name = []; 
-        compaIdx.forEach(index => {
-          let name = types[index];
-          compa_name.push(name);          
-        });
-
-        const relIdx = [4, 3, 12, 19, 18, 22, 25]; //indices in the array chart types
-        var rel_name = []; 
-        relIdx.forEach(index => {
-          let name = types[index];
-          rel_name.push(name);          
-        });
-
+      
 
 
         graph.nodes.forEach((node) => {
@@ -226,19 +198,6 @@ function resortPart(arr, field, value, sortFun){
   return sectionToSort;
 }
 //calculate the spacing between topmost and the upper edge
-
-var abstract_dict = {'One Numeric': 2,
-'Two Numeric': 8,
-'Three Numeric': 7,
-'Several Numeric': 9,
-'One Categorical': 6,
-'Several Categorical': 12,
-'One Num, One Cat': 10,
-'One Cat, Several Num': 14,
-'Several Cat, One Num': 15}
-
- var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22}
-  
 
   var ColorState = (function() {
     var current_state = "";
@@ -396,6 +355,8 @@ function ascending_name1(a, b) {
   function scrollToBottom(){
     window.scrollTo({left : 0, top : document.body.scrollHeight, behavior: "smooth"});
   }
+
+
 function resetColList(){
 col1 = [],
 col2 = [],

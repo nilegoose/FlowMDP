@@ -1,16 +1,13 @@
-const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
-
-const colorFunctions = ["#5ab4ac", "#d8b365"];
-const nameFunctions = ["Comparision", "Relationship"];
-
 const paperArea = document.getElementById("papers");
-
-const copySVG = 'M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z';
+const paperTop = document.getElementById("paperTop");
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
 var box_compa = document.getElementById('fun_compa');
 var box_rel = document.getElementById('fun_rel');
+
+
+/*-------------------------------------------------------------------------- */
 
 for (var i = 0; i < colorBoxes.length; i++) {
     colorBoxes[i].addEventListener('click', toggleOpacity);
@@ -310,47 +307,6 @@ function copyToClipboard(text){
 }
 
 
-const title_list = ['PieParty: visualizing cells from scRNA-seq data as pie charts',
-'Improving Visualization Design for Effective Multi-Objective Decision Making',
-'Comparing and Exploring High-Dimensional Data with Dimensionality Reduction Algorithms and Matrix Visualizations',
-'Cluster-Based Visual Abstraction for Multivariate Scatterplots',
-'ClustVis: a web tool for visualizing clustering of multivariate data using Principal Component Analysis and heatmap',
-'High-Dimensional Data Visualization by Interactive Construction of Low-Dimensional Parallel Coordinate Plots',
-'A spectral method for assessing and combining multiple data visualizations',
-'Exploration of Principal Component Analysis: Deriving Principal Component Analysis Visually Using Spectra',
-'A review, framework, and R toolkit for exploring, evaluating, and comparing visualization methods'],
-doi_list = ['10.26508/lsa.202000986',
-'10.1109/TVCG.2021.3065126',
-'10.1145/3399715.3399875',
-'10.1109/TVCG.2017.2754480',
-'10.1093/nar/gkv468',
-          '10.1016/j.jvlc.2017.03.001',
-'10.1038/s41467-023-36492-2',
-'10.1177/0003702820987847',
-'10.1007/s00371-020-01817-5'],
-href_list=['https://doi.org/10.26508/lsa.202000986',
-'https://doi.org/10.1109/TVCG.2021.3065126',
-'https://doi.org/10.1145/3399715.3399875',
-'https://doi.org/10.1109/TVCG.2017.2754480',
-'https://doi.org/10.1093/nar/gkv468',      
-          'https://doi.org/10.1016/j.jvlc.2017.03.001',
-'https://doi.org/10.1038/s41467-023-36492-2',
-'https://doi.org/10.1177/0003702820987847',
-'https://doi.org/10.1007/s00371-020-01817-5'],
-
-chart2D = [['Piechart'],
-['Parallel coordinates', 'Heatmap', 'Radar chart', 'Scatterplot'],
-['Scatterplot', 'Heatmap'],
-['Scatterplot', 'Barplot'],
-['Scatterplot', 'Heatmap'],
-          ['Parallel coordinates'],
-          ['Heatmap', 'Bubble plot'],
-          ['Line plot'],
-          ['Heatmap', 'Area plot']];
-
-
-const paperIndex = {'Piechart': [0], 'Parallel coordinates': [1, 5], 'Heatmap': [1, 2, 4, 6, 8], 'Radar chart': [1], 'Scatterplot': [1, 2, 3, 4], 'Barplot': [3], 'Bubble plot': [6], 'Line plot': [7], 'Area plot': [8]};
-
 
 // given index, show paper
 function drawPaper(index){
@@ -391,11 +347,12 @@ function drawBubble(){
 }
 
 
-function updatePaperArea(){
+function updatePaperArea(current_name){
   let display = false;
   let indexList = paperIndex[current_name];
   if (indexList != undefined){
     displayPaperArea();
+    listTitle(current_name);
     display = true;
     indexList.forEach(function(idx){
       drawPaper(idx);
@@ -410,11 +367,30 @@ function updatePaperArea(){
 }
 
 function tooltipText(idx){
-  let text = "    Chart type: ";
+  let text = "Chart type: ";
   let charts = "";
   chart2D[idx].forEach(function(x){
-    charts += x + ", ";
+    charts += types[x] + ", ";
   })
-  return text + charts.slice(0, -2) + "    ";
+  return text + charts.slice(0, -2);
 }
+
+function listTitle(nodeName){
+  let text = "List of papers : " + nodeName;
+  paperTop.innerText = text;
+
+}
+
+/*------------------------------------------------------------------------------------------- */
+/*------------------------------------------------------------------------------------------- */
+
+function testPaper(){
+  displayPaperArea();
+  let i = 0;
+  while(i < 17){
+    drawPaper(i);
+    i++;
+  }
+}
+
 
