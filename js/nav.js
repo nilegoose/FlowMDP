@@ -207,9 +207,9 @@ function displayPaperArea(){
     paperArea.setAttribute("class", "paperContainer");
 
   }
-  scrollToBottom();
-
-
+  let paperList = document.getElementById("paperList");
+  // clear previous papers
+  paperList.innerHTML = '';
 }
 
 function hidePaperArea(){
@@ -222,6 +222,8 @@ function hidePaperArea(){
 
 function createPaperElemenet(title, doiText, linkText){
   let paperList = document.getElementById("paperList");
+  // clear previous papers
+
   let listItem = document.createElement('li');
 
 // Create the first <div> element with class "paperItem"
@@ -303,25 +305,48 @@ function copyToClipboard(text){
 
 
 const title_list = ['PieParty: visualizing cells from scRNA-seq data as pie charts',
- 'Improving Visualization Design for Effective Multi-Objective Decision Making',
- 'Comparing and Exploring High-Dimensional Data with Dimensionality Reduction Algorithms and Matrix Visualizations',
- 'Cluster-Based Visual Abstraction for Multivariate Scatterplots',
- 'ClustVis: a web tool for visualizing clustering of multivariate data using Principal Component Analysis and heatmap'],
-  doi_list = ['10.26508/lsa.202000986',
- '10.1109/TVCG.2021.3065126',
- '10.1145/3399715.3399875',
- '10.1109/TVCG.2017.2754480',
- '10.1093/nar/gkv468'],
-  href_list=['https://doi.org/10.26508/lsa.202000986',
- 'https://doi.org/10.1109/TVCG.2021.3065126',
- 'https://doi.org/10.1145/3399715.3399875',
- 'https://doi.org/10.1109/TVCG.2017.2754480',
- 'https://doi.org/10.1093/nar/gkv468'];
+'Improving Visualization Design for Effective Multi-Objective Decision Making',
+'Comparing and Exploring High-Dimensional Data with Dimensionality Reduction Algorithms and Matrix Visualizations',
+'Cluster-Based Visual Abstraction for Multivariate Scatterplots',
+'ClustVis: a web tool for visualizing clustering of multivariate data using Principal Component Analysis and heatmap',
+'High-Dimensional Data Visualization by Interactive Construction of Low-Dimensional Parallel Coordinate Plots',
+'A spectral method for assessing and combining multiple data visualizations',
+'Exploration of Principal Component Analysis: Deriving Principal Component Analysis Visually Using Spectra',
+'A review, framework, and R toolkit for exploring, evaluating, and comparing visualization methods'],
+doi_list = ['10.26508/lsa.202000986',
+'10.1109/TVCG.2021.3065126',
+'10.1145/3399715.3399875',
+'10.1109/TVCG.2017.2754480',
+'10.1093/nar/gkv468',
+          '10.1016/j.jvlc.2017.03.001',
+'10.1038/s41467-023-36492-2',
+'10.1177/0003702820987847',
+'10.1007/s00371-020-01817-5'],
+href_list=['https://doi.org/10.26508/lsa.202000986',
+'https://doi.org/10.1109/TVCG.2021.3065126',
+'https://doi.org/10.1145/3399715.3399875',
+'https://doi.org/10.1109/TVCG.2017.2754480',
+'https://doi.org/10.1093/nar/gkv468',      
+          'https://doi.org/10.1016/j.jvlc.2017.03.001',
+'https://doi.org/10.1038/s41467-023-36492-2',
+'https://doi.org/10.1177/0003702820987847',
+'https://doi.org/10.1007/s00371-020-01817-5'];
 
-function row(index){
+
+const paperIndex = {'Piechart': [0], 'Parallel coordinates': [1, 5], 'Heatmap': [1, 2, 4, 6, 8], 'Radar chart': [1], 'Scatterplot': [1, 2, 3, 4], 'Barplot': [3], 'Bubble plot': [6], 'Line plot': [7], 'Area plot': [8]};
+
+
+// given index, show paper
+function drawPaper(index){
   createPaperElemenet(title_list[index], doi_list[index], href_list[index]);
 }
 
 hidePaperArea();
+
+function clearList(){
+  let paperList = document.getElementById("paperList");
+
+  paperList.innerHTML = '';
+}
 
 

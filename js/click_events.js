@@ -147,7 +147,30 @@ var path = sankey.link();
           remove1();
         }*/
 
+         
+        var clicked_col = checkCol(i);
+        cols[clicked_col -1] = [node];
+
         let display = false;
+        // if the third column is clicked, draw / re-draw paper
+        if(clicked_col == 3){
+          let indexList = paperIndex[current_name];
+          if (indexList != undefined){
+            displayPaperArea();
+            display = true;
+            indexList.forEach(function(idx){
+              drawPaper(idx);
+            });
+
+            scrollToBottom();
+
+          }
+          if(!display){
+            hidePaperArea();
+          }
+          
+        }
+/*
         chart2D.forEach(function(arrayOfCharts, index){
           if(arrayOfCharts.includes(current_name)){
             displayPaperArea();
@@ -156,19 +179,19 @@ var path = sankey.link();
           }
         });
 
-        if(!display){
+        if(clicked_col == 3 && !display){
           hidePaperArea();
-        }
+        }*/
+
+
+
+
+
+
+
+
         console.log(current_name + " clicked");
         update_opacity(0.2);
-
-
-
-        
-      
-      
-        var clicked_col = checkCol(i);
-        cols[clicked_col -1] = [node];
 
 
         traverse_left(node);
