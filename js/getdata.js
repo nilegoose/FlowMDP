@@ -1202,6 +1202,18 @@ function assignFunctions(){
 var paperIndex = {};
 
 
+var dim_name_dict = {'1D': "1 Dimensional", '2D': "2 Dimensional", '3D': "3 Dimensional", 'N-D': "N Dimensional"};
+var abstract_name_dict = {'One Numeric': 'One Numeric',
+'Two Numeric': 'Two Numeric',
+'Three Numeric': 'Three Numeric',
+'Several Numeric': 'Several Numeric',
+'One Categorical': 'One Categorical',
+'Several Categorical': 'Several Categorical',
+'One Num, One Cat': 'One Numeric, One Categorical',
+'One Cat, Several Num': 'One Categorical, Several Numeric',
+'Several Cat, One Num': 'Several Categorical, One Numeric'};
+
+
 function assignPaperDict(){
     
     paperIndexKeys.forEach(function(x, index){

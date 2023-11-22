@@ -48,16 +48,22 @@ switch (true) {
 return temp_color;
 }
 
-function title_link(d) { 
-return d.source.name + " -- " + d.target.name}
+function title_link(d) {
+  if(d.source.column == 1){
+    return dim_name_dict[d.source.name] + " -- " + abstract_name_dict[d.target.name];
+  }else if(d.source.column == 2){
+    return abstract_name_dict[d.source.name] + " -- " + d.target.name;
+  }
+return d.source.name + " -- " + d.target.name
+}
 
 function title_node(d) { 
   if(d.column == 3){
     return d.name; 
   }else if(d.column == 1){
-    return d.name + "\n" +  "Chart types: " + dim_dict[d.name];
+    return dim_name_dict[d.name] + "\n" +  "Chart types: " + dim_dict[d.name];
   }else if(d.column == 2){
-    return d.name + "\n" +  "Chart types: " + abstract_dict[d.name];
+    return abstract_name_dict[d.name] + "\n" +  "Chart types: " + abstract_dict[d.name];
   }
   return d.name + "\n" +  "Chart types: " + format(d.value); 
 }
