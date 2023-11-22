@@ -11,7 +11,7 @@ function getData(){
                 "name": "3D"
             },
             {
-                "name": "HD"
+                "name": "N-D"
             },
             {
                 "name": "One Numeric"
@@ -1141,7 +1141,7 @@ const paperIndexKeys = [16, 18, 12, 19, 4, 14, 3, 7, 6, 0, 8, 2, 23];
 
 const types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Bar chart', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
 
-dimensions=["1D", "2D", "3D", "HD"], 
+dimensions=["1D", "2D", "3D", "N-D"],
 attributes=['One Numeric', 'Two Numeric', 'Three Numeric', 'Several Numeric', 'One Categorical', 'Several Categorical', 'One Num, One Cat', 'One Cat, Several Num', 'Several Cat, One Num'],
 encoding=['Position', 'Point', 'Color', 'Line', 'Size(area)', 'Angle', 'Shape', 'Length'];
 
@@ -1177,7 +1177,7 @@ var abstract_dict = {'One Numeric': 2,
 'One Cat, Several Num': 14,
 'Several Cat, One Num': 15};
 
- var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22};
+ var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'N-D': 22};
 
  var compa_name = [],
  rel_name = []; 
