@@ -1157,7 +1157,7 @@ const relIdx = [4, 3, 12, 19, 18, 22, 25]; //indices in the array chart types
 
 /*------------------------------------------------------------------------------------ */
 
-const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
+const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idioms"];
 
 const colorFunctions = ["#5ab4ac", "#d8b365"];
 const nameFunctions = ["Comparision", "Relationship"];
