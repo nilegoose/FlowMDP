@@ -1056,87 +1056,6 @@ function getData(){
     }
 }
 
-
-const title_list = ['PieParty: visualizing cells from scRNA-seq data as pie charts',
-'Improving Visualization Design for Effective Multi-Objective Decision Making',
-'Comparing and Exploring High-Dimensional Data with Dimensionality Reduction Algorithms and Matrix Visualizations',
-'Cluster-Based Visual Abstraction for Multivariate Scatterplots',
-'ClustVis: a web tool for visualizing clustering of multivariate data using Principal Component Analysis and heatmap',
-'High-Dimensional Data Visualization by Interactive Construction of Low-Dimensional Parallel Coordinate Plots',
-'A spectral method for assessing and combining multiple data visualizations',
-'Exploration of Principal Component Analysis: Deriving Principal Component Analysis Visually Using Spectra',
-'A review, framework, and R toolkit for exploring, evaluating, and comparing visualization methods',
-'ProSeCo: Visual analysis of class separation measures and dataset characteristics',
-'VisCoDeR: A Tool for Visually Comparing Dimensionality Reduction Algorithms',
-'Evaluating Density-based Motion for Big DataVisual Analytics',
-'Uncertainty-AwareMultidimensionalScaling',
-'Data Aggregation and Distance Encoding for Interactive Large Multidimensional Data Visualization.',
-'Visual Hierarchical Dimension Reduction for Exploration of High Dimensional Datasets',
-'Visual Analytics for Dimension Reduction and Cluster Analysis of High Dimensional Electronic Health Records',
-'Beyond the Third Dimension: Visualizing High-Dimensional Data with Projections'],
-doi_list = ['10.26508/lsa.202000986',
-'10.1109/TVCG.2021.3065126',
-'10.1145/3399715.3399875',
-'10.1109/TVCG.2017.2754480',
-'10.1093/nar/gkv468',
-          '10.1016/j.jvlc.2017.03.001',
-'10.1038/s41467-023-36492-2',
-'10.1177/0003702820987847',
-'10.1007/s00371-020-01817-5',
-           '10.1016/j.cag.2021.03.004',
-'',
-'10.1109/BigData.2014.7004262',
-'10.1109/TVCG.2022.3209420',
-'10.5220/0006602502250235',
-'',
-'10.3390/informatics7020017',
-'10.1109/MCSE.2016.90'
-          ],
-href_list=['https://doi.org/10.26508/lsa.202000986',
-'https://doi.org/10.1109/TVCG.2021.3065126',
-'https://doi.org/10.1145/3399715.3399875',
-'https://doi.org/10.1109/TVCG.2017.2754480',
-'https://doi.org/10.1093/nar/gkv468',      
-          'https://doi.org/10.1016/j.jvlc.2017.03.001',
-'https://doi.org/10.1038/s41467-023-36492-2',
-'https://doi.org/10.1177/0003702820987847',
-'https://doi.org/10.1007/s00371-020-01817-5',
-         'https://doi.org/10.1016/j.cag.2021.03.004',
-'',
-'https://doi.org/10.1109/BigData.2014.7004262',
-'https://doi.org/10.1109/TVCG.2022.3209420',
-'https://doi.org/10.5220/0006602502250235',
-'',
-'https://doi.org/10.3390/informatics7020017',
-'https://doi.org/10.1109/MCSE.2016.90'],
-
-chart2D = [[16],
-[18, 12, 19, 4],
-[4, 12],
-[4, 14],
-[4, 12],
-[18],
-[12, 3],
-[7],
-[12, 6],
-[18, 0],
-[4, 8, 18, 2],
-[8],
-[8, 4],
-[18, 4],
-[23],
-[4, 14],
-[14, 4, 8]];
-
-// for creating dictionary :
-// dict (chart name : list of paper index)
-
-
-const paperIndexValues = [[0], [1, 5, 9, 10, 13], [1, 2, 4, 6, 8], [1], [1, 2, 3, 4, 10, 12, 13, 15, 16], [3, 15, 16], [6], [7], [8], [9], [10, 11, 12, 16], [10], [14]];
-const paperIndexKeys = [16, 18, 12, 19, 4, 14, 3, 7, 6, 0, 8, 2, 23];
-
-
-/*----------------------------------------------------------------------------- */
 // labels 
 
 const types = ['Boxplot', 'Histogram', 'Density plot', 'Bubble plot', 'Scatterplot', 'Violin plot', 'Area plot', 'Line plot', '2D density plot', 'Stacked Area plot', 'Streamgraph', 'Ridgeline', 'Heatmap', 'Dendrogram', 'Bar chart', 'Donut chart', 'Piechart', 'Treemap', 'Parallel coordinates', 'Radar chart', 'Sankey diagram', 'Circular packing', 'Venn diagram', 'Sunburst', 'Network', 'Chord', 'Arc diagram'],
@@ -1151,39 +1070,14 @@ colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
 colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
 colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 /*----------------------------------------------------------------------------------- */
+//this part for the two additional categories
 
 const compaIdx = [0, 3, 7, 9, 14, 15, 16, 17, ,18, 19, 22, 25]; //indices in the array chart types
 const relIdx = [4, 3, 12, 19, 18, 22, 25]; //indices in the array chart types
-
-/*------------------------------------------------------------------------------------ */
-
-const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
-
 const colorFunctions = ["#5ab4ac", "#d8b365"];
 const nameFunctions = ["Comparision", "Relationship"];
-
-/*-------------------------------------------------------------------------------------- */
-
-const copySVG = 'M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z';
-
-/*------------------------------------------------------------------------------------- */
-var abstract_dict = {'One Numeric': 2,
-'Two Numeric': 8,
-'Three Numeric': 7,
-'Several Numeric': 9,
-'One Categorical': 6,
-'Several Categorical': 12,
-'One Num, One Cat': 10,
-'One Cat, Several Num': 14,
-'Several Cat, One Num': 15};
-
- var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22};
-
- var compa_name = [],
- rel_name = []; 
-
- /*------------------------------------------------------------------------------------------ */
-
+var compa_name = [],
+rel_name = []; 
 
 
 function assignFunctions(){
@@ -1199,16 +1093,34 @@ function assignFunctions(){
 
 }
 
-var paperIndex = {};
-
-
-function assignPaperDict(){
-    
-    paperIndexKeys.forEach(function(x, index){
-        paperIndex[types[x]] = paperIndexValues[index];
-
-    })
-}
-
 assignFunctions();
-assignPaperDict();
+
+/*------------------------------------------------------------------------------------ */
+
+const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
+
+
+/*-------------------------------------------------------------------------------------- */
+// the copy icon
+
+const copySVG = 'M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z';
+
+/*------------------------------------------------------------------------------------- */
+// for the thickness (???)
+var abstract_dict = {'One Numeric': 2,
+'Two Numeric': 8,
+'Three Numeric': 7,
+'Several Numeric': 9,
+'One Categorical': 6,
+'Several Categorical': 12,
+'One Num, One Cat': 10,
+'One Cat, Several Num': 14,
+'Several Cat, One Num': 15};
+
+ var dim_dict = {'1D': 8, '2D': 15, '3D': 10, 'HD': 22};
+
+
+
+ /*------------------------------------------------------------------------------------------ */
+
+

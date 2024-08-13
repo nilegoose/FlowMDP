@@ -1,4 +1,8 @@
 
+// this file is mostly from the sankey diagram pf d3 library
+// https://github.com/d3/d3-sankey
+
+// there are some modifications specific for this application
 d3.sankey = function() {
   var sankey = {},
       nodeWidth = 24,
@@ -46,7 +50,7 @@ d3.sankey = function() {
   };
 
   sankey.layout = function(iterations) {
-    console.log(sort);
+    //console.log(sort);
     computeNodeLinks();
     computeNodeValues();
     computeNodeBreadths();
@@ -67,7 +71,7 @@ d3.sankey = function() {
     //computeNodeLinks();
     //computeNodeValues();
     //computeNodeBreadths();
-    console.log("relayout2");
+    //console.log("relayout2");
     computeNodeDepths_noSort(32);    
     extrapadding(name);
     computeLinkDepths();

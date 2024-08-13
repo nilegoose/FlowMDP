@@ -1,7 +1,3 @@
-
-
-
-
 var opacity_pick;
 var dataObj = DataObj.getData();  
 

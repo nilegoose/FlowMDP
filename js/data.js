@@ -1,3 +1,4 @@
+// transfer data to object
 var DataObj = (function() {
   var data;
 
@@ -42,4 +43,9 @@ var DataObj = (function() {
     }
   };
 })();
+
+
+// TODO
+// remove list of paper
+// clean up update _ functions
 

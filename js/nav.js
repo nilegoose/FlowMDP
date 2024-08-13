@@ -1,5 +1,4 @@
-const paperArea = document.getElementById("papers");
-const paperTop = document.getElementById("paperTop");
+
 //--------------------------------------------------------------------
 // color boxes
 var colorBoxes = document.querySelectorAll('.color-box');
@@ -198,182 +197,7 @@ function refreshOnResize() {
 refreshOnResize();
 /*-------------------------------------- */
 // paper functions
-function displayPaperArea(){
-    paperArea.classList.remove("nonDisplay");
-    paperArea.setAttribute("class", "paperContainer");
 
-  let paperList = document.getElementById("paperList");
-  // clear previous papers
-  paperList.innerHTML = '';
-}
-
-function hidePaperArea(){
-  paperArea.setAttribute("class", "nonDisplay");
-}
-
-function createPaperElemenet(title, doiText, linkText, tooltipText){
-  let paperList = document.getElementById("paperList");
-  // clear previous papers
-
-  let listItem = document.createElement('li');
-
-// Create the first <div> element with class "paperItem"
-const div1 = document.createElement('div');
-div1.className = 'paperItem';
-
-// Create the <p> element with <b> element inside
-const p1 = document.createElement('p');
-p1.setAttribute('class', 'tooltip');
-var tip1 = document.createElement('span');
-tip1.textContent = tooltipText;
-tip1.setAttribute('class', 'tooltiptext');
-p1.appendChild(tip1);
-
-const b1 = document.createElement('b');
-b1.textContent = title;
-p1.appendChild(b1);
-
-// Create the <span> element with class "tab"
-const span1 = document.createElement('span');
-span1.className = 'tab';
-
-// <svg> 
-const svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svg1.setAttribute('id', 'copy_icon');
-svg1.setAttribute('class', 'copyBtn');
-svg1.setAttribute('height', '24');
-svg1.setAttribute('viewBox', '0 -960 960 960');
-svg1.setAttribute('width', '24');
-const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-path1.setAttribute('d', copySVG); 
-svg1.appendChild(path1);
-
-svg1.addEventListener("click", function(){
-  copyToClipboard(title);
-});
-
-div1.appendChild(p1);
-div1.appendChild(span1);
-div1.appendChild(svg1);
-
-// Create the second <div> element with classes "paperItem" and "doiLine"
-const div2 = document.createElement('div');
-div2.className = 'paperItem doiLine';
-
-// Create the inner <p> element with "DOI" text
-const p2 = document.createElement('p');
-p2.textContent = 'DOI:';
-
-// Create the inner <span> element with class "tab"
-const span2 = document.createElement('span');
-span2.className = 'tab';
-
-// Create the <a> element with "text" text and href attribute
-const a2 = document.createElement('a');
-a2.setAttribute('target', '_blank');
-a2.setAttribute('href', linkText);
-a2.textContent = doiText;
-
-// Append the created elements to p2
-p2.appendChild(span2);
-p2.appendChild(a2);
-
-
-div2.appendChild(p2);
-div2.appendChild(span2);
-div2.appendChild(a2);
-
-// Append div1 and div2 to the <li> element
-listItem.appendChild(div1);
-listItem.appendChild(div2);
-
-// Append the <li> element to the desired parent element in your document
-paperList.appendChild(listItem);
-
-
-
-
-}
-
-
-function copyToClipboard(text){
-  navigator.clipboard.writeText(text);
-}
-
-
-
-// given index, show paper
-function drawPaper(index){
-  createPaperElemenet(title_list[index], doi_list[index], href_list[index], tooltipText(index));
-}
-
-hidePaperArea();
-
-function clearList(){
-  let paperList = document.getElementById("paperList");
-
-  paperList.innerHTML = '';
-}
-
-function drawBubble(){
-  return;
-        /*
-        if(current_name == "Bubble plot"){
-          draw1();
-          scrollToBottom();
-          // add a line between
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-
-          }
-          exampleArea.setAttribute("class", "maxWidth")
-
-
-        }else{
-
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-          }
-
-          remove1();
-        }*/
-
-}
-
-
-function updatePaperArea(current_name){
-  let display = false;
-  let indexList = paperIndex[current_name];
-  if (indexList != undefined){
-    displayPaperArea();
-    listTitle(current_name);
-    display = true;
-    indexList.forEach(function(idx){
-      drawPaper(idx);
-    });
-
-    scrollToBottom();
-
-  }
-  if(!display){
-    hidePaperArea();
-  }
-}
-
-function tooltipText(idx){
-  let text = "Chart type: ";
-  let charts = "";
-  chart2D[idx].forEach(function(x){
-    charts += types[x] + ", ";
-  })
-  return text + charts.slice(0, -2);
-}
-
-function listTitle(nodeName){
-  let text = "List of papers : " + nodeName;
-  paperTop.innerText = text;
-
-}
 
 /*------------------------------------------------------------------------------------------- */
 /*------------------------------------------------------------------------------------------- */
@@ -394,5 +218,19 @@ function displaySearch(){
     searchIcon.classList.remove("nonDisplay");
     searchIcon.setAttribute("class", "dropdown");
 }
+
+function testPaperArea2(){
+  paperArea.classList.remove("nonDisplay");
+  paperArea.setAttribute("class", "paperContainer");
+
+let paperList = document.getElementById("paperList");
+// clear previous papers
+  let i = 0;
+  while(i < 17){
+    drawPaper(i);
+    i++;
+  }
+}
+
 
 

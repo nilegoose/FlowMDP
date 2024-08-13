@@ -289,12 +289,26 @@ body{
 
 .paperItem {
   display: flex;
+  
+  align-items: flex-start;  
+  color: black;
+  font-size: large;
+  line-height: 1.3;
+}
+
+.doiItem {
+  display: flex;
   align-items: center;
+  
+  
+  
 
   color: black;
   font-size: large;
   line-height: 1.3;
 }
+
+
 
 .doiLine{
   margin-top: -6px;
@@ -317,12 +331,33 @@ body{
   z-index: 1;
 
   bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
+  left: 5%;
+  /*margin-left: -60px;*/
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.visuallyhidden{
+  position:absolute;
+  clip:rect(1px,1px,1px,1px)
+}
+
+.button-tooltip-container {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    min-height: 30px;
+
+}
+#custom-tooltip {
+    display: none;
+    margin-left: 40px;
+    padding: 5px 12px;
+    background-color: #000000df;
+    border-radius: 4px;
+    color: #fff;
 }
  

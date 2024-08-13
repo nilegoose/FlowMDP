@@ -120,10 +120,6 @@ var path = sankey.link();
         var clicked_col = checkCol(i);
         cols[clicked_col -1] = [node]; //assign clicked column
 
-        // if the third column is clicked, draw / re-draw paper
-        if(clicked_col == 3){
-          updatePaperArea(current_name);
-        }
 
         reset_opacity(0.2);
 
