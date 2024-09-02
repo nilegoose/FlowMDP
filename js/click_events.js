@@ -1,3 +1,7 @@
+// columns are refered to using indices
+// to change order, all references have to be changed
+
+
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
@@ -115,6 +119,36 @@ var path = sankey.link();
         clicked_node = node;
 
         let current_name = node['name'];
+
+
+        // bubble plot
+
+
+        if(current_name == "Bubble plot"){
+          draw1();
+          scrollToBottom();
+          // add a line between
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+
+          }
+          exampleArea.setAttribute("class", "maxWidth")
+
+
+        }else{
+
+          if (exampleArea.getAttribute("class") == "maxWidth"){
+            exampleArea.classList.remove("maxWidth");
+          }
+
+          remove1();
+        }
+
+
+
+
+
+
 
          
         var clicked_col = checkCol(i);

@@ -22,31 +22,32 @@ function draw(color, area, divName, subplot){
   d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function(data) {
 
 // Add X axis
-  let x = d3.scale.linear()
+  let x = d3.scaleLinear()
   .domain([0, 10000])
   .range([ 0, width ]);
 
 
 // Add Y axis
-  let y = d3.scale.linear()
+  let y = d3.scaleLinear()
   .domain([35, 90])
   .range([ height, 0]);
 
   if(subplot == undefined){
     svg2.append("g")
-    .call(d3.svg.axis().scale(y).orient("left"));
-    svg2.append("g")
+    .call(d3.axisBottom(x))
     .attr("transform", "translate(-6," + height + ")")
-    .call(d3.svg.axis().scale(x).orient("bottom"));
+    svg2.append("g")
+    .attr("transform", "translate(-6, 0)")
+    .call(d3.axisLeft(y));
 
   }else{
     
     var axisLeft = svg2.append("g")
-    .call(d3.svg.axis().scale(y).orient("left"));
+    .call(d3.axisLeft(y));
     axisLeft.selectAll("text").remove();
     var axisRight =svg2.append("g")
     .attr("transform", "translate(-6," + height + ")")
-    .call(d3.svg.axis().scale(x).orient("bottom"));
+    .call(d3.axisBottom(x));
     axisRight.selectAll("text").remove();
   
   }
@@ -54,13 +55,13 @@ function draw(color, area, divName, subplot){
 
 // Add a scale for bubble size
 // scaleOrdinal()
-  let z = d3.scale.linear()
+  let z = d3.scaleLinear()
   .domain([200000, 1310000000])
   .range([ 1, 40]);
 
-  let myColor = d3.scale.ordinal()
+  let myColor = d3.scaleOrdinal()
     .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
-    .range(["blue", "green", "yellow", "black", "grey", "darkgreen", "pink", "brown", "slateblue", "grey1", "orange"]);
+    .range(["blue", "green", "yellow", "black", "grey"]);
 
     svg2.append('g')
     .selectAll("dot")
