@@ -42,12 +42,15 @@ function draw(color, area, divName, subplot){
 
   }else{
     
+
+ 
+
     var axisLeft = svg2.append("g")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).tickSize(0));
     axisLeft.selectAll("text").remove();
     var axisRight =svg2.append("g")
     .attr("transform", "translate(-6," + height + ")")
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x).tickSize(0));
     axisRight.selectAll("text").remove();
   
   }
