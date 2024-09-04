@@ -142,6 +142,23 @@ var path = sankey.link();
           }
 
           remove1();
+
+          if(current_name == "Line plot"){
+            readCSVTime(dataLine, 2);
+          }
+          if(current_name == "2D density plot"){
+            readCSV(dataDensity2D, 1);
+          }
+          if(current_name == "Area plot"){
+            readCSVTime(dataArea, 4);
+          }
+          if(current_name == "Density plot"){
+            readCSV(dataDensity, 3);
+          }
+          if(current_name == "Stacked Area plot"){
+            readCSV(dataStackedArea, 5);
+          }
+          
         }
 
 
