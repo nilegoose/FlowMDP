@@ -39,7 +39,6 @@ function toggleCompa() {
       toggleOpacity.call(box_rel);
     }
     FunState.compa();
-   
     update_general("compa");
   } else {
       fun_compa_count = 0;

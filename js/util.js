@@ -182,7 +182,7 @@ function translateString(x, y){
   return "translate(" + x + "," + y + ")"
 }
 
-
+// considering the structure of nodes, this function sorts one column
 function resortPart(arr, field, value, sortFun){
   let startIdx = arr.findIndex(node => node[field] == value);
   let endIdx = arr.findIndex((node, idx) => idx > startIdx && node[field] !== value);
@@ -190,7 +190,7 @@ function resortPart(arr, field, value, sortFun){
   if(endIdx == -1){
     endIdx = arr.length;
   }
-  console.log(endIdx);
+  //console.log(endIdx);
   const sectionToSort = arr.slice(startIdx, endIdx);
   sectionToSort.sort(sortFun);
   // if return the whole array with sorted part:
@@ -366,4 +366,19 @@ col4 = [];
 cols = [col1, col2, col3, col4];
 
     }
+
+    // for general update function, it needs different sort functions according to action name
+
+function getSortfunction(action){
+      if(action == "compa"){
+        return ascending_param;
+      }else if(action == "rel"){
+        return ascending_param2
+      }
+      else{
+        return ascending_name1
+      }
+  
+    }
+  
 

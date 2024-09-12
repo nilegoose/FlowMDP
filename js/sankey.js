@@ -2,7 +2,7 @@
 // this file is mostly from the sankey diagram pf d3 library
 // https://github.com/d3/d3-sankey
 
-// there are some modifications specific for this application
+// there are some modifications specific for this application, scattered in several functions
 d3.sankey = function() {
   var sankey = {},
       nodeWidth = 24,
@@ -109,6 +109,7 @@ d3.sankey = function() {
     return link;
   };
 
+  
   function extrapadding(name){
     var i = 0;
     var pivot = false;
@@ -279,6 +280,7 @@ d3.sankey = function() {
 
         nodes.forEach(function(node, i) {
           node.y = i ;
+          width_unit = ky;
           node.dy = node.value * ky;
         });
       });

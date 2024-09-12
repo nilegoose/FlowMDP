@@ -1,6 +1,7 @@
 // columns are refered to using indices
 // to change order, all references have to be changed
 
+var width_unit = 1; // cannot fix updating problem, this is a workaround
 
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
@@ -8,20 +9,24 @@ var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
 
 
-var translated_nodes = [];
+var translated_nodes = []; // for highlightened subtree
 var padding_space = 10;
 
 function drawSankey(data, svg, sortFun){
   translated_nodes = [];
-  console.log("function drawSankey");
-  console.log(sortFun);
-
+  //console.log("function drawSankey");
+  //console.log(sortFun);
   //console.log(data);
+
+
+svg.selectAll(".link").remove();  
+svg.selectAll(".node").remove();  
 
 
  
 
-svg.selectAll("g").remove();
+//svg.
+//selectAll("g").remove();
 
 
 var sankey = d3.sankey()
@@ -46,7 +51,8 @@ var path = sankey.link();
   dataObj.updateSankey(sankey);
 
 
-  var link = svg.append("g").selectAll(".link")
+  var link = svg
+  .append("g").selectAll(".link")
       .data(data.links);
 
       
@@ -60,7 +66,7 @@ var path = sankey.link();
       })
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
-      .style('stroke', color_link);
+      .style('stroke', color_link)
 
  
 
@@ -71,12 +77,13 @@ var path = sankey.link();
       .data(data.nodes)
       .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return translateString(d.x, d.y); });
+      .attr("transform", function(d) { return translateString(d.x, d.y); })
+      
     
 
 
 
-      /** you cannot specify "the" svg element */
+  /** you cannot specify "the" svg element */
   var canvas = d3.select("#chartSVG")
   .on("click", canvasEvent);
 
@@ -102,74 +109,18 @@ var path = sankey.link();
       .attr("x", 6 + sankey.nodeWidth())// position right
       .attr("text-anchor", "start");
 
-            
-     
-      // usually we dont dont have to write so complex function
-      // but since there are multiple updating operations.. 
-      // so the main function is splitted into several 
-
-
-      // - hightlight
-      // - resort then highlight
-      
-      
+    
       function highlight_node_links(node,i){
-        resetColList();
-        console.log("highlight_node_links");
+        resetColList(); // emtpy the list of highlightened columns
         clicked_node = node;
 
         let current_name = node['name'];
 
 
-        // bubble plot
+        drawExampleGraph(current_name);
 
-
-        if(current_name == "Bubble plot"){
-          draw1();
-          scrollToBottom();
-          // add a line between
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-
-          }
-          exampleArea.setAttribute("class", "maxWidth")
-
-
-        }else{
-
-          if (exampleArea.getAttribute("class") == "maxWidth"){
-            exampleArea.classList.remove("maxWidth");
-          }
-
-          remove1();
-
-          if(current_name == "Line plot"){
-            readCSVTime(dataLine, 2);
-          }
-          if(current_name == "2D density plot"){
-            readCSV(dataDensity2D, 1);
-          }
-          if(current_name == "Area plot"){
-            readCSVTime(dataArea, 4);
-          }
-          if(current_name == "Density plot"){
-            readCSV(dataDensity, 3);
-          }
-          if(current_name == "Stacked Area plot"){
-            readCSV(dataStackedArea, 5);
-          }
-          
-        }
-
-
-
-
-
-
-
-         
         var clicked_col = checkCol(i);
-        cols[clicked_col -1] = [node]; //assign clicked column
+        cols[clicked_col -1] = [node]; //assign clicked node
 
 
         reset_opacity(0.2);
@@ -233,56 +184,40 @@ var path = sankey.link();
 function update_general(action){
   translated_nodes = [];
   clearHighlight();
-  resetColList();
+  resetColList(); // emtpy the list of highlightened columns
   graph = dataObj.getData();
+  var sortFunction = getSortfunction(action);
   var sankey = d3.sankey()
   .nodeWidth(15)
   .nodePadding(10)
-  .size([width, height]),
-  path;
+  .size([width, height])
+  .nodes(graph.nodes)
+  .nodeSort(sortFunction)
+  .links(graph.links)
+  .layout(32);
 
 
-  if(action == "compa"){
-    sankey 
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .nodeSort(ascending_param)
-    .layout(32);
+  path = sankey.link();
 
-    path = sankey.link();
 
-  }else if(action == "rel"){
-    sankey 
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .nodeSort(ascending_param2)
-    .layout(32);
-
-    path = sankey.link();
-
-  }
-  else{
-    sankey
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .nodeSort(ascending_name1)
-    .layout(32);
-    path = sankey.link();
-  }
-
+  translate_col4();
 
   dataObj.updateSankey(sankey);
+  graph = dataObj.getData();
+
+  svg.selectAll(".link").transition().duration(600).remove();
 
 
-
-  var link2 = svg.selectAll(".link")
+  svg
+  .append("g").selectAll(".link")
   .data(graph.links)
-  .transition()
-  .duration(1000)
+  .enter().append("path")
   .attr("class", "link")
   .attr("d", path)
-  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-  .style('stroke', color_link);
+  .style('stroke', color_link)
+  .style("stroke-width", function(d) { return d.value*width_unit; })
+  .transition()
+  .duration(1000)
 
 
   svg.selectAll(".link>title")
@@ -310,6 +245,9 @@ function update_general(action){
   .text(title_node);
 
 
+
+
+
   svg.selectAll("text")
   .data(graph.nodes)
   .transition()
@@ -317,7 +255,6 @@ function update_general(action){
   .style("fill", "#000000")
   .attr("x", -6)
   .attr("y", function(d) { 
-    //if(d.name == "PCA"){return d.dy + 6}
     return d.dy / 2; })
   .attr("dy", ".35em")
   .attr("text-anchor", "end")
@@ -343,9 +280,8 @@ function color_per_func(){
 
 // changes link color, including fading
 function update_link(){
-  var link3 = svg.selectAll(".link");
-
-  link3.style('stroke', color_fade_link)
+  svg.selectAll(".link")
+  .style('stroke', color_fade_link)
   .transition()
   .duration(1000);
 
@@ -353,7 +289,7 @@ function update_link(){
 
 
 function fade_link(data, path){
-  var link3 = svg.selectAll(".link")
+  svg.selectAll(".link")
   .data(data)
   .transition()
   .duration(1000)
@@ -396,13 +332,12 @@ function translate_spacing(node){
 
 
     
-  let link = svg.selectAll(".link");
+  
   let path = dataObj.getSankey().link();
 
 
 
-   link
-   //.data(link_data)
+  svg.selectAll(".link")
    .transition()
    .duration(1000)
    .attr("d", path);
@@ -438,12 +373,10 @@ function translate_reset(){
   .duration(1000)
   .attr("transform", function(d){
     return translateString(d.x, d.y)});
-  let link = svg.selectAll(".link");
   let path = dataObj.getSankey().link();
 
 
-   link
-   //.data(link_data)
+  svg.selectAll(".link")
    .transition()
    .duration(1000)
    .attr("d", path)
@@ -455,7 +388,7 @@ function translate_reset(){
 
 // the idea is, to update graph first, then re-highlight
 
-
+// this function regulates vertical space for column 4
 function translate_col4(){
   let nodes = dataObj.getSankey().nodes();
 
@@ -488,6 +421,63 @@ function translate_col4(){
   })
 
 
+}
+
+function drawExampleGraph(current_name){
+
+  if(current_name == "Bubble plot"){
+    draw1();
+    scrollToBottom();
+    // add a line between
+    if (exampleArea.getAttribute("class") == "maxWidth"){
+      exampleArea.classList.remove("maxWidth");
+
+    }
+    exampleArea.setAttribute("class", "maxWidth")
+
+
+  }else{
+
+    if (exampleArea.getAttribute("class") == "maxWidth"){
+      exampleArea.classList.remove("maxWidth");
+    }
+
+    remove1();
+
+    
+      
+
+    
+  }
+
+
+  switch(current_name) {
+    case "Line plot":
+        readCSVTime(dataLine, 2);
+        break;
+    case "2D density plot":
+        readCSV(dataDensity2D, 1);
+        break;
+    case "Area plot":
+      readCSVTime(dataArea, 4);
+      break;
+    case "Density plot":
+      readCSV(dataDensity, 3);
+      break;
+    case "Stacked Area plot":
+      readCSV(dataStackedArea, 5);
+      break;
+    case "Scatterplot":
+      readCSV(dataScatter, 6);
+      break;
+    case "Violin plot":
+      readCSV(dataViolin, 7);
+      break;
+    
+    // Add more cases if needed
+    default:
+        break;
+      }
 }
 
       

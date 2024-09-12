@@ -21,11 +21,11 @@ const dataLine = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Ex
 const dataDensity2D = "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_for_density2d.csv"
 const dataArea = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv" // Time
 const dataStackedArea = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv"
+const dataScatter = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
+const dataViolin = "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv"
 function readCSV(path, funcIndex){
   d3.csv(path, function(data){
-    console.log(data)
     const func = functionsMap[funcIndex]
-    console.log(func)
     func(data, generateSVG())
   })
 }
@@ -42,6 +42,7 @@ function readCSVTime(path, funcIndex){
     }
   });
 }
+
 
 
 
