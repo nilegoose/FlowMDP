@@ -205,19 +205,23 @@ function update_general(action){
   dataObj.updateSankey(sankey);
   graph = dataObj.getData();
 
-  svg.selectAll(".link").transition().duration(600).remove();
 
 
   svg
-  .append("g").selectAll(".link")
+  .selectAll(".link")
   .data(graph.links)
-  .enter().append("path")
+  //.enter().append("path")
   .attr("class", "link")
-  .attr("d", path)
-  .style('stroke', color_link)
-  .style("stroke-width", function(d) { return d.value*width_unit; })
   .transition()
   .duration(1000)
+  .attr("d", path)
+  .style('stroke', color_link)
+
+
+  svg
+  .selectAll(".link")
+  .style("stroke-width", function(d) { return d.value*width_unit; })
+
 
 
   svg.selectAll(".link>title")
@@ -300,7 +304,6 @@ function fade_link(data, path){
 function translate_spacing(node){
 
   translate_reset();
-  console.log(node);
   let nodes = dataObj.getData().nodes;
   let col_nr = node.column;
 
@@ -340,8 +343,8 @@ function translate_spacing(node){
   svg.selectAll(".link")
    .transition()
    .duration(1000)
-   .attr("d", path);
-   link.style('stroke', color_fade_link);
+   .attr("d", path)
+   .style('stroke', color_fade_link);
 
    //dataObj.getSankey().nodes(backupNodes);
    //console.log("restored");
