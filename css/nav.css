@@ -143,8 +143,6 @@ details[open] summary {
 }
 
 .resetBtn:active {
-  fill: #000;
-
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -153,6 +151,11 @@ details[open] summary {
 .rotated {
   transform: rotate(90deg); 
 }
+
+.splitBtn{
+  fill: #3e8e41;
+}
+
 
 /*---------------------------------------------------*/
 .container {

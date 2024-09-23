@@ -4,9 +4,52 @@
 var colorBoxes = document.querySelectorAll('.color-box');
 var box_compa = document.getElementById('fun_compa');
 var box_rel = document.getElementById('fun_rel');
+//--------------------------------------------------------------------
 
 
-/*-------------------------------------------------------------------------- */
+var opacity_pick;
+var dataObj = DataObj.getData();  
+
+
+var margin = {top: 20, right: 50, bottom: 100, left: 50},
+width = window.innerWidth - margin.left - margin.right - 20,
+height = window.innerHeight - margin.top - margin.bottom -120;
+
+var formatNumber = d3.format(",.0f"),
+format = function(d) { return formatNumber(d) + "  "; };
+
+function generateSVGLarge(){
+    let svg = d3.select("#chart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .attr("id", "chartSVG")
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    return svg;
+
+}
+
+var svg = generateSVGLarge();
+
+drawSankey(dataObj.getData(), svg)
+
+
+/*-----------------------------buttons--------------------------------------------- */
+
+
+var resetBtn = document.getElementById("reset_icon");
+resetBtn.addEventListener("click", resetBtnEvent);
+var printBtn = document.getElementById("print-icon");
+printBtn.addEventListener("click", downloadSVG);
+var splitBtn = document.getElementById("split_btn");
+splitBtn.addEventListener("click", splitBtnEvent);
+
+document.getElementById("fun_compa").addEventListener("click", toggleCompa);
+document.getElementById("fun_rel").addEventListener("click", toggleRel);
+
+
+
+/*----------------------------------------------------------------------------*/
 
 for (var i = 0; i < colorBoxes.length; i++) {
     colorBoxes[i].addEventListener('click', toggleOpacity);
@@ -201,16 +244,6 @@ refreshOnResize();
 /*------------------------------------------------------------------------------------------- */
 /*------------------------------------------------------------------------------------------- */
 
-function testPaper(){
-  displayPaperArea();
-  let i = 0;
-  while(i < 17){
-    drawPaper(i);
-    i++;
-  }
-}
-
-
 function displaySearch(){
   let searchIcon = document.getElementById("dropdownDiv");
 
@@ -218,18 +251,10 @@ function displaySearch(){
     searchIcon.setAttribute("class", "dropdown");
 }
 
-function testPaperArea2(){
-  paperArea.classList.remove("nonDisplay");
-  paperArea.setAttribute("class", "paperContainer");
+function resetSankey() {
 
-let paperList = document.getElementById("paperList");
-// clear previous papers
-  let i = 0;
-  while(i < 17){
-    drawPaper(i);
-    i++;
-  }
+  drawSankey(dataObj.getData(), svg);
+  FunState.default();
 }
-
 
 

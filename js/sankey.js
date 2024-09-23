@@ -269,6 +269,8 @@ d3.sankey = function() {
       var ky = d3.min(nodesByBreadth, function(nodes) {
         return (size[1] - (nodes.length -1 + padding_preserve) * nodePadding) / d3.sum(nodes, value);
       });
+      width_unit = ky;
+
 
       nodesByBreadth.forEach(function(nodes) {
         //console.log(nodes);
@@ -280,7 +282,6 @@ d3.sankey = function() {
 
         nodes.forEach(function(node, i) {
           node.y = i ;
-          width_unit = ky;
           node.dy = node.value * ky;
         });
       });
