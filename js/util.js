@@ -6,18 +6,26 @@ col4 = [];
 var cols = [col1, col2, col3, col4];
 
 
+function checkCol(x, col1 = column_1, col2 = column_2, col3 = column_3, col4 = column_4) {
+  if (typeof x === 'number') {
+      return checkCol_index(x, col1, col2, col3, col4);
+  } else {
+      return checkCol_node(x, col1, col2, col3, col4);
+  } 
+}
+
 
 
 // i : index of node
-function checkCol(i){
+function checkCol_index(i, col1, col2, col3, col4){
   switch (true) {
-    case (i >= 0 && i < dimensions.length):
+    case (i >= 0 && i < col1.length):
       return 1;
-    case (i >= dimensions.length && i < dimensions.length + attributes.length):
+    case (i >= col1.length && i < col2.length + col1.length):
       return 2;
-    case (i >= dimensions.length + attributes.length && i < dimensions.length + attributes.length + types.length):
+    case (i >= col2.length + col1.length && i < col1.length + col2.length + col3.length):
       return 3;
-    case (i >= dimensions.length + attributes.length + types.length):
+    case (i >= col1.length + col2.length + col3.length):
       return 4;
     default:
       console.log("function checkCol fails")
@@ -25,14 +33,14 @@ function checkCol(i){
 }
 
 // for initial assignment, not efficient but secure
-function checkCol_node(node){
-  if(types.includes(node.name)){
+function checkCol_node(node, col1, col2, col3, col4){
+  if(col3.includes(node.name)){
     return 3;
-  }else if(dimensions.includes(node.name)){
+  }else if(col1.includes(node.name)){
      return 1;
-  }else if(attributes.includes(node.name)){
+  }else if(col2.includes(node.name)){
     return 2;
-  }else if(encoding.includes(node.name)){
+  }else if(col4.includes(node.name)){
     return 4;
   }else{
     console.log("new name " + node.name);
@@ -49,9 +57,11 @@ function data_process(){
     "links" :[]
   };
 
-  getData()["nodes"].forEach(function (d){
+  let combinedList = [...column_1, ...column_2, ...column_3, ...column_4];
+
+  combinedList.forEach(function (d){
     graph.nodes.push({
-      "name" : d.name
+      "name" : d
     });
 
   });
@@ -66,7 +76,7 @@ function data_process(){
   });
 
   graph.nodes.forEach((node) => {
-    node.column = checkCol_node(node);
+    node.column = checkCol(node);
   });
 
 

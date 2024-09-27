@@ -185,7 +185,7 @@ function changeHeight() {
   var boxElement = document.getElementById("chart");
   var newHeight = window.innerHeight - 120 -100; 
   boxElement.style.height = newHeight + "px";
-  console.log(newHeight);
+  //console.log(newHeight);
 }
 
 changeHeight();
