@@ -1,7 +1,7 @@
 // columns are refered to using indices
 // to change order, all references have to be changed
 
-var width_unit = 1; // cannot fix updating problem, this is a workaround
+var width_unit = 1; // cannot fix updating problem, a workaround
 
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
@@ -33,11 +33,10 @@ function drawSankey(data, svg, sortFun){
     .nodeSort(sortFun == undefined? ascending_name1 : sortFun)
     .layout(32);
 
-  dataObj.updateSankey(sankey);
 
   translate_col4();
 
-  dataObj.updateSankey(sankey);
+  dataObj.updateData(data);
 
 
   let link = svg
@@ -68,11 +67,7 @@ function drawSankey(data, svg, sortFun){
     .attr("class", "node")
     .attr("transform", function(d) { return translateString(d.x, d.y); })
 
-
-
-
-
-  /** you cannot specify "the" svg element */
+  /** selection otherwise failed */
   let canvas = d3.select("#chartSVG")
     .on("click", canvasEvent);
 
@@ -98,24 +93,22 @@ function drawSankey(data, svg, sortFun){
     .attr("x", 6 + sankey.nodeWidth())// position right
     .attr("text-anchor", "start");
 
+    dataObj.updateSankey(sankey);
+
+
 
 
   function highlight_node_links(node,i){
     resetColList(); // emtpy the list of highlightened columns
     clicked_node = node;
-
     let current_name = node['name'];
-
-
     drawExampleGraph(current_name);
 
-    var clicked_col = checkCol(i);
+    var clicked_col = checkCol(node);
     cols[clicked_col -1] = [node]; //assign clicked node
 
 
     reset_opacity(0.2);
-
-
     traverse_left(node);
     traverse_right(node);
 
@@ -173,7 +166,15 @@ function update_general(action){
   translated_nodes = [];
   clearHighlight();
   resetColList(); // emtpy the list of highlightened columns
-  graph = dataObj.getData();
+
+  if(action == "remove"){
+    graph = data_process2();
+  }else{
+    graph = dataObj.getData();
+
+  }
+
+  
   let sortFunction = getSortfunction(action);
   let sankey = d3.sankey()
     .nodeWidth(15)
@@ -187,11 +188,8 @@ function update_general(action){
 
   path = sankey.link();
 
-
-  translate_col4();
-
   dataObj.updateSankey(sankey);
-  graph = dataObj.getData();
+  dataObj.updateData(graph);
 
 
 
@@ -217,6 +215,8 @@ function update_general(action){
     .transition()
     .text(title_link);
 
+  translate_col4();
+
 
   svg.selectAll(".node")
     .data(graph.nodes)
@@ -224,6 +224,7 @@ function update_general(action){
     .duration(1000)
     .attr("class", "node")
     .attr("transform", function(d) {return translateString(d.x, d.y)})
+
 
 
       
@@ -464,6 +465,9 @@ function drawExampleGraph(current_name){
         break;
     }
 }
+
+
+
 
       
 

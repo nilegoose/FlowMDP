@@ -74,19 +74,20 @@ function link_clicked(d){
 function traverse_right(node){
     let remainingNodes = [],
         nextNodes = [];
-
-    let sankey = dataObj.getSankey();
                 // traversal right
-    node["sourceLinks"].forEach(function(link) {
-      remainingNodes.push(link["target"]);
-    });
+
+    let currentRightLinks = node["sourceLinks"]
+    if(currentRightLinks != undefined){
+      node["sourceLinks"].forEach(function(link) {
+        remainingNodes.push(link["target"]);      
+        });
+    }
     while (remainingNodes.length) {
 
       nextNodes = [];
 
-      let current_index = sankey.nodes().indexOf(remainingNodes[0]);
-      cols[checkCol(current_index) - 1] = remainingNodes;
-
+      let current_index = checkCol(remainingNodes[0]);
+      cols[current_index - 1] = remainingNodes;
 
       remainingNodes.forEach(function(node) {
           // traversal right
@@ -108,17 +109,21 @@ function traverse_right(node){
 
 function traverse_left(node){
     let remainingNodes = [],
-        nextNodes = [],
-        sankey = dataObj.getSankey();
+        nextNodes = [];
 
-    node["targetLinks"].forEach(function(link) {
-    remainingNodes.push(link["source"]);      
-    });
+    
+    let currentLeftLinks = node["targetLinks"]
+    if(currentLeftLinks != undefined){
+      node["targetLinks"].forEach(function(link) {
+        remainingNodes.push(link["source"]);      
+        });
+    }
+
 
     while (remainingNodes.length) {
 
-    let current_index = sankey.nodes().indexOf(remainingNodes[0]);
-    cols[checkCol(current_index) - 1] = remainingNodes;
+    let current_index = checkCol(remainingNodes[0]); // check index fails
+    cols[current_index - 1] = remainingNodes;
 
     nextNodes = [];
     remainingNodes.forEach(function(node) {

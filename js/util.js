@@ -1,3 +1,4 @@
+//-----------------------------locate clicked nodes-------------------------------------------------
 var col1 = [],
 col2 = [],
 col3 = [],
@@ -140,23 +141,79 @@ function filterByFunction(array, fun) {
   });
 }
 
-function removeCol_link(array, collumnIndex) {
-  return array.filter(function(link) {
-    return ![0, 1, 2, 3].includes(link["source"]);
-  });
-}
-function removeCol_node(array, collumnIndex) {
-  return array.splice(0, 4);
-}
+
 
 
 
 function data_process2(){
-  graph = data_process();
-  graph.links = removeCol_link(graph.links);
-  //graph.nodes.splice(0, 4);// cannot remove nodes because... the links are computed with indices
-  // rewrite the sankey function ...
-  // then you also have to recompute the id of links...
+  graph = {
+    "nodes" :[],
+    "links" :[]
+  };
+
+  let combinedList = [...column_2, ...column_3, ...column_4];
+
+  combinedList.forEach(function (d){
+    graph.nodes.push({
+      "name" : d
+    });
+
+  });
+
+  getData()["links"].forEach(function (d){
+    if(![0, 1, 2, 3].includes(d.source)){    
+      graph.links.push({
+        "source" : d.source - 4,
+        "target" : d.target - 4,
+        "value" :  d.value
+      });
+    }
+  });
+
+  graph.nodes.forEach((node) => {
+    node.column = checkCol(node);
+  });
+
+
+  // assign color
+  let countCol1 = 0,
+  countCol2 = 0,
+  countCol4 = 0;
+      
+
+  graph.nodes.forEach((node) => {
+    if (node.column == 1){
+      node.color = colorCol1[countCol1];
+      countCol1++;
+    } else if (node.column == 2){
+      node.color = colorCol2[countCol2];
+      countCol2++
+    } else if (node.column == 4){
+      node.color = colorCol4[countCol4];
+      countCol4++
+    } else {
+      node.color = "#a9a9a9"
+    } 
+  });
+  // ------------functions
+
+  graph.nodes.forEach((node) => {
+    if(node.column == 3){
+      if(compa_name.includes(node.name)){
+        node.comparasion = true;
+        node.color1=colorFunctions[0];
+      }
+    }
+  });
+
+  graph.nodes.forEach((node) => {
+    if(node.column == 3){
+      if(rel_name.includes(node.name)){
+        node.relationships = true;
+        node.color2=colorFunctions[1];
+      }
+    }
+  });
   return graph;
 }
 
@@ -361,6 +418,13 @@ function getSortfunction(action){
   else{
     return ascending_name1
   }
+}
+
+  
+function testFunction() {
+
+  drawSankey(data_process2(), svg);
+  FunState.default();
 }
   
 

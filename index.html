@@ -10,10 +10,10 @@
 
   
   
-  <div id="main">
+<div id="main">
 
 
-    <!--the first row-->
+  <!--the first row-->
   <div class = "flex_box">
     <h1 class="titleFont">FlowMDP</h1>
     <span class="tab"></span>
@@ -25,24 +25,30 @@
     <svg class="dropbtn" id="setting_icon" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30">
         <path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/>
     </svg>
-<!--drop down-->
+  <!--drop down-->
     <div class="dropdown-content">
       <details>
         <summary>Search Charts by Functions</summary>
-          <!--p>    <span class="tab"></span>
-          Single click on color box to search, double click to cancel.</p-->
-          <span class="tab"></span><input type="checkbox" id="open-checkbox">
-          <label for="open-checkbox" id="checkbox-label">Keep this window open</label>      
-        </details>
-      <div class="container">
-      <div class="color-box" id="fun_compa"><p>Comparision</p></div>
-      <!-- A4 + B1-->
-      <div class="color-box" id="fun_rel"><p>Relationship</p></div>
+        <span class="tab"></span><input type="checkbox" id="open-checkbox">
+        <label for="open-checkbox" id="checkbox-label">Keep this window open</label> 
+      </details>
+
+      <div class="container"> 
+        <div class="color-box" id="fun_compa"><p>Comparision</p></div>
+        <div class="color-box" id="fun_rel"><p>Relationship</p></div>
       </div>
+      <details>
+        <summary>Test buttons</summary>
+        <div class="container"> 
+          <div class="color-box"><p>button1</p></div>
+          <div class="color-box"><p>button2</p></div>
+        </div>
+      </details>
+ 
     </div>
-<!-- end drop down-->
+  <!-- end drop down-->
     
-  
+
   </div>
     <span class="tab"></span>
     <div>
@@ -66,23 +72,23 @@
 <!--end flex box-->
 
 
-    <div id="chart">
+  <div id="chart">
 
-    </div>
-
-    <div class="text-row">
-      <p id="button1">1</p>
-      <p id="button2">1</p>
-      <p id="button3">1</p>
-      <p id="button4">1</p>
-    </div> 
-
-    <div id="multiple" class = "nonDisplay"></div>
-    <div id="my_dataviz"></div>
-
-
- 
   </div>
+
+  <div class="text-row" id="col-names">
+    <!--p id="button1">1</p>
+    <p id="button2">1</p>
+    <p id="button3">1</p>
+    <p id="button4">1</p-->
+  </div> 
+
+  <div id="multiple" class = "nonDisplay"></div>
+  <div id="my_dataviz"></div>
+
+
+
+</div>
   <!--end main-->
 
 </body>

@@ -19,13 +19,13 @@ var formatNumber = d3.format(",.0f"),
 format = function(d) { return formatNumber(d) + "  "; };
 
 function generateSVGLarge(){
-    let svg = d3.select("#chart").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("id", "chartSVG")
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    return svg;
+  let svg = d3.select("#chart").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .attr("id", "chartSVG")
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  return svg;
 
 }
 
@@ -47,7 +47,7 @@ splitBtn.addEventListener("click", splitBtnEvent);
 document.getElementById("fun_compa").addEventListener("click", toggleCompa);
 document.getElementById("fun_rel").addEventListener("click", toggleRel);
 
-
+const colNameContainer = document.getElementById('col-names');
 
 /*----------------------------------------------------------------------------*/
 
@@ -108,6 +108,22 @@ function toggleRel() {
       FunState.cancelRel();
       update_general("reset");
     }
+}
+
+// create p element with certain id
+function createP(id) {
+  let button = document.createElement('p');
+  button.innerText = "1";
+  button.id = id;
+  return button;
+}
+
+function createColName(){
+// Generate 4 buttons with specific ids
+  for (let i = 1; i <= 4; i++) {
+    const button = createP(`button${i}`);
+    colNameContainer.appendChild(button);
+  }
 }
 
 
@@ -189,6 +205,7 @@ function changeHeight() {
 }
 
 changeHeight();
+createColName();
 setColText();
 setBoxText();
 
@@ -256,5 +273,6 @@ function resetSankey() {
   drawSankey(dataObj.getData(), svg);
   FunState.default();
 }
+
 
 
