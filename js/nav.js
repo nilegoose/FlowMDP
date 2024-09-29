@@ -123,9 +123,11 @@ function toggleRel() {
 function removeCol1(){
   if(removeCol1_count == 0){
     testFunction2();
+    createColName(["Data Abstraction", "Chart Types", "Encoding Idoms"]);
     removeCol1_count = 1;
   }else{
     testFunction3();
+    createColName(buttonTexts);
     removeCol1_count = 0;
   }
 }
@@ -219,7 +221,6 @@ function changeHeight() {
   var boxElement = document.getElementById("chart");
   var newHeight = window.innerHeight - 120 -100; 
   boxElement.style.height = newHeight + "px";
-  //console.log(newHeight);
 }
 
 changeHeight();
