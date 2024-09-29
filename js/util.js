@@ -2,7 +2,7 @@
 var col1 = [],
 col2 = [],
 col3 = [],
-col4 = [];
+col4 = []; // they hold (clicked) nodes as lists of object
 
 var cols = [col1, col2, col3, col4];
 
@@ -435,4 +435,9 @@ function testFunction2() {
   update_general("remove");
 }
   
+function testFunction3() {
 
+  update_general("add");
+  update_general("add");
+}
+  

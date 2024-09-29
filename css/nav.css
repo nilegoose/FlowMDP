@@ -167,6 +167,15 @@ details[open] summary {
   box-sizing: border-box;
 
 }
+.container2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+}
    
 #chart {
   height: 500px;
@@ -194,16 +203,38 @@ details[open] summary {
 }
 
 
-.color-box {
-      width: 100px;
-      height: 100px;
-      display: inline-block;
-      margin: 10px;
-      transition: opacity 0.3s ease-in-out;
-      opacity : 0.5;
-      text-align: center;
-      border-radius: 10px;
+.toggle-op {
+  transition: opacity 0.3s ease-in-out;
+  opacity : 0.5;
+  text-align: center;
+
     }
+.color-box{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin: 10px;
+  position: relative; /* Enable positioning */
+  text-align: center;
+  border-radius: 10px;
+
+}
+.color-box p {
+  position: absolute;
+  top: 20%; /* Move the text down 40% from the top */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -20%); /* Adjust to account for centering */
+}
+.button-box{
+  text-align: center;
+  border: 2px solid black;
+}
+.buttonTexts{
+  border-radius: 3px;
+}
+.chart-text{
+  text-align: center;
+}
 
 .nonDisplay{
   display: none;
@@ -302,10 +333,6 @@ body{
 .doiItem {
   display: flex;
   align-items: center;
-  
-  
-  
-
   color: black;
   font-size: large;
   line-height: 1.3;

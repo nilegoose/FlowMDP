@@ -1,12 +1,13 @@
-// columns are refered to using indices
-// to change order, all references have to be changed
+
+// there are four columns per pre-definition
+// deleted column(s) are considered as "hidden"
 
 var width_unit = 1; // cannot fix updating problem, a workaround
-
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
+var removeCol1_count = 0;
 
 
 var translated_nodes = []; // for highlightened subtree
@@ -40,42 +41,74 @@ function drawSankey(data, svg, sortFun){
   dataObj.updateSankey(sankey);//cannot delete two of them
 
 
+//more elemental drawing operations for animation
 
-
-  let link = svg
-    .append("g").selectAll(".link")
-    .data(data.links);
-
-
-  link
-    .enter().append("path")
-    .attr("class", "link")
-    .attr("d", path)
-    .attr("id", function(d,i){
-      d.id = i;
-      return "link-"+i;
-    })
-    .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-    .sort(function(a, b) { return b.dy - a.dy; })
-    .style('stroke', color_link)
-
-
-
+  let link = linkEnter(svg, data, path)
   link.append("title")
     .text(title_link);
 
-  let node = svg.append("g").selectAll(".node")
-    .data(data.nodes)
-    .enter().append("g")
-    .attr("class", "node")
-    .attr("transform", function(d) { return translateString(d.x, d.y); })
+  let node = nodeEnter(svg, data, sankey)
 
   /** selection otherwise failed */
   let canvas = d3.select("#chartSVG")
     .on("click", canvasEvent);
 
+    dataObj.updateSankey(sankey);
+
+}
+
+function highlight_node_links(node,i){
+  resetColList(); // emtpy the list of highlightened columns
+  clicked_node = node;
+  let current_name = node['name'];
+  drawExampleGraph(current_name);
+
+  var clicked_col = checkCol(node);
+  cols[clicked_col -1] = [node]; //assign clicked node
 
 
+  reset_opacity(0.2);
+  traverse_left(node);
+  traverse_right(node);
+
+  update_link();
+  update_opacity(0.6);
+  update_node("highlight");
+  console.log(cols[2])
+  appendCharts(cols[2])
+  update_text("highlight");
+
+  translate_spacing(node);
+
+}
+
+function linkEnter(svg, data, path){
+  let link = svg
+  .append("g").selectAll(".link")
+  .data(data.links);
+
+
+link
+  .enter().append("path")
+  .attr("class", "link")
+  .attr("d", path)
+  .attr("id", function(d,i){
+    d.id = i;
+    return "link-"+i;
+  })
+  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+  .sort(function(a, b) { return b.dy - a.dy; })
+  .style('stroke', color_link)
+
+  return link
+}
+
+function nodeEnter(svg, data, sankey){
+  let node = svg.append("g").selectAll(".node")
+    .data(data.nodes)
+    .enter().append("g")
+    .attr("class", "node")
+    .attr("transform", function(d) { return translateString(d.x, d.y); })
   node
     .append("rect")
     .attr("height", function(d) { return d.dy; })
@@ -95,35 +128,7 @@ function drawSankey(data, svg, sortFun){
     .filter(function(d) { return d.x < width / 2; })
     .attr("x", 6 + sankey.nodeWidth())// position right
     .attr("text-anchor", "start");
-
-    dataObj.updateSankey(sankey);
-
-
-
-
-  function highlight_node_links(node,i){
-    resetColList(); // emtpy the list of highlightened columns
-    clicked_node = node;
-    let current_name = node['name'];
-    drawExampleGraph(current_name);
-
-    var clicked_col = checkCol(node);
-    cols[clicked_col -1] = [node]; //assign clicked node
-
-
-    reset_opacity(0.2);
-    traverse_left(node);
-    traverse_right(node);
-
-    update_link();
-    update_opacity(0.6);
-    update_node("highlight");
-    update_text("highlight");
-
-    translate_spacing(node);
-
-  }
-
+  return node
 }
 
 
@@ -145,6 +150,7 @@ function clearHighlight(){
   update_node("dehighlight");
   update_text("dehighlight");
   reset_opacity(0.2);
+  appendCharts([]);
 }
 
 
@@ -165,7 +171,8 @@ function reset_opacity(opacity){
 
 
 
-function update_general(action){// suitable for translating, but not for data update
+function update_general(action){// suitable for translating, more subtle for data updating
+  // redundancy for animation
   translated_nodes = [];
   clearHighlight();
   resetColList(); // emtpy the list of highlightened columns
@@ -174,6 +181,10 @@ function update_general(action){// suitable for translating, but not for data up
 
   if(action == "remove"){
     graph = data_process2();
+  }
+
+  if(action == "add"){
+    graph = data_process();
   }
   
   let sortFunction = getSortfunction(action);
@@ -213,6 +224,8 @@ function update_general(action){// suitable for translating, but not for data up
     .selectAll(".link")
     .style("stroke-width", function(d) { return Math.max(1, d.value*width_unit); })
 
+  // for adding links
+  let link = linkEnter(svg, graph, path)
 
 
   svg.selectAll(".link>title")
@@ -228,16 +241,17 @@ function update_general(action){// suitable for translating, but not for data up
     .attr("class", "node")
     .attr("transform", function(d) {return translateString(d.x, d.y)});
 
+  let node = nodeEnter(svg, graph, sankey);
+
   svg.selectAll(".rect")
     .data(graph.nodes)
     .transition()
     .duration(1000)
     .attr("height", function(d) { return d.dy; })
-    
-
 
   color_per_func();//color nodes
 
+  // have to reset text
   svg.selectAll(".node>rect>title")
     .data(graph.nodes)
     .transition()

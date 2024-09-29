@@ -29,20 +29,32 @@
     <div class="dropdown-content">
       <details>
         <summary>Search Charts by Functions</summary>
-        <span class="tab"></span><input type="checkbox" id="open-checkbox">
-        <label for="open-checkbox" id="checkbox-label">Keep this window open</label> 
       </details>
 
       <div class="container"> 
-        <div class="color-box" id="fun_compa"><p>Comparision</p></div>
-        <div class="color-box" id="fun_rel"><p>Relationship</p></div>
+        <div class="toggle-op color-box" id="fun_compa"><p>Comparision</p></div>
+        <div class="toggle-op color-box" id="fun_rel"><p>Relationship</p></div>
       </div>
       <details>
-        <summary>Test buttons</summary>
+        <summary>Hide One Column</summary>
         <div class="container"> 
-          <div class="color-box"><p>button1</p></div>
-          <div class="color-box"><p>button2</p></div>
+          <div class="toggle-op buttonTexts" id="col1-text"><p>1</p></div>
+          <div class="toggle-op buttonTexts"><p>2</p></div>
+          <div class="button-box buttonTexts"><p>3</p></div>
+          <div class="toggle-op buttonTexts"><p>4</p></div>
         </div>
+      </details>
+
+      <details>
+        <summary>Charts</summary>
+        <div class="container2 chart-text" id="chart_texts"> 
+          <p>Not selected</p>
+        </div>
+      </details>
+      <details>
+        <summary>This Window</summary>
+        <span class="tab"></span><input type="checkbox" id="open-checkbox">
+        <label for="open-checkbox" id="checkbox-label">Keep this window open</label> 
       </details>
  
     </div>
@@ -77,10 +89,7 @@
   </div>
 
   <div class="text-row" id="col-names">
-    <!--p id="button1">1</p>
-    <p id="button2">1</p>
-    <p id="button3">1</p>
-    <p id="button4">1</p-->
+    <!--column labels-->
   </div> 
 
   <div id="multiple" class = "nonDisplay"></div>

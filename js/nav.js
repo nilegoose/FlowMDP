@@ -1,9 +1,11 @@
 
 //--------------------------------------------------------------------
 // color boxes
-var colorBoxes = document.querySelectorAll('.color-box');
+var toggleBoxes = document.querySelectorAll('.toggle-op');
 var box_compa = document.getElementById('fun_compa');
 var box_rel = document.getElementById('fun_rel');
+var colBoxes = document.querySelectorAll('.buttonTexts');
+
 //--------------------------------------------------------------------
 
 
@@ -48,11 +50,19 @@ document.getElementById("fun_compa").addEventListener("click", toggleCompa);
 document.getElementById("fun_rel").addEventListener("click", toggleRel);
 
 const colNameContainer = document.getElementById('col-names');
+const chartTextContainer = document.getElementById('chart_texts');
+const col1OnOff = document.getElementById('col1-text')
+
 
 /*----------------------------------------------------------------------------*/
 
-for (var i = 0; i < colorBoxes.length; i++) {
-    colorBoxes[i].addEventListener('click', toggleOpacity);
+for (var i = 0; i < toggleBoxes.length; i++) {
+  toggleBoxes[i].addEventListener('click', toggleOpacity);
+}
+
+for (var i = 0; i < colBoxes.length; i++) {
+  colBoxes[i].innerText = buttonTexts[i];
+  colBoxes[i].click()
 }
 
 function toggleOpacity() {
@@ -79,7 +89,7 @@ function toggleCompa() {
     fun_compa_count = 1; // toggle button
     if(fun_rel_count == 1){
       fun_rel_count = 0;
-      toggleOpacity.call(box_rel);
+      toggleOpacity.call(box_rel);//reset other box style
     }
     FunState.compa();
     update_general("compa");
@@ -99,7 +109,7 @@ function toggleRel() {
       fun_rel_count = 1; // toggle button
       if(fun_compa_count == 1){
         fun_compa_count = 0;
-        toggleOpacity.call(box_compa);
+        toggleOpacity.call(box_compa);//reset other box style
       }
       FunState.rel();
       update_general("rel");
@@ -110,6 +120,16 @@ function toggleRel() {
     }
 }
 
+function removeCol1(){
+  if(removeCol1_count == 0){
+    testFunction2();
+    removeCol1_count = 1;
+  }else{
+    testFunction3();
+    removeCol1_count = 0;
+  }
+}
+
 
 
 function createColName(array){
@@ -117,10 +137,19 @@ function createColName(array){
 // Generate 4 buttons with specific ids
   for (let i = 1; i <= array.length; i++) {
     let button = document.createElement('p');
-    button.innerText = "1";
     button.id =`button${i}`;
     button.innerText = array[i-1];  
     colNameContainer.appendChild(button);
+  }
+}
+
+function appendCharts(array){
+  clearContainer(chartTextContainer);
+// Generate 4 buttons with specific ids
+  for (let i = 1; i <= array.length; i++) {
+    let p = document.createElement('p');
+    p.innerText = array[i-1].name;  
+    chartTextContainer.appendChild(p);
   }
 }
 
@@ -196,6 +225,7 @@ function changeHeight() {
 changeHeight();
 createColName(buttonTexts);
 setBoxText();
+col1OnOff.addEventListener('click', removeCol1); //has to be later then click function
 
 /*----------------------------------------------------------------------*/
 // set the "search by functions" window

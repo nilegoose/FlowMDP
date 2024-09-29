@@ -963,7 +963,7 @@ assignFunctions();
 
 /*------------------------------------------------------------------------------------ */
 
-const buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
+var buttonTexts = ["Dimension", "Data Abstraction", "Chart Types", "Encoding Idoms"];
 
 
 /*-------------------------------------------------------------------------------------- */
@@ -1039,4 +1039,5 @@ var DataObj = (function() {
   
   // TODO
   // reset column labels after deleting column
+  // toggle buttons
   // opacity
