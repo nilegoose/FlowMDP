@@ -110,37 +110,26 @@ function toggleRel() {
     }
 }
 
-// create p element with certain id
-function createP(id) {
-  let button = document.createElement('p');
-  button.innerText = "1";
-  button.id = id;
-  return button;
-}
 
-function createColName(){
+
+function createColName(array){
+  clearContainer(colNameContainer);
 // Generate 4 buttons with specific ids
-  for (let i = 1; i <= 4; i++) {
-    const button = createP(`button${i}`);
+  for (let i = 1; i <= array.length; i++) {
+    let button = document.createElement('p');
+    button.innerText = "1";
+    button.id =`button${i}`;
+    button.innerText = array[i-1];  
     colNameContainer.appendChild(button);
   }
 }
 
-
-function setColText() {
-
-  let buttons = [document.getElementById('button1'),
-  document.getElementById('button2'),
-  document.getElementById('button3'),
-  document.getElementById('button4')]
-
-  
-
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].innerText = buttonTexts[i];  
+function clearContainer(container) {
+  while (container.firstChild) {
+      container.removeChild(container.firstChild);
   }
-
 }
+
 
 function setBoxText(){
    
@@ -205,8 +194,7 @@ function changeHeight() {
 }
 
 changeHeight();
-createColName();
-setColText();
+createColName(buttonTexts);
 setBoxText();
 
 /*----------------------------------------------------------------------*/

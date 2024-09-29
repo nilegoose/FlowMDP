@@ -228,6 +228,8 @@ function translateString(x, y){
   return "translate(" + x + "," + y + ")"
 }
 
+
+
 // considering the structure of nodes, this function sorts one column
 function resortPart(arr, field, value, sortFun){
   let startIdx = arr.findIndex(node => node[field] == value);
@@ -425,6 +427,12 @@ function testFunction() {
 
   drawSankey(data_process2(), svg);
   FunState.default();
+}
+
+function testFunction2() {
+
+  update_general("remove");
+  update_general("remove");
 }
   
 

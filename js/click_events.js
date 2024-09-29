@@ -34,9 +34,12 @@ function drawSankey(data, svg, sortFun){
     .layout(32);
 
 
-  translate_col4();
-
+  dataObj.updateSankey(sankey);
   dataObj.updateData(data);
+  translate_col4();
+  dataObj.updateSankey(sankey);//cannot delete two of them
+
+
 
 
   let link = svg
@@ -162,18 +165,16 @@ function reset_opacity(opacity){
 
 
 
-function update_general(action){
+function update_general(action){// suitable for translating, but not for data update
   translated_nodes = [];
   clearHighlight();
   resetColList(); // emtpy the list of highlightened columns
 
+  let graph = dataObj.getData();
+
   if(action == "remove"){
     graph = data_process2();
-  }else{
-    graph = dataObj.getData();
-
   }
-
   
   let sortFunction = getSortfunction(action);
   let sankey = d3.sankey()
@@ -190,6 +191,10 @@ function update_general(action){
 
   dataObj.updateSankey(sankey);
   dataObj.updateData(graph);
+  translate_col4();
+  dataObj.updateSankey(sankey);//cannot delete two of them
+
+
 
 
 
@@ -215,21 +220,23 @@ function update_general(action){
     .transition()
     .text(title_link);
 
-  translate_col4();
-
 
   svg.selectAll(".node")
     .data(graph.nodes)
     .transition()
     .duration(1000)
     .attr("class", "node")
-    .attr("transform", function(d) {return translateString(d.x, d.y)})
+    .attr("transform", function(d) {return translateString(d.x, d.y)});
+
+  svg.selectAll(".rect")
+    .data(graph.nodes)
+    .transition()
+    .duration(1000)
+    .attr("height", function(d) { return d.dy; })
+    
 
 
-
-      
-
-  color_per_func();
+  color_per_func();//color nodes
 
   svg.selectAll(".node>rect>title")
     .data(graph.nodes)
@@ -253,8 +260,14 @@ function update_general(action){
     .attr("x", 6 + sankey.nodeWidth())
     .attr("text-anchor", "start");
 
-}
 
+    svg.selectAll(".node")
+    .data(graph.nodes).exit().remove()
+
+    svg.selectAll(".link")
+    .data(graph.links).exit().remove()
+
+}
 
 function color_per_func(){
   let data = dataObj.getData();
@@ -383,6 +396,7 @@ function translate_col4(){
   let nodes = dataObj.getSankey().nodes();
 
   let sorted_part = resortPart( nodes.slice(), "column", 4, descendingDepth);
+
 
   let col3Nodes = resortPart( nodes.slice(), "column", 3, descendingDepth);
 
