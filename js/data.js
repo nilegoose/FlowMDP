@@ -1038,6 +1038,5 @@ var DataObj = (function() {
   
   
   // TODO
-  // reset column labels after deleting column
-  // toggle buttons
-  // opacity
+  // toggle buttons (delete columns)
+  // opacity (clicking on node and canvas change behavior)

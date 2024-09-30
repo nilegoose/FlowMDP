@@ -154,27 +154,24 @@ svg.selectAll("rect").data(graph.nodes)
   
     if(action == "dehighlight"){
       return color_node_fun(d);
-    }else{
+    }else if(action == "highlight"){
       if(cols.flat().includes(d)){
         return color_node_fun(d);}
       if(compBool  && d.column ==3){
         if(d.color1 != undefined){
           return d.color1;
         }
-       
-
       }
-
       if(relBool && d.column ==3){
-      
         if(d.color2 != undefined){
           return d.color2;
         }
-
       }
-
-      
-      return "#a9a9a9";}
+      return "#a9a9a9";
+    }else if(action == "split"){
+        if(cols.flat().includes(d)){
+          return color_node_fun(d);}
+        return "transparent";}
     })
     .attr("height", function(d) { 
       return d.dy; })
@@ -191,11 +188,16 @@ function update_text(action){
   .style("fill", function(d){
     if(action == "dehighlight"){
       return "#000000";
-    }else{
+    }else if(action == "highlight"){
       if(cols.flat().includes(d)){
         return "#000000";
       }
       return "#8c8c8c";
+    }else if(action == "split"){
+      if(cols.flat().includes(d)){
+        return "#000000";
+      }
+      return "transparent";
     }
   })
   

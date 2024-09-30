@@ -391,12 +391,30 @@ function resetBtnEvent(){
   this.classList.toggle('rotated');
 }
 
-function splitBtnEvent(){
-  this.classList.toggle('splitBtn');
-}
 
 function scrollToBottom(){
   window.scrollTo({left : 0, top : document.body.scrollHeight, behavior: "smooth"});
+}
+
+function splitBtnEvent(){
+  if(chart_count == 0){
+    return
+  }
+  if(splitBtn_count == 0){
+    splitBtn.setAttribute("fill", "#3e8e41");
+    update_unclicked_opacity(0);
+    update_text("split");
+    update_node("split");
+    splitBtn_count = 1;
+
+  }else{
+    splitBtn.setAttribute("fill", "#dce1e0");
+    update_unclicked_opacity(0.2)
+    update_text("highlight");
+    update_node("highlight");
+    splitBtn_count = 0;
+  }
+  
 }
 
 

@@ -9,6 +9,7 @@ var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
 var removeCol1_count = 0;
 var chart_count = 0;
+var splitBtn_count = 0;
 
 
 var translated_nodes = []; // for highlightened subtree
@@ -59,6 +60,9 @@ function drawSankey(data, svg, sortFun){
 }
 
 function highlight_node_links(node,i){
+  if(splitBtn_count == 1){
+    return
+  }
   resetColList(); // emtpy the list of highlightened columns
   clicked_node = node;
   let current_name = node['name'];
@@ -140,6 +144,10 @@ function canvasEvent(){
   if (!d3.event.target.matches("rect") && !d3.event.target.matches("path")) {
     clearHighlight();
     translate_reset();
+    if(splitBtn_count == 1){
+      splitBtn.setAttribute("fill", "#dce1e0");
+      splitBtn_count = 0;
+    }
 
   }
 
@@ -163,6 +171,15 @@ function update_opacity(opacity){
     .style("stroke-opacity", opacity);
 
 }
+
+function update_unclicked_opacity(opacity){
+  d3.selectAll(".link")
+  .filter(function(d) {
+    return !link_clicked(d); // Negate the condition to get not clicked links
+  })
+    .style("stroke-opacity", opacity);
+}
+
 
 function reset_opacity(opacity){
   d3.selectAll(".link")
@@ -303,15 +320,6 @@ function update_link(){
     .transition()
     .duration(1000);
 
-}
-
-
-function fade_link(data, path){
-  svg.selectAll(".link")
-    .data(data)
-    .transition()
-    .duration(1000)
-    .style("stroke-opacity", opacity_pick)
 }
 
 //update graph first, then re-highlight
