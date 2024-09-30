@@ -8,6 +8,7 @@ var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
 var removeCol1_count = 0;
+var chart_count = 0;
 
 
 var translated_nodes = []; // for highlightened subtree
@@ -70,14 +71,13 @@ function highlight_node_links(node,i){
   reset_opacity(0.2);
   traverse_left(node);
   traverse_right(node);
+  cleanUpColList();
 
   update_link();
   update_opacity(0.6);
   update_node("highlight");
-  console.log(cols[2])
   appendCharts(cols[2])
   update_text("highlight");
-
   translate_spacing(node);
 
 }
@@ -96,7 +96,8 @@ link
     d.id = i;
     return "link-"+i;
   })
-  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+  .style("stroke-width", function(d) { 
+    return Math.max(1, d.dy); })
   .sort(function(a, b) { return b.dy - a.dy; })
   .style('stroke', color_link)
 
@@ -150,6 +151,7 @@ function clearHighlight(){
   update_node("dehighlight");
   update_text("dehighlight");
   reset_opacity(0.2);
+  resetColList();
   appendCharts([]);
 }
 

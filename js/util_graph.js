@@ -102,7 +102,8 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
-    col4 = [...new Set(cols[3])];
+    col4 = removeDuplication([...new Set(cols[3])]);
+
   }
 
 
@@ -134,7 +135,7 @@ function traverse_left(node){
     });
     remainingNodes = nextNodes;
   }
-  col1 = [...new Set(cols[0])];
+  col1 = removeDuplication([...new Set(cols[0])]);
 }
 
 

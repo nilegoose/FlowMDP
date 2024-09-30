@@ -51,7 +51,8 @@ document.getElementById("fun_rel").addEventListener("click", toggleRel);
 
 const colNameContainer = document.getElementById('col-names');
 const chartTextContainer = document.getElementById('chart_texts');
-const col1OnOff = document.getElementById('col1-text')
+const col1OnOff = document.getElementById('col1-text');
+const chartCountText = document.getElementById('chart-count');
 
 
 /*----------------------------------------------------------------------------*/
@@ -145,7 +146,18 @@ function createColName(array){
   }
 }
 
+function setChartCount(){
+  if(chart_count == 1 || chart_count == 0){
+    chartCountText.innerText = chart_count + " Chart Selected"
+  }else if(chart_count > 1){
+    chartCountText.innerText = chart_count + " Charts Selected"
+  }
+  
+
+}
+
 function appendCharts(array){
+  setChartCount();
   clearContainer(chartTextContainer);
 // Generate 4 buttons with specific ids
   for (let i = 1; i <= array.length; i++) {

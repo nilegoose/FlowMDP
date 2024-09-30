@@ -401,10 +401,24 @@ function scrollToBottom(){
 
 
 function resetColList(){
+  chart_count = 0;
   col1 = [],
   col2 = [],
   col3 = [],
   col4 = [];
+
+  cols = [col1, col2, col3, col4];
+  chart_count = 0;
+  setChartCount();
+
+}
+
+function cleanUpColList(){
+  col1 = removeDuplication(cols[0]),
+  col2 = removeDuplication(cols[1]),
+  col3 = removeDuplication(cols[2]),
+  col4 = removeDuplication(cols[3]);
+  chart_count = col3.length;
 
   cols = [col1, col2, col3, col4];
 
