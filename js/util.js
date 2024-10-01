@@ -417,6 +417,19 @@ function splitBtnEvent(){
   
 }
 
+function pinBtnEvent(){
+
+  if(pinChecked == false){
+    pinBtn.setAttribute("fill", "#3e8e41");
+
+    pinChecked = true;
+
+  }else{
+    pinBtn.setAttribute("fill", "#dce1e0");
+    pinChecked = false;
+  }
+  
+}
 
 function resetColList(){
   chart_count = 0;

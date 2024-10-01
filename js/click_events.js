@@ -192,6 +192,10 @@ function reset_opacity(opacity){
 
 function update_general(action){// suitable for translating, more subtle for data updating
   // redundancy for animation
+  if(splitBtn_count == 1){
+    splitBtn.setAttribute("fill", "#dce1e0");
+    splitBtn_count = 0;
+  }
   translated_nodes = [];
   clearHighlight();
   resetColList(); // emtpy the list of highlightened columns

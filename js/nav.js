@@ -53,6 +53,11 @@ const colNameContainer = document.getElementById('col-names');
 const chartTextContainer = document.getElementById('chart_texts');
 const col1OnOff = document.getElementById('col1-text');
 const chartCountText = document.getElementById('chart-count');
+const expandSearch = document.getElementById('expand-search');
+const pinBtn = document.getElementById('pin-btn')
+
+pinBtn.addEventListener("click", pinBtnEvent);
+var pinChecked = false;
 
 
 /*----------------------------------------------------------------------------*/
@@ -239,11 +244,11 @@ changeHeight();
 createColName(buttonTexts);
 setBoxText();
 col1OnOff.addEventListener('click', removeCol1); //has to be later then click function
+expandSearch.click();
 
 /*----------------------------------------------------------------------*/
 // set the "search by functions" window
 // popup per hover or checkbox
-const openCheckbox = document.getElementById('open-checkbox');
 const content = document.querySelector('.dropdown-content');
 const hoverWindow = document.getElementById('setting_icon');
 
@@ -257,7 +262,7 @@ hoverWindow.addEventListener('mouseenter', () => {
 
 hoverWindow.addEventListener('mouseleave', () => {
   leaveTimeout = setTimeout(() => {
-  if (!openCheckbox.checked && !isHovering) {
+  if (!pinChecked && !isHovering) {
     content.style.display = 'none';
       }
     }, 100); 
@@ -271,7 +276,7 @@ content.addEventListener('mouseenter', () => {
 
 content.addEventListener('mouseleave', () => {
     isHovering = false;
-    if (!openCheckbox.checked) {
+    if (!pinChecked) {
         content.style.display = 'none';
     }
 });

@@ -27,14 +27,15 @@
     </svg>
   <!--drop down-->
     <div class="dropdown-content">
-      <details>
-        <summary>Search Charts by Functions</summary>
-      </details>
 
-      <div class="container"> 
-        <div class="toggle-op color-box" id="fun_compa"><p>Comparision</p></div>
-        <div class="toggle-op color-box" id="fun_rel"><p>Relationship</p></div>
-      </div>
+
+      <details>
+        <summary id="expand-search">Search Charts by Functions</summary>
+        <div class="container"> 
+          <div class="toggle-op color-box" id="fun_compa"><p>Comparision</p></div>
+          <div class="toggle-op color-box" id="fun_rel"><p>Relationship</p></div>
+        </div>
+      </details>
       <details>
         <summary>Hide One Column</summary>
         <div class="container"> 
@@ -51,17 +52,14 @@
         <div class="container2 chart-text" id="chart_texts"> 
         </div>
       </details>
-      <details>
-        <summary>Pin</summary>
-        <span class="tab"></span><input type="checkbox" id="open-checkbox">
-        <label for="open-checkbox" id="checkbox-label">Keep this window open</label> 
-      </details>
- 
+      <div class="rightElem2">
+        <svg id="pin-btn" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960"  transform="rotate(15)" width="30px" fill="#dce1e0">
+          <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>
+      </div>
     </div>
   <!-- end drop down-->
-    
+    </div>  
 
-  </div>
     <span class="tab"></span>
     <div>
     <svg class="dropbtn" id="split_btn" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30" fill="#dce1e0">

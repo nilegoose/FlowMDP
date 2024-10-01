@@ -1038,5 +1038,5 @@ var DataObj = (function() {
   
   
   // TODO
-  // toggle buttons (delete columns)
-  // opacity (clicking on node and canvas change behavior)
+  // data & buttons (delete columns)
+  // print svg
