@@ -1,5 +1,4 @@
 const link1_2 = []
-const link2_3 = []
 const link3_4 = []
 
 const meta_1_30 = [1, 4, 0, 7, 6, 3, 2, 8, 13, 12]
@@ -8,6 +7,7 @@ const meta_1_32 = [1, 6, 2, 11, 13]
 const meta_1_33 = [5, 2, 11, 12]
 const meta_1_34 = [6, 4, 0, 12, 13]
 // because of the column-swap function, the indices here are relative, and should be used with a setoff value
+// link1_3: base index = 9
 const link1_3=[
     {
         "source": 0,
@@ -165,10 +165,202 @@ const link1_3=[
         "value": 5
     }
 ]
+const link2_3=[
+    {
+        "source": 5,
+        "target": 9,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 9,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 13,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 17,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 22,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 22,
+        "value": 1
+    }
+]
 function getData(){
     let combinedList = [...link1_2, ...link2_3, ...link3_4]
     return{        
-        "links": link1_3
+        "links": link2_3
     }
 }
 
