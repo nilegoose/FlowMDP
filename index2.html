@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FlowMDP</title>
+<link rel = "stylesheet" href="css/nav.css">
+</head>
+<body>
+
+
+  
+  
+<div id="main">
+
+
+  <!--the first row-->
+  <div class = "flex_box">
+    <h1 class="titleFont">FlowMDP</h1>
+    <span class="tab"></span>
+    <svg id="reset_icon" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30" class="resetBtn">
+      <path d="M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z"/>
+    </svg>
+    <span class="tab"></span>
+    <div id="dropdownDiv">
+    <svg class="dropbtn" id="setting_icon" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30">
+        <path d="M226-160q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-414q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226-668q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/>
+    </svg>
+  <!--drop down-->
+    <div class="dropdown-content">
+
+
+      <details>
+        <summary id="expand-search">Search Charts by Functions</summary>
+        <div class="container"> 
+          <div class="toggle-op color-box" id="fun_compa"><p>Comparision</p></div>
+          <div class="toggle-op color-box" id="fun_rel"><p>Relationship</p></div>
+        </div>
+      </details>
+      <details>
+        <summary>Hide One Column</summary>
+        <div class="container"> 
+          <div class="toggle-op buttonTexts" id="col1-text"><p>1</p></div>
+          <div class="toggle-op buttonTexts"><p>2</p></div>
+          <div class="button-box buttonTexts"><p>3</p></div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Charts</summary>
+        <p class="chart-text" id="chart-count">0 Chart Selected</p>
+        <div class="container2 chart-text" id="chart_texts"> 
+        </div>
+      </details>
+      <div class="rightElem2">
+        <svg id="pin-btn" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960"  transform="rotate(15)" width="30px" fill="#dce1e0">
+          <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>
+      </div>
+    </div>
+  <!-- end drop down-->
+    </div>  
+
+    <span class="tab"></span>
+    <div>
+    <svg class="dropbtn" id="split_btn" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30" fill="#dce1e0">
+      <path d="M160-440v-80h304l200-200H560v-80h240v240h-80v-104L496-440H160Zm400 280v-80h104L536-366l58-58 126 128v-104h80v240H560Z"/>
+    </svg>
+    </div>
+    <span class="tab"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30" class="end-element printbtn" id="print-icon">
+      <path d="M658-648v-132H302v132h-60v-192h476v192h-60Zm-518 60h680-680Zm599 95q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm-81 313v-192H302v192h356Zm60 60H242v-176H80v-246q0-45.05 30.5-75.525Q141-648 186-648h588q45.05 0 75.525 30.475Q880-587.05 880-542v246H718v176Zm102-236v-186.215Q820-562 806.775-575 793.55-588 774-588H186q-19.55 0-32.775 13.225Q140-561.55 140-542v186h102v-76h476v76h102Z"/>
+    </svg>
+    <span class="tab"></span>
+    <div class="rightElem">
+      <a target="_blank" href="https://github.com/nilegoose/FlowMDP">GitHub Page</a>
+    </div>
+
+
+
+  </div>
+
+<!--end flex box-->
+
+
+  <div id="chart">
+
+  </div>
+
+  <div class="text-row" id="col-names">
+    <!--column labels-->
+  </div> 
+
+  <div id="multiple" class = "nonDisplay"></div>
+  <div id="my_dataviz"></div>
+
+
+
+</div>
+  <!--end main-->
+
+</body>
+
+
+<!--script src="http://d3js.org/d3.v3.min.js?2.9.1"></script-->
+<script src="js/charts/d3v4.js"></script>
+<script src="https://d3js.org/d3-contour.v1.min.js"></script>
+
+<script src="js/sankey.js"></script>
+<script src="js/charts/bubble2.js"></script>
+<script src="js/charts/charts_def.js"></script>
+<script src="js/charts/charts.js"></script>
+<script src="js/click_events.js"></script>
+<script src="js/util_graph.js"></script>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+
+
+
+
+
+
+

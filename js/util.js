@@ -101,25 +101,8 @@ function data_process(){
       node.color = "#a9a9a9"
     } 
   });
-  // ------------functions
 
-  graph.nodes.forEach((node) => {
-    if(node.column == 3){
-      if(compa_name.includes(node.name)){
-        node.comparasion = true;
-        node.color1=colorFunctions[0];
-      }
-    }
-  });
-
-  graph.nodes.forEach((node) => {
-    if(node.column == 3){
-      if(rel_name.includes(node.name)){
-        node.relationships = true;
-        node.color2=colorFunctions[1];
-      }
-    }
-  });
+  console.log(graph)
   return graph;
 }
 

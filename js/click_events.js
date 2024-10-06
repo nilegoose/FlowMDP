@@ -16,6 +16,7 @@ var translated_nodes = []; // for highlightened subtree
 var padding_space = 10;
 
 function drawSankey(data, svg, sortFun){
+  console.log("....")
   translated_nodes = [];
 
   svg.selectAll(".link").remove();  
@@ -27,6 +28,7 @@ function drawSankey(data, svg, sortFun){
     .size([width, height]);
 
   let path = sankey.link();  
+  console.log(data.links)
 
 
 
