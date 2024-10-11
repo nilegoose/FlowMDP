@@ -16,7 +16,6 @@ var translated_nodes = []; // for highlightened subtree
 var padding_space = 10;
 
 function drawSankey(data, svg, sortFun){
-  console.log("....")
   translated_nodes = [];
 
   svg.selectAll(".link").remove();  
@@ -65,25 +64,40 @@ function highlight_node_links(node,i){
   if(splitBtn_count == 1){
     return
   }
-  resetColList(); // emtpy the list of highlightened columns
+
   clicked_node = node;
   let current_name = node['name'];
   drawExampleGraph(current_name);
-
+  
   var clicked_col = checkCol(node);
+      // change column for new data
+  if(cols[0].length == 1 && clicked_col == 2){
+    cols[1] = node;
+    reset_opacity(0.2);
+    traverse_right(node);
+    update_nodeLinkText("highlight");
+    appendCharts(cols[2])
+    translate_spacing(node);
+    return;
+  }else  if(cols[1].length == 1 && clicked_col == 1){
+    cols[0] = node;
+    reset_opacity(0.2);
+    cols[2] = sliceTask(node, sliceOneColumn(types));
+    update_nodeLinkText("highlight");
+    appendCharts(cols[2])
+    translate_spacing(node);
+    return;
+  }else{
+    resetColList(); // emtpy the list of highlightened columns
+  }
+
   cols[clicked_col -1] = [node]; //assign clicked node
-
-
   reset_opacity(0.2);
   traverse_left(node);
   traverse_right(node);
   cleanUpColList();
-
-  update_link();
-  update_opacity(0.6);
-  update_node("highlight");
+  update_nodeLinkText("highlight");
   appendCharts(cols[2])
-  update_text("highlight");
   translate_spacing(node);
 
 }
@@ -193,7 +207,8 @@ function reset_opacity(opacity){
 
 
 function update_general(action){// suitable for translating, more subtle for data updating
-  // redundancy for animation
+  // redundancy for:
+  // adding, transforming, and deleting
   if(splitBtn_count == 1){
     splitBtn.setAttribute("fill", "#dce1e0");
     splitBtn_count = 0;
@@ -202,16 +217,15 @@ function update_general(action){// suitable for translating, more subtle for dat
   clearHighlight();
   resetColList(); // emtpy the list of highlightened columns
 
-  let graph = dataObj.getData();
+  let graph = dataObj.getData();  
 
-  if(action == "remove"){
+  if(action == "data2"){
     graph = data_process2();
   }
 
   if(action == "add"){
     graph = data_process();
   }
-  
   let sortFunction = getSortfunction(action);
   let sankey = d3.sankey()
     .nodeWidth(15)
@@ -319,14 +333,6 @@ function color_per_func(){
     .attr("width", sankey.nodeWidth()); 
 }
 
-// changes link color, including fading
-function update_link(){
-  svg.selectAll(".link")
-    .style('stroke', color_fade_link)
-    .transition()
-    .duration(1000);
-
-}
 
 //update graph first, then re-highlight
 

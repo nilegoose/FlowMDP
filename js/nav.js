@@ -51,11 +51,11 @@ document.getElementById("fun_rel").addEventListener("click", toggleRel);
 
 const colNameContainer = document.getElementById('col-names');
 const chartTextContainer = document.getElementById('chart_texts');
-const col1OnOff = document.getElementById('col1-text');
 const chartCountText = document.getElementById('chart-count');
 const expandSearch = document.getElementById('expand-search');
 const pinBtn = document.getElementById('pin-btn')
-
+const taskTxt = document.getElementById('task-txt')
+const dimTxt = document.getElementById('dim-txt')
 pinBtn.addEventListener("click", pinBtnEvent);
 var pinChecked = false;
 
@@ -98,12 +98,14 @@ function toggleCompa() {
       toggleOpacity.call(box_rel);//reset other box style
     }
     FunState.compa();
-    update_general("compa");
+    dataObj.updateData(data_process());
+    update_general();
+    update_general();
   } else {
       fun_compa_count = 0;
       FunState.cancelCompa();
 
-      update_general("reset");
+      //update_general("reset");
 
   }
 }
@@ -118,11 +120,12 @@ function toggleRel() {
         toggleOpacity.call(box_compa);//reset other box style
       }
       FunState.rel();
-      update_general("rel");
+      dataObj.updateData(data_process2());
+      update_general("data2");
+      update_general("data2");
     } else {
       fun_rel_count = 0;
       FunState.cancelRel();
-      update_general("reset");
     }
 }
 
@@ -170,6 +173,12 @@ function appendCharts(array){
     p.innerText = array[i-1].name;  
     chartTextContainer.appendChild(p);
   }
+  if(cols[0].length == 1){
+    taskTxt.innerText = cols[0][0]['name'];
+  }else if(cols[1].length == 1){
+    dimTxt.innerText = cols[1][0]['name'];
+  }
+  
 }
 
 function clearContainer(container) {
@@ -243,7 +252,6 @@ function changeHeight() {
 changeHeight();
 createColName(buttonTexts);
 setBoxText();
-col1OnOff.addEventListener('click', removeCol1); //has to be later then click function
 expandSearch.click();
 
 /*----------------------------------------------------------------------*/

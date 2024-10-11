@@ -128,13 +128,14 @@ function filterByFunction(array, fun) {
 
 
 
+
 function data_process2(){
   graph = {
     "nodes" :[],
     "links" :[]
   };
 
-  let combinedList = [...column_2, ...column_3, ...column_4];
+  let combinedList = [...column_1, ...column_2, ...column_3, ...column_4];
 
   combinedList.forEach(function (d){
     graph.nodes.push({
@@ -143,14 +144,13 @@ function data_process2(){
 
   });
 
-  getData()["links"].forEach(function (d){
-    if(![0, 1, 2, 3].includes(d.source)){    
-      graph.links.push({
-        "source" : d.source - 4,
-        "target" : d.target - 4,
-        "value" :  d.value
-      });
-    }
+  getData2()["links"].forEach(function (d){
+
+    graph.links.push({
+      "source" : d.source,
+      "target" : d.target,
+      "value" :  d.value
+    });
   });
 
   graph.nodes.forEach((node) => {
@@ -178,25 +178,8 @@ function data_process2(){
       node.color = "#a9a9a9"
     } 
   });
-  // ------------functions
 
-  graph.nodes.forEach((node) => {
-    if(node.column == 3){
-      if(compa_name.includes(node.name)){
-        node.comparasion = true;
-        node.color1=colorFunctions[0];
-      }
-    }
-  });
-
-  graph.nodes.forEach((node) => {
-    if(node.column == 3){
-      if(rel_name.includes(node.name)){
-        node.relationships = true;
-        node.color2=colorFunctions[1];
-      }
-    }
-  });
+  console.log(graph)
   return graph;
 }
 
@@ -451,21 +434,59 @@ function getSortfunction(action){
 }
 
   
-function testFunction() {
 
-  drawSankey(data_process2(), svg);
-  FunState.default();
+
+//a test function for clicked nodes
+function logCol(){
+  console.log(cols.flat())
+
 }
 
-function testFunction2() {
+function locateChartColumn(){
+  if(column_2 == types){
+    return 2;
+  }else if(column_3 == types){
+    return 3;
+  }
 
-  update_general("remove");
-  update_general("remove");
 }
-  
-function testFunction3() {
 
-  update_general("add");
-  update_general("add");
+function locateDimensionColumn(){
+  if(column_2 == dimensions){
+    return 2;
+  }else if(column_3 == dimensions){
+    return 3;
+  }
+}
+
+function sliceOneColumn(column){
+  let data = dataObj.getData(); 
+  let nodes = data.nodes;
+  let result = [];
+
+  for (let x of nodes) {
+      if (column.includes(x.name)) {
+          result.push(x);
+      }
+  }
+  return result;
+}
+
+// given a task and give corresponding charts
+function sliceTask(task, charts){
+  let names = [];
+  let result = [];
+  let index = tasks.indexOf(task.name);
+  let charts_indices = task_charts[index];
+  for(let x of charts_indices){
+    names.push(types[x])
+  }
+
+  for (let x of charts) {
+    if (names.includes(x.name)) {
+        result.push(x);
+    }
+  }
+  return result;
 }
   

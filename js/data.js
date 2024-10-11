@@ -1,6 +1,106 @@
-const link1_2 = []
+const link1_2 = [
+    {
+        "source": 0,
+        "target": 5,
+        "value": 2.0
+    },
+    {
+        "source": 0,
+        "target": 6,
+        "value": 2.6666666666666665
+    },
+    {
+        "source": 0,
+        "target": 7,
+        "value": 2.0
+    },
+    {
+        "source": 0,
+        "target": 8,
+        "value": 2.0
+    },
+    {
+        "source": 1,
+        "target": 5,
+        "value": 1.0
+    },
+    {
+        "source": 1,
+        "target": 6,
+        "value": 2.3333333333333335
+    },
+    {
+        "source": 1,
+        "target": 7,
+        "value": 2.0
+    },
+    {
+        "source": 1,
+        "target": 8,
+        "value": 2.0
+    },
+    {
+        "source": 2,
+        "target": 5,
+        "value": 0.6666666666666666
+    },
+    {
+        "source": 2,
+        "target": 6,
+        "value": 1.6666666666666667
+    },
+    {
+        "source": 2,
+        "target": 7,
+        "value": 1.3333333333333333
+    },
+    {
+        "source": 2,
+        "target": 8,
+        "value": 1.3333333333333333
+    },
+    {
+        "source": 3,
+        "target": 5,
+        "value": 2.0
+    },
+    {
+        "source": 3,
+        "target": 6,
+        "value": 2.6666666666666665
+    },
+    {
+        "source": 3,
+        "target": 7,
+        "value": 2.0
+    },
+    {
+        "source": 3,
+        "target": 8,
+        "value": 2.0
+    },
+    {
+        "source": 4,
+        "target": 5,
+        "value": 1.3333333333333333
+    },
+    {
+        "source": 4,
+        "target": 6,
+        "value": 1.3333333333333333
+    },
+    {
+        "source": 4,
+        "target": 7,
+        "value": 0.6666666666666666
+    },
+    {
+        "source": 4,
+        "target": 8,
+        "value": 0.6666666666666666
+    }
+]
 const link3_4 = []
-
 const meta_1_30 = [1, 4, 0, 7, 6, 3, 2, 8, 13, 12]
 const meta_1_31 = [2, 1, 9, 10, 5, 13, 12] 
 const meta_1_32 = [1, 6, 2, 11, 13]
@@ -8,6 +108,390 @@ const meta_1_33 = [5, 2, 11, 12]
 const meta_1_34 = [6, 4, 0, 12, 13]
 // because of the column-swap function, the indices here are relative, and should be used with a setoff value
 // link1_3: base index = 9
+const link3_2=[
+    {
+        "source": 9,
+        "target": 5,
+        "value": 6
+    },
+    {
+        "source": 9,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 10,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 10,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 10,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 11,
+        "target": 5,
+        "value": 6
+    },
+    {
+        "source": 11,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 11,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 11,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 12,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 12,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 12,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 13,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 14,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 14,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 14,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 15,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 15,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 15,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 16,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 16,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 16,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 17,
+        "target": 5,
+        "value": 6
+    },
+    {
+        "source": 18,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 18,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 18,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 19,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 19,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 19,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 20,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 20,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 20,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 21,
+        "target": 5,
+        "value": 6
+    },
+    {
+        "source": 21,
+        "target": 6,
+        "value": 6
+    },
+    {
+        "source": 21,
+        "target": 7,
+        "value": 6
+    },
+    {
+        "source": 21,
+        "target": 8,
+        "value": 6
+    },
+    {
+        "source": 22,
+        "target": 5,
+        "value": 6
+    },
+    {
+        "source": 22,
+        "target": 6,
+        "value": 6
+    }
+]
+const link2_3=[
+    {
+        "source": 5,
+        "target": 9,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 9,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 10,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 11,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 12,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 13,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 14,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 15,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 16,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 17,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 18,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 19,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 20,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 8,
+        "target": 21,
+        "value": 1
+    },
+    {
+        "source": 5,
+        "target": 22,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 22,
+        "value": 1
+    }
+]
 const link1_3=[
     {
         "source": 0,
@@ -165,202 +649,16 @@ const link1_3=[
         "value": 5
     }
 ]
-const link2_3=[
-    {
-        "source": 5,
-        "target": 9,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 9,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 13,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 17,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 22,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 22,
-        "value": 1
-    }
-]
 function getData(){
-    let combinedList = [...link1_2, ...link2_3, ...link3_4]
+    let combinedList = [...link1_2, ...link2_3]
     return{        
-        "links": link2_3
+        "links": combinedList
+    }
+}
+function getData2(){
+    let combinedList = [...link1_3, ...link3_2]
+    return{        
+        "links": combinedList
     }
 }
 
@@ -369,18 +667,24 @@ function getData(){
 const types = ['Density plot', 'Scatterplot', 'Heatmap', 'Dendrogram', 'Voronoi diagram',
     'Parallel coordinates','Contour plot', '2D density plot', 'Radial chart', 'Box plot',
     'Violin plot', 'Line plot', 'Bar chart', 'Histogram'],
-tasks = ["Cluster Identification", "Anomaly Detection", "Distance Preservation", "Global Structure", "Class Separation"]
+tasks = ["Cluster Identification", "Anomaly Detection", "Distance Preservation", "Global Structure", "Class Separation"],
 dimensions=["1D", "2D", "3D", "HD"];
+
 const column_1 = tasks,
 column_2 = dimensions,
 column_3 = types,
 column_4 = [];
+const task_charts = [[1, 4, 0, 7, 6, 3, 2, 8, 13, 12],
+    [2, 1, 9, 10, 5, 13, 12],
+    [1, 6, 2, 11, 13],
+    [5, 2, 11, 12],
+    [6, 4, 0, 12, 13]];
 
 
 
 // colors for each column
-const colorCol2=["#fcae91", "#fb6a4a", "#de2d26", "#a50f15", "#6baed6", "#3182bd", "#b8a0c3", "#a6747c",  "#865d9e"],
-colorCol1=["#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"],
+const colorCol2=['#b2e2e2','#66c2a4','#2ca25f','#006d2c'],
+colorCol1=['#e41a1c','#377eb8','#984ea3','#ff7f00','#a65628'],
 colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
 colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 /*----------------------------------------------------------------------------------- */
@@ -389,7 +693,7 @@ colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d'
 const compaIdx = []; //indices in the array chart types
 const relIdx = []; //indices in the array chart types
 const colorFunctions = ["#5ab4ac", "#d8b365"];
-const nameFunctions = ["Comparision", "Relationship"];
+const nameFunctions = ["Data1", "Data2"];
 var compa_name = [],
 rel_name = []; 
 
@@ -468,8 +772,11 @@ var DataObj = (function() {
       }
     };
   })();
+
+
   
   
   // TODO
+  // limit max - height of chart on big screen
   // data & buttons (delete columns)
   // print svg

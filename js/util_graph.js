@@ -72,22 +72,29 @@ function link_clicked(d){
 // assign link_toHighlight
 // and nodes
 function traverse_right(node){
+  if(node.column == 1){
+    let chatColIndex = locateChartColumn() - 1//list index - 1
+    let dimColIndex = locateDimensionColumn() - 1
+    if(node.column == 1){
+      cols[chatColIndex] = sliceTask(node, sliceOneColumn(types));
+      cols[dimColIndex] = sliceOneColumn(dimensions);
+    }
+  }else{
     let remainingNodes = [],
         nextNodes = [];
-                // traversal right
 
-    let currentRightLinks = node["sourceLinks"]
-    if(currentRightLinks != undefined){
-      node["sourceLinks"].forEach(function(link) {
-        remainingNodes.push(link["target"]);      
-        });
-    }
+    let sankey = dataObj.getSankey();
+                // traversal right
+    node["sourceLinks"].forEach(function(link) {
+      remainingNodes.push(link["target"]);
+    });
     while (remainingNodes.length) {
 
       nextNodes = [];
 
-      let current_index = checkCol(remainingNodes[0]);
-      cols[current_index - 1] = remainingNodes;
+      let current_index = sankey.nodes().indexOf(remainingNodes[0]);
+      cols[checkCol(current_index) - 1] = remainingNodes;
+
 
       remainingNodes.forEach(function(node) {
           // traversal right
@@ -102,13 +109,17 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
-    col4 = removeDuplication([...new Set(cols[3])]);
-
   }
+  
+
+}
 
 
 
 function traverse_left(node){
+  if(node.column == 1){
+    return
+  }
     let remainingNodes = [],
         nextNodes = [];
 
@@ -128,14 +139,12 @@ function traverse_left(node){
 
     nextNodes = [];
     remainingNodes.forEach(function(node) {
-// traversal right
     node["targetLinks"].forEach(function(link) {
     nextNodes.push(link["source"]);      
       });
     });
     remainingNodes = nextNodes;
   }
-  col1 = removeDuplication([...new Set(cols[0])]);
 }
 
 
@@ -202,6 +211,26 @@ function update_text(action){
   })
   
 }
+
+// changes link color, including fading and highlighting
+function update_link(){
+  svg.selectAll(".link")
+    .style('stroke', color_fade_link)
+    .transition()
+    .duration(1000);
+  update_opacity(0.6);
+}
+
+
+function update_nodeLinkText(action){
+  update_node(action);
+  update_text(action);
+  update_link();
+  
+}
+
+
+
 
 /**-------------------------------------------------------------------------- */
 //test functions
