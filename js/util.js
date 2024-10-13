@@ -2,16 +2,17 @@
 var col1 = [],
 col2 = [],
 col3 = [],
-col4 = []; // they hold (clicked) nodes as lists of object
+col4 = [],
+col5 = []; // they hold (clicked) nodes as lists of object
 
-var cols = [col1, col2, col3, col4];
+var cols = [col1, col2, col3, col4, col5];
 
 
-function checkCol(x, col1 = column_1, col2 = column_2, col3 = column_3, col4 = column_4) {
+function checkCol(x, col1 = column_1, col2 = column_2, col3 = column_3, col4 = column_4, col5 = column_5) {
   if (typeof x === 'number') {
       return checkCol_index(x, col1, col2, col3, col4);
   } else {
-      return checkCol_node(x, col1, col2, col3, col4);
+      return checkCol_node(x, col1, col2, col3, col4, col5);
   } 
 }
 
@@ -26,15 +27,15 @@ function checkCol_index(i, col1, col2, col3, col4){
       return 2;
     case (i >= col2.length + col1.length && i < col1.length + col2.length + col3.length):
       return 3;
-    case (i >= col1.length + col2.length + col3.length):
+    case (i >= col1.length + col2.length + col3.length && i < col1.length + col2.length + col3.length + col4.length):
       return 4;
     default:
-      console.log("function checkCol fails")
+      return 5;
   }
 }
 
 // for initial assignment, not efficient but secure
-function checkCol_node(node, col1, col2, col3, col4){
+function checkCol_node(node, col1, col2, col3, col4, col5){
   if(col3.includes(node.name)){
     return 3;
   }else if(col1.includes(node.name)){
@@ -43,6 +44,8 @@ function checkCol_node(node, col1, col2, col3, col4){
     return 2;
   }else if(col4.includes(node.name)){
     return 4;
+  }else if(col5.includes(node.name)){
+    return 5;
   }else{
     console.log("new name " + node.name);
   }
@@ -58,7 +61,7 @@ function data_process(){
     "links" :[]
   };
 
-  let combinedList = [...column_1, ...column_2, ...column_3, ...column_4];
+  let combinedList = [...column_1, ...column_2, ...column_3, ...column_4, ...column_5];
 
   combinedList.forEach(function (d){
     graph.nodes.push({
@@ -84,6 +87,7 @@ function data_process(){
   // assign color
   let countCol1 = 0,
   countCol2 = 0,
+  countCol3 = 0,
   countCol4 = 0;
       
 
@@ -94,7 +98,10 @@ function data_process(){
     } else if (node.column == 2){
       node.color = colorCol2[countCol2];
       countCol2++
-    } else if (node.column == 4){
+    } else if (node.column == 3){
+      node.color = colorColAb[countCol3];
+      countCol3++
+    } else if (node.column == 5){
       node.color = colorCol4[countCol4];
       countCol4++
     } else {
@@ -402,9 +409,10 @@ function resetColList(){
   col1 = [],
   col2 = [],
   col3 = [],
-  col4 = [];
+  col4 = [],
+  col5 = [];
 
-  cols = [col1, col2, col3, col4];
+  cols = [col1, col2, col3, col4, col5];
   chart_count = 0;
   setChartCount();
 
@@ -415,9 +423,11 @@ function cleanUpColList(){
   col2 = removeDuplication(cols[1]),
   col3 = removeDuplication(cols[2]),
   col4 = removeDuplication(cols[3]);
+  col5 = removeDuplication(cols[4]);
+
   chart_count = col3.length;
 
-  cols = [col1, col2, col3, col4];
+  cols = [col1, col2, col3, col4, col5];
 
 }
 
@@ -447,6 +457,8 @@ function locateChartColumn(){
     return 2;
   }else if(column_3 == types){
     return 3;
+  }else if(column_4 == types){
+    return 4;
   }
 
 }
