@@ -123,8 +123,10 @@ d3.sankey = function() {
     console.log("103 extrapadding");
     //console.log(nodes);
 
-    nodesByBreadth[3].sort(sort);
-    var charts = nodesByBreadth[3];
+    let index = locateChartColumn();
+
+    nodesByBreadth[index].sort(sort);
+    var charts = nodesByBreadth[index];
     charts.forEach(function(node){
       if(node.column == 3){
         if(node.name == name){
@@ -276,9 +278,13 @@ d3.sankey = function() {
         //console.log(nodes);
 
         let col_num = nodes[0].column;
-        if(col_num == 3){
+        if(col_num == locateChartColumn()){
           nodes.sort(sort);
+        }else if(col_num == locateAttributesColumn()){
+          nodes.sort(sortAttributes);
         }
+
+        
 
         nodes.forEach(function(node, i) {
           node.y = i ;

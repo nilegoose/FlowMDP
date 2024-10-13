@@ -72,14 +72,7 @@ function link_clicked(d){
 // assign link_toHighlight
 // and nodes
 function traverse_right(node){
-  if(node.column == 1){
-    let chatColIndex = locateChartColumn() - 1//list index - 1
-    let dimColIndex = locateDimensionColumn() - 1
-    if(node.column == 1){
-      cols[chatColIndex] = sliceTask(node, sliceOneColumn(types));
-      cols[dimColIndex] = sliceOneColumn(dimensions);
-    }
-  }else{
+
     let remainingNodes = [],
         nextNodes = [];
 
@@ -109,7 +102,13 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
-  }
+    if(node.column == 1){
+      let chatColIndex = locateChartColumn() - 1//list index - 1
+      let dimColIndex = locateDimensionColumn() - 1
+      cols[chatColIndex] = sliceTask(node, sliceOneColumn(types));
+      cols[dimColIndex] = sliceOneColumn(dimensions);
+    
+    }
   
 
 }

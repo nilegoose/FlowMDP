@@ -312,6 +312,12 @@ function noSort(a, b) {
   return a.index - b.index;
 }
 
+function sortAttributes(a, b) {
+  indexA = attributes.findIndex(attr => attr.name === a.name)
+  indexB = attributes.findIndex(attr => attr.name === b.name)
+  return indexA - indexB;
+}
+
 // sort by 1. nodes with comparison param
 // then by y value
 function ascending_param(a, b) {
@@ -461,6 +467,14 @@ function locateChartColumn(){
     return 4;
   }
 
+}
+
+function locateAttributesColumn(){
+  if(column_3 == attributes){
+    return 3;
+  }else{
+    return -1;
+  }
 }
 
 function locateDimensionColumn(){
