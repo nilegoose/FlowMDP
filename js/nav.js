@@ -54,8 +54,6 @@ const chartTextContainer = document.getElementById('chart_texts');
 const chartCountText = document.getElementById('chart-count');
 const expandSearch = document.getElementById('expand-search');
 const pinBtn = document.getElementById('pin-btn')
-const taskTxt = document.getElementById('task-txt')
-const dimTxt = document.getElementById('dim-txt')
 pinBtn.addEventListener("click", pinBtnEvent);
 var pinChecked = false;
 
@@ -155,6 +153,8 @@ function createColName(array){
 }
 
 function setChartCount(){
+  let chartColIndex = locateChartColumn();
+  chart_count = cols[chartColIndex].length;
   if(chart_count == 1 || chart_count == 0){
     chartCountText.innerText = chart_count + " Chart Selected"
   }else if(chart_count > 1){
@@ -173,11 +173,7 @@ function appendCharts(array){
     p.innerText = array[i-1].name;  
     chartTextContainer.appendChild(p);
   }
-  if(cols[0].length == 1){
-    taskTxt.innerText = cols[0][0]['name'];
-  }else if(cols[1].length == 1){
-    dimTxt.innerText = cols[1][0]['name'];
-  }
+
   
 }
 

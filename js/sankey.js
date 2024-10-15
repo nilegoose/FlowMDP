@@ -346,21 +346,20 @@ d3.sankey = function() {
             n = nodes.length,
             i,
 
-            sort_comparasion = true;// col2 : encoding channel, col3: dimensions, col4: chart
+            sort_comparasion = true;// col1: task; col2: dim; col3 : abstraction; col4: charts; col5: encoding
 
-        //console.log(nodes);
-        // stop sorting the first column
-        if (true) {          
-          if (col_num == 1 || col_num == 2) {
-            // skip sort dim and cat
-          } else {
-            nodes.sort(sort);
-          }
-        }else{//  skip sorting
-          nodes.sort(ascendingDepth);
+        if (col_num == 5) {
+          // skip sort dim and cat
+          nodes.sort(ascendingDepth); // means skip
+        } else if(col_num == 1){
+          nodes.sort(sortTask)
+        }else if(col_num == locateDimensionColumn()){
+          nodes.sort(sortDim);
+        }else if(col_num == locateAttributesColumn()){
+          nodes.sort(sortAttributes)
+        } else if(col_num == locateChartColumn()){
+          nodes.sort(sort);
         }
-
-
 
          // Push any overlapping nodes down.
 

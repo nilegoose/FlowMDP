@@ -654,52 +654,52 @@ const l_task_dim = [
     {
     "source": 0,
     "target": 5,
-    "value": 2.0
+    "value": 4
     },
     {
     "source": 0,
     "target": 6,
-    "value": 5.0
+    "value": 10
     },
     {
     "source": 1,
     "target": 5,
-    "value": 1.5
+    "value": 3
     },
     {
     "source": 1,
     "target": 6,
-    "value": 3.5
+    "value": 7
     },
     {
     "source": 2,
     "target": 5,
-    "value": 0.5
+    "value": 1
     },
     {
     "source": 2,
     "target": 6,
-    "value": 2.5
+    "value": 5
     },
     {
     "source": 3,
     "target": 5,
-    "value": 1.0
+    "value": 2
     },
     {
     "source": 3,
     "target": 6,
-    "value": 2.0
+    "value": 4
     },
     {
     "source": 4,
     "target": 5,
-    "value": 1.5
+    "value": 3
     },
     {
     "source": 4,
     "target": 6,
-    "value": 2.5
+    "value": 5
     }
     ];
 const l_dim_abstract = [
@@ -1104,7 +1104,7 @@ rel_name = [];
 
 /*------------------------------------------------------------------------------------ */
 
-var buttonTexts = ["Tasks", "Dimensions", "Chart Types"];
+var buttonTexts = ["Tasks", "Dimensions", "Data Abstraction", "Chart Types", "Encoding Idioms"];
 
 
 /*-------------------------------------------------------------------------------------- */

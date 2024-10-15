@@ -68,36 +68,45 @@ function highlight_node_links(node,i){
   clicked_node = node;
   let current_name = node['name'];
   drawExampleGraph(current_name);
-  
-  var clicked_col = checkCol(node);
+  let clicked_col = checkCol(node);
+  let chartColIndex = locateChartColumn()- 1
       // change column for new data
-  if(cols[0].length == 1 && clicked_col == 2){
-    cols[1] = node;
+  if(clicked_col == locateChartColumn()){
+    resetColList();
+  }else if(cols[0].length == 1 && clicked_col != 1 && cols.flat().includes(node)){
+    cols[clicked_col - 1] = node;
+    // already a tree, performs a filter
+    if(clicked_col == 2){
+      traverse_right(node);
+      let adjancentNodes = cols[chartColIndex]
+      cols[chartColIndex] = sliceTask(cols[0][0], adjancentNodes);
+    }else if(clicked_col == 3){
+      traverse_right(node);
+      traverse_left_dim(node);
+      let adjancentNodes = cols[chartColIndex]
+      cols[chartColIndex] = sliceTask(cols[0][0], adjancentNodes);
+    }else if(clicked_col == 5){
+      traverse_left_encode(node, cols[0][0])
+    }
+
     reset_opacity(0.2);
-    traverse_right(node);
+
+
+    
     update_nodeLinkText("highlight");
-    appendCharts(cols[2])
-    translate_spacing(node);
+    appendCharts(cols[chartColIndex])
     return;
-  }else  if(cols[1].length == 1 && clicked_col == 1){
-    cols[0] = node;
-    reset_opacity(0.2);
-    cols[2] = sliceTask(node, sliceOneColumn(types));
-    update_nodeLinkText("highlight");
-    appendCharts(cols[2])
-    translate_spacing(node);
-    return;
-  }else{
+  }{
     resetColList(); // emtpy the list of highlightened columns
   }
 
-  cols[clicked_col -1] = [node]; //assign clicked node
+  cols[clicked_col -1] = [node]; 
   reset_opacity(0.2);
   traverse_left(node);
   traverse_right(node);
   cleanUpColList();
   update_nodeLinkText("highlight");
-  appendCharts(cols[2])
+  appendCharts(cols[chartColIndex])
   translate_spacing(node);
 
 }
@@ -146,7 +155,7 @@ function nodeEnter(svg, data, sankey){
     .attr("text-anchor", "end")
     .attr("transform", null)
     .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
+    .filter(function(d) { return d.x < width / 3; })
     .attr("x", 6 + sankey.nodeWidth())// position right
     .attr("text-anchor", "start");
   return node

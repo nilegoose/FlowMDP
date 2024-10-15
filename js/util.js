@@ -318,6 +318,21 @@ function sortAttributes(a, b) {
   return indexA - indexB;
 }
 
+function sortDim(a, b) {
+  indexA = dimensions.findIndex(attr => attr.name === a.name)
+  indexB = dimensions.findIndex(attr => attr.name === b.name)
+  return indexA - indexB;
+}
+
+
+function sortTask(a, b) {
+  indexA = tasks.findIndex(attr => attr.name === a.name)
+  indexB = tasks.findIndex(attr => attr.name === b.name)
+  return indexA - indexB;
+}
+
+
+
 // sort by 1. nodes with comparison param
 // then by y value
 function ascending_param(a, b) {
@@ -431,7 +446,7 @@ function cleanUpColList(){
   col4 = removeDuplication(cols[3]);
   col5 = removeDuplication(cols[4]);
 
-  chart_count = col3.length;
+  chart_count = col4.length;
 
   cols = [col1, col2, col3, col4, col5];
 
@@ -514,5 +529,13 @@ function sliceTask(task, charts){
     }
   }
   return result;
+}
+
+
+
+// given a task and give corresponding charts
+function sliceMultipleTask(taskArray, charts){
+  return 
+
 }
   

@@ -86,7 +86,7 @@ function traverse_right(node){
       nextNodes = [];
 
       let current_index = sankey.nodes().indexOf(remainingNodes[0]);
-      cols[checkCol(current_index) - 1] = remainingNodes;
+      cols[checkCol(current_index) - 1] = removeDuplication(remainingNodes);
 
 
       remainingNodes.forEach(function(node) {
@@ -102,17 +102,62 @@ function traverse_right(node){
       
       remainingNodes = nextNodes;
     }
-    if(node.column == 1){
-      let chatColIndex = locateChartColumn() - 1//list index - 1
-      let dimColIndex = locateDimensionColumn() - 1
-      cols[chatColIndex] = sliceTask(node, sliceOneColumn(types));
-      cols[dimColIndex] = sliceOneColumn(dimensions);
-    
-    }
+
   
 
 }
 
+// if the right column of dim is clicked
+function traverse_left_dim(node){
+  // traverse left
+  let leftNodes = []
+  let currentLeftLinks = node["targetLinks"]
+  if(currentLeftLinks != undefined){
+    currentLeftLinks.forEach(function(link) {
+      leftNodes.push(link["source"]);      
+      });
+  }
+  cols[locateDimensionColumn() - 1] = removeDuplication(leftNodes);
+
+
+}
+
+// if the right column of charts is clicked
+// AND
+// one task node is selected
+function traverse_left_encode(node, tasknode){
+  // traverse left
+  let leftNodes = []
+  let currentLeftLinks = node["targetLinks"]
+  if(currentLeftLinks != undefined){
+    currentLeftLinks.forEach(function(link) {
+      leftNodes.push(link["source"]);      
+      });
+  }
+  let remaining = sliceTask(tasknode, leftNodes)
+  leftNodes = []
+  cols[locateChartColumn() - 1] = removeDuplication(remaining);
+  // traverse left, to abstraction column
+  remaining.forEach(function(node) {
+    node["targetLinks"].forEach(function(link) {
+      leftNodes.push(link["source"]);      
+      });
+    })
+
+    cols[locateAttributesColumn() - 1] = removeDuplication(leftNodes);
+
+    leftNodes = []
+    // traverse left, to dim column
+    cols[locateAttributesColumn() - 1].forEach(function(node) {
+      node["targetLinks"].forEach(function(link) {
+        leftNodes.push(link["source"]);      
+        });
+      })
+  
+      cols[locateDimensionColumn() - 1] = removeDuplication(leftNodes);
+  
+
+}
 
 
 function traverse_left(node){
@@ -125,7 +170,7 @@ function traverse_left(node){
     
     let currentLeftLinks = node["targetLinks"]
     if(currentLeftLinks != undefined){
-      node["targetLinks"].forEach(function(link) {
+      currentLeftLinks.forEach(function(link) {
         remainingNodes.push(link["source"]);      
         });
     }
@@ -134,7 +179,7 @@ function traverse_left(node){
     while (remainingNodes.length) {
 
     let current_index = checkCol(remainingNodes[0]); // check index fails
-    cols[current_index - 1] = remainingNodes;
+    cols[current_index - 1] = removeDuplication(remainingNodes);
 
     nextNodes = [];
     remainingNodes.forEach(function(node) {
