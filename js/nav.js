@@ -127,18 +127,6 @@ function toggleRel() {
     }
 }
 
-function removeCol1(){
-  if(removeCol1_count == 0){
-    testFunction2();
-    createColName(["Data Abstraction", "Chart Types", "Encoding Idoms"]);
-    removeCol1_count = 1;
-  }else{
-    testFunction3();
-    createColName(buttonTexts);
-    removeCol1_count = 0;
-  }
-}
-
 
 
 function createColName(array){
@@ -153,8 +141,8 @@ function createColName(array){
 }
 
 function setChartCount(){
-  let chartColIndex = locateChartColumn();
-  chart_count = cols[chartColIndex].length;
+  let chartArray = resortPart( dataObj.getData().nodes, "column", chartCol, noSort);
+  chart_count = resortPart(chartArray, "clicked", 1, noSort)
   if(chart_count == 1 || chart_count == 0){
     chartCountText.innerText = chart_count + " Chart Selected"
   }else if(chart_count > 1){
@@ -232,13 +220,6 @@ function downloadSVG() {
 }
 
 
-
-function greyLink(){
-  update_link_color(dataObj.getData(), "grey");
-}
-
-
-
 function changeHeight() {
   var boxElement = document.getElementById("chart");
   var newHeight = window.innerHeight - 120 -100; 
@@ -313,6 +294,16 @@ function resetSankey() {
   drawSankey(dataObj.getData(), svg);
   FunState.default();
 }
+
+function handleKeyPress(event) {
+  if (event.key === 'r' || event.key === 'R') {
+    resetBtnEvent();
+  }else if (event.key === 's' || event.key === 'S') {
+    splitBtnEvent();
+  }
+}
+
+document.addEventListener('keypress', handleKeyPress);
 
 
 

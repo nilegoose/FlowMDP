@@ -1,25 +1,16 @@
 /*----------------------------------------------------------------------------------------- */
 /*anoymous functions */
-// colorful link 
+// default link color: color, color, grey, grey
 function color_link(link){
-  if(link.source.column == 2 || link.source.column == 1){
-    return link.source.color;
+  if(link.target.column == chartCol || link.target.column == encodeCol){
+    return link.target.color;
   }
  else{
-   return link.target.color;
+   return link.source.color;
   }
 }
 
-// color highlight link and fade the rest
-function color_fade_link(d){   
 
-  if(link_clicked(d)){
-    let sourceColorBool = d.source.column < 3;
-    if(sourceColorBool) return d.color = d.source.color;
-    else return d.color = d.target.color;
-}
-  return d.color = "#D8D8D8"
-}
 
 function color_node_fun(d) { 
 let compBool = FunState.getValue().includes("comparasion");
@@ -62,8 +53,10 @@ function title_node(d) {
   return d.name + "\n" +  "Chart types: " + format(d.value); 
 }
 
-function link_clicked(d){ 
-  return cols.flat().includes(d.source) && cols.flat().includes(d.target) 
+function link_clicked(d){
+  let bool1 = d.source.clicked;
+  let bool2 = d.target.clicked;
+  return bool1 == 1 && bool2 == 1; 
 }
 
 /*----------------------------------------------------------------------------------------------- */
@@ -72,98 +65,100 @@ function link_clicked(d){
 // assign link_toHighlight
 // and nodes
 function traverse_right(node){
+  let result = [];
 
-    let remainingNodes = [],
-        nextNodes = [];
+  let remainingNodes = [],
+      nextNodes = [];
+              // traversal right
+  node["sourceLinks"].forEach(function(link) {
+    remainingNodes.push(link["target"]);
+  });
+  while (remainingNodes.length) {
 
-    let sankey = dataObj.getSankey();
-                // traversal right
-    node["sourceLinks"].forEach(function(link) {
+    nextNodes = [];
+    remainingNodes.forEach(function(node) {
+      result.push(node);
+        node["sourceLinks"].forEach(function(link) {        
+        nextNodes.push(link["target"]);
+      });
+
+
+    });
+    
+    remainingNodes = nextNodes;
+  }
+
+  result = removeDuplication(result);
+  return result;
+}
+
+
+function traverse_right_charts(chat_array){
+  let result = [];
+
+  let remainingNodes = [];
+
+  chat_array.forEach(function(chart){
+                  // traversal right
+    chart["sourceLinks"].forEach(function(link) {
       remainingNodes.push(link["target"]);
     });
-    while (remainingNodes.length) {
+    
+  })
 
-      nextNodes = [];
+    
+    result = removeDuplication(remainingNodes);
+    return result;
+  }
 
-      let current_index = sankey.nodes().indexOf(remainingNodes[0]);
-      cols[checkCol(current_index) - 1] = removeDuplication(remainingNodes);
-
-
-      remainingNodes.forEach(function(node) {
-          // traversal right
-          node["sourceLinks"].forEach(function(link) {
-          //console.log(link);
-          
-          nextNodes.push(link["target"]);
-        });
+  // go to the abstraction column
+  function traverse_left_charts(chat_array){
+    let result = [];
   
-
+    let remainingNodes = [];
+  
+    chat_array.forEach(function(chart){
+                    // traversal right
+      chart["targetLinks"].forEach(function(link) {
+        remainingNodes.push(link["source"]);
       });
       
-      remainingNodes = nextNodes;
+    })
+  
+      
+      result = removeDuplication(remainingNodes);
+      return result;
     }
 
+    
+  // go to the dim column
+  function traverse_left_attri(chat_array){
+    let result = [];
   
-
-}
-
-// if the right column of dim is clicked
-function traverse_left_dim(node){
-  // traverse left
-  let leftNodes = []
-  let currentLeftLinks = node["targetLinks"]
-  if(currentLeftLinks != undefined){
-    currentLeftLinks.forEach(function(link) {
-      leftNodes.push(link["source"]);      
+    let remainingNodes = [];
+  
+    chat_array.forEach(function(chart){
+                    // traversal right
+      chart["targetLinks"].forEach(function(link) {
+        remainingNodes.push(link["source"]);
       });
-  }
-  cols[locateDimensionColumn() - 1] = removeDuplication(leftNodes);
-
-
-}
-
-// if the right column of charts is clicked
-// AND
-// one task node is selected
-function traverse_left_encode(node, tasknode){
-  // traverse left
-  let leftNodes = []
-  let currentLeftLinks = node["targetLinks"]
-  if(currentLeftLinks != undefined){
-    currentLeftLinks.forEach(function(link) {
-      leftNodes.push(link["source"]);      
-      });
-  }
-  let remaining = sliceTask(tasknode, leftNodes)
-  leftNodes = []
-  cols[locateChartColumn() - 1] = removeDuplication(remaining);
-  // traverse left, to abstraction column
-  remaining.forEach(function(node) {
-    node["targetLinks"].forEach(function(link) {
-      leftNodes.push(link["source"]);      
-      });
+      
     })
-
-    cols[locateAttributesColumn() - 1] = removeDuplication(leftNodes);
-
-    leftNodes = []
-    // traverse left, to dim column
-    cols[locateAttributesColumn() - 1].forEach(function(node) {
-      node["targetLinks"].forEach(function(link) {
-        leftNodes.push(link["source"]);      
-        });
-      })
   
-      cols[locateDimensionColumn() - 1] = removeDuplication(leftNodes);
-  
+      
+      result = removeDuplication(remainingNodes);
+      return result;
+    }
 
-}
+
+
 
 
 function traverse_left(node){
   if(node.column == 1){
     return
   }
+  result = []
     let remainingNodes = [],
         nextNodes = [];
 
@@ -177,18 +172,17 @@ function traverse_left(node){
 
 
     while (remainingNodes.length) {
-
-    let current_index = checkCol(remainingNodes[0]); // check index fails
-    cols[current_index - 1] = removeDuplication(remainingNodes);
-
     nextNodes = [];
     remainingNodes.forEach(function(node) {
-    node["targetLinks"].forEach(function(link) {
-    nextNodes.push(link["source"]);      
+      result.push(node);
+      node["targetLinks"].forEach(function(link) {
+      nextNodes.push(link["source"]);      
       });
     });
     remainingNodes = nextNodes;
   }
+  result = removeDuplication(result);
+  return result;
 }
 
 
@@ -202,27 +196,16 @@ svg.selectAll("rect").data(graph.nodes)
   .transition()
   .duration(1000)
   .style("fill", function(d){
-    let compBool = FunState.getValue().includes("comparasion");
-    let relBool = FunState.getValue().includes("relationship");
   
     if(action == "dehighlight"){
       return color_node_fun(d);
     }else if(action == "highlight"){
-      if(cols.flat().includes(d)){
+      if(d.clicked){
         return color_node_fun(d);}
-      if(compBool  && d.column ==3){
-        if(d.color1 != undefined){
-          return d.color1;
-        }
-      }
-      if(relBool && d.column ==3){
-        if(d.color2 != undefined){
-          return d.color2;
-        }
-      }
+      
       return "#a9a9a9";
     }else if(action == "split"){
-        if(cols.flat().includes(d)){
+        if(d.clicked){
           return color_node_fun(d);}
         return "transparent";}
     })
@@ -242,12 +225,12 @@ function update_text(action){
     if(action == "dehighlight"){
       return "#000000";
     }else if(action == "highlight"){
-      if(cols.flat().includes(d)){
+      if(d.clicked){
         return "#000000";
       }
       return "#8c8c8c";
     }else if(action == "split"){
-      if(cols.flat().includes(d)){
+      if(d.clicked){
         return "#000000";
       }
       return "transparent";
@@ -261,8 +244,19 @@ function update_link(){
   svg.selectAll(".link")
     .style('stroke', color_fade_link)
     .transition()
-    .duration(1000);
+    .duration(500);
   update_opacity(0.6);
+
+}
+
+
+// color highlight link and fade the rest
+function color_fade_link(d){   
+
+  if(link_clicked(d)){
+    return color_link(d)
+  }
+  return d.color = "#D8D8D8"
 }
 
 

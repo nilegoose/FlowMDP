@@ -1,654 +1,3 @@
-const link1_2 = [
-    {
-        "source": 0,
-        "target": 5,
-        "value": 2.0
-    },
-    {
-        "source": 0,
-        "target": 6,
-        "value": 2.6666666666666665
-    },
-    {
-        "source": 0,
-        "target": 7,
-        "value": 2.0
-    },
-    {
-        "source": 0,
-        "target": 8,
-        "value": 2.0
-    },
-    {
-        "source": 1,
-        "target": 5,
-        "value": 1.0
-    },
-    {
-        "source": 1,
-        "target": 6,
-        "value": 2.3333333333333335
-    },
-    {
-        "source": 1,
-        "target": 7,
-        "value": 2.0
-    },
-    {
-        "source": 1,
-        "target": 8,
-        "value": 2.0
-    },
-    {
-        "source": 2,
-        "target": 5,
-        "value": 0.6666666666666666
-    },
-    {
-        "source": 2,
-        "target": 6,
-        "value": 1.6666666666666667
-    },
-    {
-        "source": 2,
-        "target": 7,
-        "value": 1.3333333333333333
-    },
-    {
-        "source": 2,
-        "target": 8,
-        "value": 1.3333333333333333
-    },
-    {
-        "source": 3,
-        "target": 5,
-        "value": 2.0
-    },
-    {
-        "source": 3,
-        "target": 6,
-        "value": 2.6666666666666665
-    },
-    {
-        "source": 3,
-        "target": 7,
-        "value": 2.0
-    },
-    {
-        "source": 3,
-        "target": 8,
-        "value": 2.0
-    },
-    {
-        "source": 4,
-        "target": 5,
-        "value": 1.3333333333333333
-    },
-    {
-        "source": 4,
-        "target": 6,
-        "value": 1.3333333333333333
-    },
-    {
-        "source": 4,
-        "target": 7,
-        "value": 0.6666666666666666
-    },
-    {
-        "source": 4,
-        "target": 8,
-        "value": 0.6666666666666666
-    }
-]
-const link3_4 = []
-const meta_1_30 = [1, 4, 0, 7, 6, 3, 2, 8, 13, 12]
-const meta_1_31 = [2, 1, 9, 10, 5, 13, 12] 
-const meta_1_32 = [1, 6, 2, 11, 13]
-const meta_1_33 = [5, 2, 11, 12]
-const meta_1_34 = [6, 4, 0, 12, 13]
-// because of the column-swap function, the indices here are relative, and should be used with a setoff value
-// link1_3: base index = 9
-const link3_2=[
-    {
-        "source": 9,
-        "target": 5,
-        "value": 6
-    },
-    {
-        "source": 9,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 10,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 10,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 10,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 11,
-        "target": 5,
-        "value": 6
-    },
-    {
-        "source": 11,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 11,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 11,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 12,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 12,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 12,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 13,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 14,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 14,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 14,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 15,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 15,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 15,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 16,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 16,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 16,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 17,
-        "target": 5,
-        "value": 6
-    },
-    {
-        "source": 18,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 18,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 18,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 19,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 19,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 19,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 20,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 20,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 20,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 21,
-        "target": 5,
-        "value": 6
-    },
-    {
-        "source": 21,
-        "target": 6,
-        "value": 6
-    },
-    {
-        "source": 21,
-        "target": 7,
-        "value": 6
-    },
-    {
-        "source": 21,
-        "target": 8,
-        "value": 6
-    },
-    {
-        "source": 22,
-        "target": 5,
-        "value": 6
-    },
-    {
-        "source": 22,
-        "target": 6,
-        "value": 6
-    }
-]
-const link2_3=[
-    {
-        "source": 5,
-        "target": 9,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 9,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 10,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 11,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 12,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 13,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 14,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 15,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 16,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 17,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 18,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 19,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 20,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 7,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 8,
-        "target": 21,
-        "value": 1
-    },
-    {
-        "source": 5,
-        "target": 22,
-        "value": 1
-    },
-    {
-        "source": 6,
-        "target": 22,
-        "value": 1
-    }
-]
-const link1_3=[
-    {
-        "source": 0,
-        "target": 10,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 13,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 9,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 16,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 15,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 12,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 11,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 17,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 22,
-        "value": 10
-    },
-    {
-        "source": 0,
-        "target": 21,
-        "value": 10
-    },
-    {
-        "source": 1,
-        "target": 11,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 10,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 18,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 19,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 14,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 22,
-        "value": 7
-    },
-    {
-        "source": 1,
-        "target": 21,
-        "value": 7
-    },
-    {
-        "source": 2,
-        "target": 10,
-        "value": 5
-    },
-    {
-        "source": 2,
-        "target": 15,
-        "value": 5
-    },
-    {
-        "source": 2,
-        "target": 11,
-        "value": 5
-    },
-    {
-        "source": 2,
-        "target": 20,
-        "value": 5
-    },
-    {
-        "source": 2,
-        "target": 22,
-        "value": 5
-    },
-    {
-        "source": 3,
-        "target": 14,
-        "value": 4
-    },
-    {
-        "source": 3,
-        "target": 11,
-        "value": 4
-    },
-    {
-        "source": 3,
-        "target": 20,
-        "value": 4
-    },
-    {
-        "source": 3,
-        "target": 21,
-        "value": 4
-    },
-    {
-        "source": 4,
-        "target": 15,
-        "value": 5
-    },
-    {
-        "source": 4,
-        "target": 13,
-        "value": 5
-    },
-    {
-        "source": 4,
-        "target": 9,
-        "value": 5
-    },
-    {
-        "source": 4,
-        "target": 21,
-        "value": 5
-    },
-    {
-        "source": 4,
-        "target": 22,
-        "value": 5
-    }
-]
 
 const l_task_dim = [
     {
@@ -1063,6 +412,8 @@ function getData2(){
 
 // labels 
 
+
+
 const types = ['Density plot', 'Scatterplot', 'Heatmap', 'Dendrogram', 'Voronoi diagram',
     'Parallel coordinates','Contour plot', '2D density plot', 'Radial chart', 'Box plot',
     'Violin plot', 'Line plot', 'Bar chart', 'Histogram'],
@@ -1082,35 +433,53 @@ const task_charts = [[1, 4, 0, 7, 6, 3, 2, 8, 13, 12],
     [5, 2, 11, 12],
     [6, 4, 0, 12, 13]];
 
+function locateChartColumn(){
+    if(column_2 == types){
+        return 2;
+    }else if(column_3 == types){
+        return 3;
+    }else if(column_4 == types){
+        return 4;
+    }
+    
+}
+    
+    function locateAttributesColumn(){
+    if(column_3 == attributes){
+        return 3;
+    }else{
+        return -1;
+    }
+}
+    
+    function locateDimensionColumn(){
+    if(column_2 == dimensions){
+        return 2;
+    }else if(column_3 == dimensions){
+        return 3;
+    }
+}
 
+const chartCol = locateChartColumn();
+const dimCol = locateDimensionColumn();
+const attriCol = locateAttributesColumn();
+const encodeCol = 5;
+const taskCol = 1;
 
 // colors for each column
 const colorCol2=['#b2e2e2','#66c2a4','#2ca25f','#006d2c'],
-colorCol1=['#e41a1c','#377eb8','#984ea3','#ff7f00','#a65628'],
+colorCol1=['#c51b7d','#377eb8','#984ea3','#ff7f00','#a65628'],
 colorCol3=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a'],
 colorCol4=['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666'];
 
-const colorColAb=["#fcae91", "#fb6a4a","#6baed6", "#3182bd", "#b8a0c3"];
+const colorColAb=["#fb6a4a", "#de2d26","#6baed6", "#3182bd", "#865d9e"];
 /*----------------------------------------------------------------------------------- */
-//this part for the two additional categories
-
-const compaIdx = []; //indices in the array chart types
-const relIdx = []; //indices in the array chart types
 const colorFunctions = ["#5ab4ac", "#d8b365"];
 const nameFunctions = ["Data1", "Data2"];
-var compa_name = [],
-rel_name = []; 
-
 
 /*------------------------------------------------------------------------------------ */
 
 var buttonTexts = ["Tasks", "Dimensions", "Data Abstraction", "Chart Types", "Encoding Idioms"];
-
-
-/*-------------------------------------------------------------------------------------- */
-// the copy icon
-
-const copySVG = 'M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z';
 
 /*------------------------------------------------------------------------------------- */
 // for the tooltip
@@ -1149,6 +518,10 @@ var DataObj = (function() {
         updateData: function(newValue) {
           this.data = newValue;
         },
+
+        updateNodes: function(newValue){
+          this.data.nodes = newValue;
+        },
   
         getData: function() {
           return this.data;
@@ -1182,5 +555,4 @@ var DataObj = (function() {
   
   // TODO
   // limit max - height of chart on big screen
-  // data & buttons (delete columns)
   // print svg

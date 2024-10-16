@@ -7,7 +7,6 @@ const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
 var clicked_node = undefined;
-var removeCol1_count = 0;
 var chart_count = 0;
 var splitBtn_count = 0;
 
@@ -64,50 +63,68 @@ function highlight_node_links(node,i){
   if(splitBtn_count == 1){
     return
   }
-
-  clicked_node = node;
+  let translateBool = false;
+  clicked_node = node; // what does this line do
   let current_name = node['name'];
-  drawExampleGraph(current_name);
+  //drawExampleGraph(current_name);
   let clicked_col = checkCol(node);
-  let chartColIndex = locateChartColumn()- 1
-      // change column for new data
-  if(clicked_col == locateChartColumn()){
-    resetColList();
-  }else if(cols[0].length == 1 && clicked_col != 1 && cols.flat().includes(node)){
-    cols[clicked_col - 1] = node;
-    // already a tree, performs a filter
-    if(clicked_col == 2){
-      traverse_right(node);
-      let adjancentNodes = cols[chartColIndex]
-      cols[chartColIndex] = sliceTask(cols[0][0], adjancentNodes);
-    }else if(clicked_col == 3){
-      traverse_right(node);
-      traverse_left_dim(node);
-      let adjancentNodes = cols[chartColIndex]
-      cols[chartColIndex] = sliceTask(cols[0][0], adjancentNodes);
-    }else if(clicked_col == 5){
-      traverse_left_encode(node, cols[0][0])
-    }
+  let allNodes = dataObj.getData().nodes;
+  let currentHighlight = filterPart(allNodes, "clicked", 1)
+ 
+  node.clicked = 1;
+  let adjancentLeft = traverse_left(node);
+  let adjancentRight = traverse_right(node);
 
-    reset_opacity(0.2);
+  if(clicked_col != 1 && currentHighlight.includes(node)){
+ 
+    let combinedList = [...adjancentLeft, ...adjancentRight];
+    clickNodes(currentHighlight, 0);
+    clickNodes(currentHighlight.filter(item => combinedList.includes(item)), 1);
+    clickNodes([node], 1)
+  }else if(clicked_col == 1 && currentHighlight.includes(node)){
+    console.log("adjancent click")
+    let taskNode = node;
+    let adjancentCharts = resortPart(currentHighlight, "column", chartCol)
+    let remainCharts = sliceTask(taskNode, adjancentCharts);
+    let remainEncodes = traverse_right_charts(remainCharts);
+    let remainAtrri = traverse_left_charts(remainCharts);
+    let remainDim = traverse_left_attri(remainAtrri);
+    let combinedList = [...remainCharts, ...remainEncodes, ...remainAtrri, ...remainDim];
+    clickNodes(allNodes, 0);
+    let toHighlight = currentHighlight.filter(item => combinedList.includes(item))
+    clickNodes(toHighlight, 1);
+    clickNodes([node], 1)
+
+  }else if(clicked_col == 1){
+    //console.log("discrete, task clicked")
+    let taskNode = node;
+    let adjancentCharts = resortPart(allNodes, "column", chartCol)
+    let remainCharts = sliceTask(taskNode, adjancentCharts);
+    let remainEncodes = traverse_right_charts(remainCharts);
+    let remainAtrri = traverse_left_charts(remainCharts);
+    let remainDim = traverse_left_attri(remainAtrri);
+    let combinedList = [...remainCharts, ...remainEncodes, ...remainAtrri, ...remainDim];
+    clickNodes(allNodes, 0);
+    clickNodes(combinedList, 1);
+    clickNodes([node], 1)    // resetColList
+    translateBool = true;
 
 
-    
-    update_nodeLinkText("highlight");
-    appendCharts(cols[chartColIndex])
-    return;
-  }{
-    resetColList(); // emtpy the list of highlightened columns
+  }else{
+    clickNodes(allNodes, 0);
+    let combinedList = [...adjancentLeft, ...adjancentRight];
+    clickNodes(combinedList, 1);
+    clickNodes([node], 1)  
+    translateBool = true;
+
   }
-
-  cols[clicked_col -1] = [node]; 
   reset_opacity(0.2);
-  traverse_left(node);
-  traverse_right(node);
-  cleanUpColList();
+  //cleanUpColList();
   update_nodeLinkText("highlight");
-  appendCharts(cols[chartColIndex])
-  translate_spacing(node);
+  //appendCharts(cols[chartColIndex])
+  if(translateBool){
+    translate_spacing(node);
+  }
 
 }
 
@@ -180,12 +197,13 @@ function canvasEvent(){
 
   // array highlighted link stores id.. []
 function clearHighlight(){
+  let allNodes = dataObj.getData().nodes;
   clicked_node = undefined;
+  clickNodes(allNodes, 0);
   update_node("dehighlight");
   update_text("dehighlight");
   reset_opacity(0.2);
-  resetColList();
-  appendCharts([]);
+  //appendCharts([]);
 }
 
 
@@ -436,18 +454,12 @@ function translate_reset(){
 
 
 
-// this function regulates vertical space for column 4
+// this function regulates vertical space for the last column
 function translate_col4(){
   let nodes = dataObj.getSankey().nodes();
 
-  let sorted_part = resortPart( nodes.slice(), "column", 4, descendingDepth);
+  let sorted_part = resortPart( nodes.slice(), "column", 5, descendingDepth);
 
-
-  let col3Nodes = resortPart( nodes.slice(), "column", 3, descendingDepth);
-
-  //let baseline = col3Nodes[0].y + col3Nodes[0].dy;
-
-  // if the spacing between two nodes exceeds , correct manuelly
 
   let y_below;
   let padding = 10;

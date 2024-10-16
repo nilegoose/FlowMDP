@@ -1,12 +1,4 @@
 //-----------------------------locate clicked nodes-------------------------------------------------
-var col1 = [],
-col2 = [],
-col3 = [],
-col4 = [],
-col5 = []; // they hold (clicked) nodes as lists of object
-
-var cols = [col1, col2, col3, col4, col5];
-
 
 function checkCol(x, col1 = column_1, col2 = column_2, col3 = column_3, col4 = column_4, col5 = column_5) {
   if (typeof x === 'number') {
@@ -65,7 +57,8 @@ function data_process(){
 
   combinedList.forEach(function (d){
     graph.nodes.push({
-      "name" : d
+      "name" : d,
+      "clicked" : 0
     });
 
   });
@@ -204,7 +197,7 @@ function translateString(x, y){
 
 
 // considering the structure of nodes, this function sorts one column
-function resortPart(arr, field, value, sortFun){
+function resortPart(arr, field, value, sortFun = noSort){
   let startIdx = arr.findIndex(node => node[field] == value);
   let endIdx = arr.findIndex((node, idx) => idx > startIdx && node[field] !== value);
   // if endIdx cannot be found
@@ -219,6 +212,17 @@ function resortPart(arr, field, value, sortFun){
   return sectionToSort;
 }
 //calculate the spacing between topmost and the upper edge
+
+// considering the structure of nodes, this function sorts one column
+function filterPart(arr, field, value){
+   let section = []
+   arr.forEach(function(node){
+    if(node[field] == value){
+      section.push(node)
+    }
+   })
+  return section;
+}
 
 var ColorState = (function() {
   var current_state = "";
@@ -391,7 +395,9 @@ function scrollToBottom(){
 }
 
 function splitBtnEvent(){
-  if(chart_count == 0){
+
+  let currentClicked = filterPart(dataObj.getData().nodes, "clicked", 1);
+  if(currentClicked.length == 0){
     return
   }
   if(splitBtn_count == 0){
@@ -427,28 +433,7 @@ function pinBtnEvent(){
 
 function resetColList(){
   chart_count = 0;
-  col1 = [],
-  col2 = [],
-  col3 = [],
-  col4 = [],
-  col5 = [];
-
-  cols = [col1, col2, col3, col4, col5];
-  chart_count = 0;
   setChartCount();
-
-}
-
-function cleanUpColList(){
-  col1 = removeDuplication(cols[0]),
-  col2 = removeDuplication(cols[1]),
-  col3 = removeDuplication(cols[2]),
-  col4 = removeDuplication(cols[3]);
-  col5 = removeDuplication(cols[4]);
-
-  chart_count = col4.length;
-
-  cols = [col1, col2, col3, col4, col5];
 
 }
 
@@ -464,41 +449,6 @@ function getSortfunction(action){
   }
 }
 
-  
-
-
-//a test function for clicked nodes
-function logCol(){
-  console.log(cols.flat())
-
-}
-
-function locateChartColumn(){
-  if(column_2 == types){
-    return 2;
-  }else if(column_3 == types){
-    return 3;
-  }else if(column_4 == types){
-    return 4;
-  }
-
-}
-
-function locateAttributesColumn(){
-  if(column_3 == attributes){
-    return 3;
-  }else{
-    return -1;
-  }
-}
-
-function locateDimensionColumn(){
-  if(column_2 == dimensions){
-    return 2;
-  }else if(column_3 == dimensions){
-    return 3;
-  }
-}
 
 function sliceOneColumn(column){
   let data = dataObj.getData(); 
@@ -536,6 +486,10 @@ function sliceTask(task, charts){
 // given a task and give corresponding charts
 function sliceMultipleTask(taskArray, charts){
   return 
-
 }
-  
+
+function clickNodes(arrayIn, value) {
+  arrayIn.forEach(node => {
+    node.clicked = value;
+  });
+}
