@@ -6,9 +6,8 @@ var width_unit = 1; // cannot fix updating problem, a workaround
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
 var fun_rel_count = 0; // for toggle button
-var clicked_node = undefined;
 var chart_count = 0;
-var splitBtn_count = 0;
+var splitBtn_count = 0; // for toggle split
 
 
 var translated_nodes = []; // for highlightened subtree
@@ -64,7 +63,6 @@ function highlight_node_links(node,i){
     return
   }
   let translateBool = false;
-  clicked_node = node; // what does this line do
   let current_name = node['name'];
   //drawExampleGraph(current_name);
   let clicked_col = checkCol(node);
@@ -198,7 +196,6 @@ function canvasEvent(){
   // array highlighted link stores id.. []
 function clearHighlight(){
   let allNodes = dataObj.getData().nodes;
-  clicked_node = undefined;
   clickNodes(allNodes, 0);
   update_node("dehighlight");
   update_text("dehighlight");

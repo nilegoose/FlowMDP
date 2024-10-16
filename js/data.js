@@ -401,7 +401,7 @@ function getData(){
     let combinedList = [...l_task_dim, ...l_dim_abstract, ...l_abstract_chart, ...l_chart_encode]
     return{        
         "links": combinedList
-    }
+        }
 }
 function getData2(){
     let combinedList = [...link1_3, ...link3_2]

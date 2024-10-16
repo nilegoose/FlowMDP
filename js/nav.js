@@ -192,12 +192,14 @@ function downloadSVG() {
 
 
   // add opacity and fill attributes
-  const modifiedSvgString = svgString.replace(/<path([^>]*)">/g, '<path$1" fill="none" opacity="0.2">');
+  const modifiedSvgString = svgString.replace(/<path([^\/>]*)\/?>/g, '<path$1 fill="none" opacity="0.2"/>');
 
   const modifiedSvgString2 = modifiedSvgString.replace(
-    /<path([^>]*)opacity: 0\.6;" fill="none" opacity="0\.2">/g,
-    '<path$1opacity: 0.6;" fill="none">'
-  )
+      /<path([^>]*)opacity: 0\.6;" fill="none" opacity="0\.2"\/?>/g,
+      '<path$1 opacity: 0.6;" fill="none" opacity="0.6"/>'
+  );
+  
+  
 
   
   
@@ -297,7 +299,12 @@ function resetSankey() {
 
 function handleKeyPress(event) {
   if (event.key === 'r' || event.key === 'R') {
-    resetBtnEvent();
+    clearHighlight();
+    translate_reset();
+    if(splitBtn_count == 1){
+      splitBtn.setAttribute("fill", "#dce1e0");
+      splitBtn_count = 0;
+    }
   }else if (event.key === 's' || event.key === 'S') {
     splitBtnEvent();
   }
