@@ -211,9 +211,7 @@ function resortPart(arr, field, value, sortFun = noSort){
   //arr.splice(startIdx, sectionToSort.length, ...sectionToSort);
   return sectionToSort;
 }
-//calculate the spacing between topmost and the upper edge
 
-// considering the structure of nodes, this function sorts one column
 function filterPart(arr, field, value){
    let section = []
    arr.forEach(function(node){
@@ -222,6 +220,14 @@ function filterPart(arr, field, value){
     }
    })
   return section;
+}
+
+function getFieldsFromNodes(arr, field){
+  let output = []
+  arr.forEach(function(node){
+    output.push(node[field])}
+  )
+ return output;
 }
 
 var ColorState = (function() {
@@ -492,4 +498,33 @@ function clickNodes(arrayIn, value) {
   arrayIn.forEach(node => {
     node.clicked = value;
   });
+}
+
+// consider the case when not all tasks are logically adjancent
+// gives back the "missed" tasks
+function filterTasks(current_charts, allNodes){
+  let chart_names = getFieldsFromNodes(current_charts, "name")
+  let missedMatch = []
+  task_charts.forEach(function(list, index) {
+    const hasMatch = list.some(function(i) {
+      let chart = types[i];
+      return chart_names.includes(chart); 
+    });
+  
+    if (hasMatch) {
+      return;
+    }
+
+    missedMatch.push(index)
+  
+  });
+
+  if(missedMatch.length != 0){
+    console.log(missedMatch)
+    missedMatch.forEach(function(i){
+      allNodes[i].clicked = 0;
+    })
+
+  }
+
 }

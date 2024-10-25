@@ -1,7 +1,6 @@
 
 // there are four columns per pre-definition
 // deleted column(s) are considered as "hidden"
-
 var width_unit = 1; // cannot fix updating problem, a workaround
 const exampleArea = document.getElementById("multiple");
 var fun_compa_count = 0; // for toggle button
@@ -68,31 +67,31 @@ function highlight_node_links(node,i){
   let clicked_col = checkCol(node);
   let allNodes = dataObj.getData().nodes;
   let currentHighlight = filterPart(allNodes, "clicked", 1)
- 
   node.clicked = 1;
   let adjancentLeft = traverse_left(node);
   let adjancentRight = traverse_right(node);
 
   if(clicked_col != 1 && currentHighlight.includes(node)){
  
-    let combinedList = [...adjancentLeft, ...adjancentRight];
+    let combinedList = [...adjancentLeft, ...adjancentRight,node];
+    // ????
     clickNodes(currentHighlight, 0);
-    clickNodes(currentHighlight.filter(item => combinedList.includes(item)), 1);
-    clickNodes([node], 1)
+    let current_adjancent = currentHighlight.filter(item => combinedList.includes(item))
+    clickNodes(current_adjancent, 1);
+    let current_charts = filterPart(current_adjancent, "column", chartCol);
+    filterTasks(current_charts, allNodes);
   }else if(clicked_col == 1 && currentHighlight.includes(node)){
-    console.log("adjancent click")
     let taskNode = node;
     let adjancentCharts = resortPart(currentHighlight, "column", chartCol)
     let remainCharts = sliceTask(taskNode, adjancentCharts);
     let remainEncodes = traverse_right_charts(remainCharts);
     let remainAtrri = traverse_left_charts(remainCharts);
     let remainDim = traverse_left_attri(remainAtrri);
-    let combinedList = [...remainCharts, ...remainEncodes, ...remainAtrri, ...remainDim];
+    let combinedList = [...remainCharts, ...remainEncodes, ...remainAtrri, ...remainDim, node];
     clickNodes(allNodes, 0);
     let toHighlight = currentHighlight.filter(item => combinedList.includes(item))
     clickNodes(toHighlight, 1);
     clickNodes([node], 1)
-
   }else if(clicked_col == 1){
     //console.log("discrete, task clicked")
     let taskNode = node;
@@ -106,13 +105,12 @@ function highlight_node_links(node,i){
     clickNodes(combinedList, 1);
     clickNodes([node], 1)    // resetColList
     translateBool = true;
-
-
   }else{
     clickNodes(allNodes, 0);
-    let combinedList = [...adjancentLeft, ...adjancentRight];
+    let combinedList = [...adjancentLeft, ...adjancentRight, node];
+    let current_charts = filterPart(combinedList, "column", chartCol);
     clickNodes(combinedList, 1);
-    clickNodes([node], 1)  
+    filterTasks(current_charts, allNodes);
     translateBool = true;
 
   }
