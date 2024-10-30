@@ -199,26 +199,31 @@ function downloadSVG() {
       '<path$1 opacity: 0.6;" fill="none" opacity="0.6"/>'
   );
   
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  const svgBlob = new Blob([modifiedSvgString2], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
   
+      img.onload = function () {
+          canvas.width = svgElement.clientWidth;
+          canvas.height = svgElement.clientHeight;
 
+          ctx.fillStyle = 'white'; 
+          ctx.fillRect(0, 0, canvas.width, canvas.height); 
+            ctx.drawImage(img, 0, 0);
   
+          URL.revokeObjectURL(url);
   
-  // Create a Blob with the SVG content
-  const blob = new Blob([modifiedSvgString2], { type: 'image/svg+xml;charset=utf-8' });
-
-  // Create a URL for the Blob
-  const blobUrl = URL.createObjectURL(blob);
-
-  // Create a link element for downloading
-  const downloadLink = document.createElement('a');
-  downloadLink.href = blobUrl;
-  downloadLink.download = 'downloaded.svg';
-  
-  // Trigger the click event to initiate download
-  downloadLink.click();
-
-  // Clean up by revoking the Blob URL
-  URL.revokeObjectURL(blobUrl);
+          const pngData = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = pngData;
+          link.download = "selected_tree";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      };  
+      img.src = url;
 }
 
 
