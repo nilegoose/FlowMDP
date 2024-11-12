@@ -13,7 +13,7 @@ function color_link(link){
 
 
 function color_node_fun(d) { 
-let compBool = FunState.getValue().includes("comparasion");
+let compBool = FunState.getValue().includes("comparison");
 let relBool = FunState.getValue().includes("relationship");
 let color1Bool = d.color1 == undefined;
 let color2Bool = d.color2 == undefined;
@@ -43,12 +43,14 @@ function title_link(d) {
 return d.source.name + " -- " + d.target.name}
 
 function title_node(d) { 
-  if(d.column == 3){
+  if(d.column == 4){ 
     return d.name; 
   }else if(d.column == 1){
-    return d.name + "\n" +  "Chart types: " + dim_dict[d.name];
+    return d.name + "\n" +  "Chart types: " + task_dict[d.name];
   }else if(d.column == 2){
-    return d.name + "\n" +  "Chart types: " + abstract_dict[d.name];
+    return d.name + "\n" +  "Chart types: " + dim_dict[d.name];
+  } else if(d.column == 3){
+    return d.name + "\n" +  "Chart types: " + abstract_dict[d.name]; 
   }
   return d.name + "\n" +  "Chart types: " + format(d.value); 
 }

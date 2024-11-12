@@ -1,5 +1,5 @@
 
-// this file is mostly from the sankey diagram pf d3 library
+// this file is mostly from the sankey diagram of d3 library
 // https://github.com/d3/d3-sankey
 
 // there are some modifications specific for this application, scattered in several functions

@@ -234,7 +234,7 @@ var ColorState = (function() {
   var current_state = "";
 
   function colorByComp() {
-    current_state = "comparasion";
+    current_state = "comparison";
   }
 
   // Private function
@@ -262,11 +262,11 @@ var FunState = (function() {
 
   function funComp() {
     current_state = [];
-    current_state.push("comparasion");
+    current_state.push("comparison");
   }
 
   function elimComp() {
-    current_state = filterFunction(current_state, "comparasion");
+    current_state = filterFunction(current_state, "comparison");
   }
 
   
@@ -346,9 +346,9 @@ function sortTask(a, b) {
 // sort by 1. nodes with comparison param
 // then by y value
 function ascending_param(a, b) {
-  if (a.comparasion == b.comparasion) {
+  if (a.comparison == b.comparison) {
     return a.y - b.y; 
-  } else if (a.comparasion == true) {
+  } else if (a.comparison == true) {
     return -1; 
   } else {
     return 1; 
