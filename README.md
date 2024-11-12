@@ -41,7 +41,7 @@ The dependencies can also be found in [requirements.txt](https://github.com/Somb
 
 ---
 
-![The taxonomy](flowmdp_.png)
+![The taxonomy](flowmdp_full.png)
 
 ## License
 
