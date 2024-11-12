@@ -6,7 +6,7 @@
 
 The repository is created for the following paper: 
 
-***“The Visual Language of Multidimensional Data Projection: A Visualization Taxonomy and Informed Insights"*** by Chisom Ezekannagha, Xiao Langlotz, Dominik Heider, and Georges Hattab
+***“Exploring Chart Choices for High Dimensional Projections"***  <!-- by Chisom Ezekannagha, Ebenezer Awotoro, Xiao Langlotz, Dominik Heider, and Georges Hattab -->
 
 
 Please cite the paper as:
