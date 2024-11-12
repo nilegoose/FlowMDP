@@ -6,7 +6,7 @@
 
 The repository is created for the following paper: 
 
-***“Exploring Chart Choices for High Dimensional Projections"***  <!-- by Chisom Ezekannagha, Awotoro Ebenezer, Xiao Langlotz, Dominik Heider, and Georges Hattab -->
+***“Exploring Chart Choices for High Dimensional Projections"***  <!-- by Chisom Ezekannagha, Ebenezer Awotoro, Xiao Langlotz, Dominik Heider, and Georges Hattab -->
 
 
 Please cite the paper as:
