@@ -1,26 +1,16 @@
 # FlowMDP
 
-
-
-## Manuscript
-
 The repository is created for the following paper: 
 
 ***“Exploring Chart Choices for High Dimensional Projections"***  <!-- by Chisom Ezekannagha, Ebenezer Awotoro, Xiao Langlotz, Dominik Heider, and Georges Hattab -->
 
+Please cite the paper as:```latex
+Bibtex citation placeholder```
 
-Please cite the paper as:
-```latex
-Bibtex citation placeholder
-```
-
---- 
+---
 Abstract:
 
 > Abstract placeholder
-
-
-
 
 ## Dependencies
 
@@ -35,7 +25,6 @@ The code is written in Python 3.8.5 with the following libraries installed:
 |plotly|5.13.0|
 |seaborn|0.11.1|
 |matplotlib|3.3.4|
-
 
 The dependencies can also be found in [requirements.txt](https://github.com/Sombiri/FlowMDP/blob/master/requirements.txt).
 
