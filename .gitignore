@@ -9,3 +9,4 @@ Use cases/*
 __pycache__/
 *.pyc
 archive
+env

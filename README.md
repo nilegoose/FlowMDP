@@ -2,7 +2,7 @@
 
 The repository is created for the following paper: 
 
-***“Exploring Chart Choices for High Dimensional Projections"***  <!-- by Chisom Ezekannagha, Ebenezer Awotoro, Xiao Langlotz, Dominik Heider, and Georges Hattab -->
+***“Exploring Chart Choices for High Dimensional Projections"***
 
 Please cite the paper as:
 ```latex
@@ -16,19 +16,7 @@ Abstract:
 
 ## Dependencies
 
-The code is written in Python 3.8.5 with the following libraries installed:
-
-|Library|Version|
-|---|---|
-|numpy|1.20.1|
-|pandas|1.2.4|
-|scikit-learn|1.2.2|
-|altair|4.2.0|
-|plotly|5.13.0|
-|seaborn|0.11.1|
-|matplotlib|3.3.4|
-
-The dependencies can also be found in [requirements.txt](https://github.com/Sombiri/FlowMDP/blob/master/requirements.txt).
+The dependencies can also be found in [requirements.txt](https://github.com/nilegoose/FlowMDP/blob/data3/requirements.txt).
 
 ---
 
